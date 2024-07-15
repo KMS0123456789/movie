@@ -1,0 +1,50 @@
+#footer{
+    text-align: center;
+    font-size: 15px;
+    font-family: "Gowun Dodum", sans-serif;
+    font-style: normal;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: #a2a4dd;
+    color: white;
+  }
+  p{
+    margin: 0px;
+    font-size: 20px;
+    font-family: "Gamja Flower", sans-serif;
+    font-style: normal;
+  }
+  li a:hover{
+    background-color: cornflowerblue;
+  }
+  li > a{
+    text-decoration: none;
+    color: white;
+    font-family: "Orbit", sans-serif;
+    font-style: normal
+  }
+  #menu{
+    background-color: #a2a4dd;
+    margin-bottom: 1%;
+    position: relative;
+    padding: 5px 50px;
+    font-size: 18px;
+    font-family: "Gowun Dodum", sans-serif;
+    font-style: normal;
+  }
+  #menu ul li{
+    list-style: none;
+    font-size: 20px;
+    display: inline;
+    margin-right: 5%;
+  }
+  body{
+    margin: 0px;
+  }
+  ul{
+    margin: 10px;
+  }
+  header{
+    margin-bottom: 40px;
+  }

@@ -1,0 +1,86 @@
+body{
+    background-color: #e3d7ea;
+}
+.container {
+    background: white;
+    padding: 2rem 3rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 5rem auto;
+}
+
+h1 {
+    margin-bottom: 1.5rem;
+    color: #333;
+    text-align: center;
+    border-bottom: 2px solid #a2a4dd;
+    padding-bottom: 0.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #666;
+}
+
+.form-group input,
+.form-group textarea {
+    width: calc(100% - 12px); /* padding과 border를 고려한 너비 조정 */
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; /* padding과 border를 width에 포함 */
+}
+
+.form-group textarea {
+    height: 200px;
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #2193b0;
+}
+
+.button {
+    background: #a2a4dd;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1rem;
+    margin-right: 0.5rem;
+}
+.footer {
+    margin-top: 2rem;
+    text-align: center;
+}
+.category, .notice {
+    width: 150px;
+    border: 1px solid #a2a4dd;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 12px 13px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+}
+.category:focus, .notice:focus {
+    border: 1px solid  #a2a4dd;
+    box-sizing: border-box;
+    border-radius: 10px;
+    outline: 1.5px solid  rgb(204, 50, 68);
+    border-radius: 10px;
+}

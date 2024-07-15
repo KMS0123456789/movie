@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserMapper">
+	<resultMap type="cProject.movie.vo.UserVO" id="userMap">
+		<id property="id" column="id"/>
+		<result property="pw" column="pw"/>
+		<result property="email" column="email"/>
+		<result property="nick" column="nick"/>
+		<result property="userType" column="user_type"/>
+		<result property="createDate" column="create_date"/>
+		<result property="updateDate" column="update_date"/>
+		<result property="deleteDate" column="delete_date"/>
+	</resultMap>
+</mapper>

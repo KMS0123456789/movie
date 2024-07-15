@@ -1,0 +1,60 @@
+#login{
+    text-align: center;
+  }
+  #information{
+    margin: 0 auto;
+  }
+  input{
+    width: 200px;
+    height: 40px;
+    border-radius: 7px;
+    margin-bottom: 15px;
+    text-align: center;
+    border: none;
+  }
+  #sub{
+    background-color: #ffb6c1;
+    width: 150px;
+    height: 50px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    border: none;
+  }
+  #label{
+    margin-bottom: 10px;
+  }
+  #btn{
+    text-align: center;
+  }
+  body{
+    background-color: #e3d7ea;
+  }
+  #case{
+    width: 400px;
+    height: 350px;
+    background-color: #fff0f5;
+    border-radius: 20px;
+    margin: 30px 20px;
+    float: left;
+  }
+  #free{
+    text-align: center;
+    background:#a2a4dd;
+    color: white;
+    font-family: "Gowun Dodum", sans-serif;
+    font-style: normal;
+    border-radius: 15px;
+    padding: 15px;
+  }
+  #container{
+    float: left;
+  }
+  #logincase{
+    width: 300px;
+    height: 350px;
+    background-color: #fff5ee;
+    border-radius: 20px;
+    margin-left: 10rem;
+    display: inline-block;
+  }
