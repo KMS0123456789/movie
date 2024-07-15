@@ -28,7 +28,7 @@ public class BoardRepository {
 	public List<BoardVO> goodslist() {
 		return template.selectList(NAME_SPACE + ".goodslist");
 	}
-	public int insert(BoardVO vo) {
+	public int insertOne(BoardVO vo) {
 		return template.insert(NAME_SPACE + ".insert", vo);
 	}
 }

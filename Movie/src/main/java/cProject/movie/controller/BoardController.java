@@ -1,12 +1,19 @@
 package cProject.movie.controller;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import cProject.movie.vo.FileVO;
 
 import cProject.movie.repo.BoardRepository;
 import cProject.movie.vo.BoardVO;
@@ -46,7 +53,14 @@ public class BoardController {
 		return "write";
 	}
 	@RequestMapping(value="/write.do", method=RequestMethod.POST)
-	public String writeOK() {
-		return "write";
+	public String writeOK(BoardVO vo, @RequestParam("file") MultipartFile[] files) {
+		repository.insertOne(vo);
+		int result = vo.getBno();
+		
+		if(result > 0) {
+			return "redirect:/user/post.do?sno="+vo.getBno();
+		}else {
+			return "redirect:/user/user.do";
+		}
 	}
 }

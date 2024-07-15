@@ -1,5 +1,9 @@
 package cProject.movie.vo;
 
+import java.util.List;
+
+import cProject.movie.vo.FileVO;
+
 public class BoardVO {
 	private int bno;
 	private String author;
@@ -13,6 +17,13 @@ public class BoardVO {
 	private String createDate;
 	private String updateDate;
 	private String deleteDate;
+	private List<FileVO> files;
+	public List<FileVO> getFiles() {
+		return files;
+	}
+	public void setFiles(List<FileVO> files) {
+		this.files = files;
+	}
 	public int getBno() {
 		return bno;
 	}
