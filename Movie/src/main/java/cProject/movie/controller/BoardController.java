@@ -96,7 +96,7 @@ public class BoardController {
 		if(result > 0) {
 			return "redirect:/board/post.do?bno="+vo.getBno();
 		}else {
-			return "redirect:/board";
+			return "redirect:/board/freelist.do";
 		}
 	}
 }

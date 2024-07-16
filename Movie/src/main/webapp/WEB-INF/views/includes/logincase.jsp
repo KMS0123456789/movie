@@ -4,14 +4,14 @@
 	<div id="logincase" >
        <div id="login">
            <h2>로그인</h2>
-           <form>
+           <form action="login.do" method="post">
                <div class="information">
                    <div id="label"><label for="id">아이디</label></div>
                    <input type="text" name="id" placeholder="id를 입력하세요." id="id"><br>
                </div>
                <div class="information">
-                   <div id="label"><label for="password">비밀번호</label></div>
-                   <input type="password" name="password" placeholder="비밀번호를 입력하세요." id="pw">
+                   <div id="label"><label for="pw">비밀번호</label></div>
+                   <input type="password" name="pw" placeholder="비밀번호를 입력하세요." id="pw">
                </div>
                <div id="btn">
                    <button type="submit" id="sub">로그인</button>
