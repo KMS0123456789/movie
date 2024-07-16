@@ -29,9 +29,20 @@
                 </div>
             </nav>
         </header>
-            <h2 class="list_h2">영화 자유 게시판</h2>
+            <h2 class="list_h2">영화 정보 게시판</h2>
             <h3 class="list_h3">게시글 목록</h3>
-            <table>
+            <form action="<c:url value="/board/minfolist.do" />" method="get" id="form">
+                <div class="searchDiv">
+                    <select name="searchType">
+                        <option value="title" ${param.searchType == 'title'  ? 'selected' : ''}>제목</option>
+                        <option value="author" ${param.searchType == 'body'  ? 'selected' : ''}>작성자</option>
+                        <option value="body" ${param.searchType == 'writer'  ? 'selected' : ''}>내용</option>
+                    </select>
+                    <input type="text" name="keyword" value="${param.keyword}">
+                    <input type="submit" value="검색">
+                </div>
+            </form>
+            <table id="table">
                 <colgroup>
                     <col width="200px">
                     <col width="400px">
@@ -74,60 +85,41 @@
 					</c:forEach>
                 </tbody>
             </table>
-            <%
-            	if(true){
-            		%><%@ include file="./includes/logincase.jsp" %><%
-            	}
-            %>
-             <%
-            	if(false){
-            		%><%@ include file="./includes/logincase.jsp" %><%
-            	}
-            %>
-             <%
-            	if(false){
-            		%><%@ include file="./includes/logincase.jsp" %><%
-            	}
-            %>
-          
-            <div>
-                <f:parseNumber integerOnly="true" var="pageGroup" value="${(currentPage - 1) / 10}" />
+            <c:choose>
+				<c:when test="${empty sessionScope.user}">
+					<%@ include file="./includes/b_logincase.jsp" %>
+				</c:when>
+				<c:otherwise>
+					<%@ include file="./includes/userlogincase.jsp" %>
+				</c:otherwise>
+			</c:choose>
+			<button type="button" id="write"><a href="write.do">글 쓰기</a></button>
+             <div>
+                <ul id="page">
+                 <f:parseNumber integerOnly="true" var="pageGroup" value="${(currentPage - 1) / 10}" />
 					<c:set var="startPage" value="${(pageGroup * 10 + 1)}"></c:set>
 					<c:set var="endPage" value="${(startPage + (10 - 1))}"></c:set>
 
 				<c:if test="${currentPage > 1}">
-						<a href="<c:url value="/board/minfolist.do?page=1" />">처음 페이지</a>
-						<a href="<c:url value="/board/minfolist.do?page=${currentPage-1}" />">이전 페이지</a>
+						<li><a href="<c:url value="/board/freelist.do?page=1" />">&lt;&lt;</a></li>
+						<li><a href="<c:url value="/board/freelist.do?page=${currentPage-1}" />">&lt;</a></li>
 				</c:if>
 				<c:forEach begin="${startPage}" end="${endPage > totalPage ? totalPage : endPage}" var="pageNum">
 					<c:choose>
 						<c:when test="${currentPage == pageNum}">
-							<span>${pageNum}</span>
+							<li><a>${pageNum}</a></li>
 						</c:when>
 						<c:otherwise>
-							<a href="<c:url value="/board/minfolist.do?page=${pageNum}" />">${pageNum}</a>
+							<li><a href="<c:url value="/board/freelist.do?page=${pageNum}" />">${pageNum}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				<c:if test="${currentPage < totalPage}">
-					<a href="<c:url value="/board/minfolist.do?page=${currentPage+1}" />">다음 페이지</a>
-					<a href="<c:url value="/board/minfolist.do?page=${totalPage}" />">마지막 페이지</a>
+					<li><a href="<c:url value="/board/freelist.do?page=${currentPage+1}" />">&gt;</a></li>
+					<li><a href="<c:url value="/board/freelist.do?page=${totalPage}" />">&gt;&gt;</a></li>
 				</c:if>
+                </ul>
             </div>
-            <br>
-            <button type="button" id="write"><a href="write.do">글 쓰기</a></button>
-            <br>
-            <form action="#" method="get">
-                <div class="searchDiv">
-                    <select name="searchType">
-                        <option value="title">제목</option>
-                        <option value="author">작성자</option>
-                        <option value="body">내용</option>
-                    </select>
-                    <input type="text" name="keyword" value="${param.keyword}">
-                    <input type="submit" value="검색">
-                </div>
-            </form>
     </body>
 </html>
 

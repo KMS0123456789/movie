@@ -13,11 +13,13 @@
         text-align: left;
         margin-left: 5rem;
     }
-
+	#form{
+		margin-bottom: 3rem;
+	}
     table {
         max-width: 70%;
         border-collapse: collapse;
-        margin-bottom: 10rem;
+        margin-bottom: 7rem;
         display: inline-block;
         background-color: white;
         margin-left: 5rem;
@@ -39,6 +41,13 @@
     tr:hover {
         background-color: #f1f1f1;
     }
+    #table a{
+    	color: black;
+    	text-decoration:none;
+    }
+    td:nth-child(2){
+    cursor: pointer;
+}
 	.searchDiv {
         margin-left: 5rem;
     	max-width:67%;
@@ -72,48 +81,6 @@
     	float:left;
     	border:0px;
     }
-    .pagination {
-        margin-left: 38rem;
-        margin-top: 3rem;
-        padding: 0;
-        list-style: none;
-    }
-
-    .pagination li {
-        display: inline;
-        margin: 0 0.25rem;
-    }
-
-    .pagination a {
-        color: violet;
-        padding: 0.5rem 0.75rem;
-        text-decoration: none;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
-
-    .pagination a:hover {
-        background-color: #f1f1f1;
-    }
-
-    .pagination .active a {
-        background-color: violet;
-        color: white;
-    }
-    .pagination .disabled a{
-    	color : #ddd;
-    	pointer-events:none;
-    	cursor : default;
-    }
-    a{
-		text-decoration-line: none;
-	}
-	a:link{
-		color:white;
-			}
-	a:visited{
-		color:white;
-	}
     #write{
         background-color: #ffb6c1;
         width: 92px;
@@ -125,3 +92,19 @@
         margin-left: 77.8rem;
         margin-bottom: 1rem;
       }
+      #write a{
+      	color: black;
+    	text-decoration:none;
+      }
+      #page{
+	    list-style: none;
+	    text-align: center;
+	    padding: 0px;
+	    cursor: pointer;
+	}
+	#page li{
+	    display: inline-block;
+	    background-color: #dda0dd;
+	    border-radius: 10px;
+	    padding: 0.5rem 0.8rem;
+	}

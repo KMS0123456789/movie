@@ -7,14 +7,12 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <style>
-        @import url('./header_footer.css');
         @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Gowun+Dodum&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Orbit&display=swap');
     </style>
     <link rel="stylesheet" href="<c:url value='/resources/css/main.css'/>">
     <link rel="stylesheet" href="<c:url value='/resources/css/header_footer.css'/>">
-
 </head>
 <body>
     <header>
@@ -40,17 +38,17 @@
             </div>
             <%
             	if(true){
-            		%><%@ include file="./includes/logincase.jsp" %><%
+            		%><%@ include file="./includes/b_logincase.jsp" %><%
             	}
             %>
              <%
             	if(false){
-            		%><%@ include file="./includes/logincase.jsp" %><%
+            		%><%@ include file="./includes/b_logincase.jsp" %><%
             	}
             %>
              <%
             	if(false){
-            		%><%@ include file="./includes/logincase.jsp" %><%
+            		%><%@ include file="./includes/b_logincase.jsp" %><%
             	}
             %>
         </div>
