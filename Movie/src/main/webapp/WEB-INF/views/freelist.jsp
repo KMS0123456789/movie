@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
     <head>
@@ -62,10 +63,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${flist}" var="bvo">
+                    <c:forEach items="${fPage}" var="bvo">
 						<tr>
 							<td>${bvo.bno}</td>
-							<td><a href='<c:url value="/user/post.do?sno=${bvo.bno}"></c:url>'>${bvo.title}</a></td>
+							<td><a href='<c:url value="/board/post.do?bno=${bvo.bno}"></c:url>'>${bvo.title}</a></td>
 							<td>${bvo.author}</td>
 							<td>${bvo.createDate}</td>
 							<td>${bvo.hit}</td>
@@ -90,12 +91,28 @@
             %>
           
             <div>
-                <ul class="pagination">
-                    <li><a>&lt;&lt;</a></li>
-                    <li><a>&lt;</a></li>
-                    <li><a>&gt;</a></li>
-                    <li><a>&gt;&gt;</a></li>
-                </ul>
+                <f:parseNumber integerOnly="true" var="pageGroup" value="${(currentPage - 1) / 10}" />
+					<c:set var="startPage" value="${(pageGroup * 10 + 1)}"></c:set>
+					<c:set var="endPage" value="${(startPage + (10 - 1))}"></c:set>
+
+				<c:if test="${currentPage > 1}">
+						<a href="<c:url value="/board/freelist.do?page=1" />">처음 페이지</a>
+						<a href="<c:url value="/board/freelist.do?page=${currentPage-1}" />">이전 페이지</a>
+				</c:if>
+				<c:forEach begin="${startPage}" end="${endPage > totalPage ? totalPage : endPage}" var="pageNum">
+					<c:choose>
+						<c:when test="${currentPage == pageNum}">
+							<span>${pageNum}</span>
+						</c:when>
+						<c:otherwise>
+							<a href="<c:url value="/board/freelist.do?page=${pageNum}" />">${pageNum}</a>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<c:if test="${currentPage < totalPage}">
+					<a href="<c:url value="/board/freelist.do?page=${currentPage+1}" />">다음 페이지</a>
+					<a href="<c:url value="/board/freelist.do?page=${totalPage}" />">마지막 페이지</a>
+				</c:if>
             </div>
             <br>
             <button type="button" id="write"><a href="write.do">글 쓰기</a></button>
@@ -107,7 +124,7 @@
                         <option value="author">작성자</option>
                         <option value="body">내용</option>
                     </select>
-                    <input type="text" name="search">
+                    <input type="text" name="keyword" value="${param.keyword}">
                     <input type="submit" value="검색">
                 </div>
             </form>

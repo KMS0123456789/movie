@@ -24,17 +24,49 @@
 	</resultMap>
 	<select id="freelist" resultMap="boardMap">
 		select * from board where category_no=0
+		<where>
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+		limit #{offset}, #{limit}
 	</select>
 	<select id="reviewlist" resultMap="boardMap">
 		select * from board where category_no=1
+		<where>
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+		limit #{offset}, #{limit}
 	</select>
 	<select id="minfolist" resultMap="boardMap">
 		select * from board where category_no=2
+		<where>
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+		limit #{offset}, #{limit}
 	</select>
 	<select id="goodslist" resultMap="boardMap">
 		select * from board where category_no=3
+		<where>
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+		limit #{offset}, #{limit}
 	</select>
-	<insert id="insert" parameterType="cProject.movie.vo.BoardVO" useGeneratedKeys="true" keyProperty="sno">
+	<select id="count" resultType="int">
+		select count(*) from board
+		<where>
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+	</select>
+	<insert id="insert" parameterType="cProject.movie.vo.BoardVO" useGeneratedKeys="true" keyProperty="bno">
 		insert into board(author, category_no, notice, hit, title, body)
 		values(#{author}, #{category}, #{notice}, 0, #{title}, #{body});
 	</insert>
