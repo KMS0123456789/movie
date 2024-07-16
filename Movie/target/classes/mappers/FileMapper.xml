@@ -8,4 +8,12 @@
 		<result property="filePath" column="file_path"/>
 		<result property="fileSize" column="file_size"/>	
 	</resultMap>
+	
+	<insert id="insert" parameterType="java.util.List">
+		insert into file(bno, file_name, file_path, file_size)
+		values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.bno}, #{item.fileName}, #{item.filePath}, #{item.fileSize})
+		</foreach>
+	</insert>
 </mapper>
