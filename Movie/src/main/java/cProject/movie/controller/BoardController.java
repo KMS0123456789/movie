@@ -150,5 +150,19 @@ public class BoardController {
 			return "redirect:/board/home.do";
 		}
 	}
+	@RequestMapping(value="/return.do", method=RequestMethod.GET)
+	public String returnList(int categoryNo) {
+		if(categoryNo == 0 ) {
+			return "redirect:/board/freelist.do";
+		}else if(categoryNo == 1) {
+			return "redirect:/board/reviewlist.do";
+		}else if(categoryNo == 2) {
+			return "redirect:/board/minfolist.do";
+		}else if(categoryNo == 3) {
+			return "redirect:/board/goodslist.do";
+		}else {
+			return "redirect:/board/main.do";
+		}
+	}
 
 }
