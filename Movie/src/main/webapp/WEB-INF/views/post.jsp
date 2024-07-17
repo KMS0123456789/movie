@@ -59,7 +59,7 @@
     </div>
     <div class="button-group">
        	<a href="<c:url value="/board/modify.do?bno=${vo.bno}"></c:url>"  class="button">수정</a>
-        <form action="delete.do" method="post">
+        <form action="off.do" method="post">
 			<input type="hidden" name="bno" value="${vo.bno}">
 			<input type="submit" class="button" value="삭제">
 		</form>
