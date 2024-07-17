@@ -58,8 +58,13 @@
         
     </div>
     <div class="button-group">
-        <a href="#" class="button">수정</a>
-        <a href="#" class="button">삭제</a>
+    	<form action="modify." method="get">
+        	<a href="modify.do" class="button">수정</a>
+        </form>
+        <form action="delete.do" method="post">
+			<input type="hidden" name="bno" value="${vo.bno}">
+			<input type="submit" class="button" value="삭제">
+		</form>
         <a href="#" class="button">목록으로 돌아가기</a>
     </div>
     <script>
