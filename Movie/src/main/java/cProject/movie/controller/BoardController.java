@@ -5,15 +5,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -35,7 +39,8 @@ public class BoardController {
 			@RequestParam(name="keyword", required=false) String keyword
 			) {
 		Pageable pageable = PageRequest.of(page-1, 10);
-		Page<BoardVO> data = repository.freelist(pageable, searchType, keyword);
+		int categoryNo = 0;
+		Page<BoardVO> data = repository.freelist(pageable, searchType, keyword, categoryNo);
 		model.addAttribute("fPage", data.getContent());
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPage", data.getTotalPages());
@@ -49,7 +54,8 @@ public class BoardController {
 			@RequestParam(name="keyword", required=false) String keyword
 			) {
 		Pageable pageable = PageRequest.of(page-1, 10);
-		Page<BoardVO> data = repository.reviewlist(pageable, searchType, keyword);
+		int categoryNo = 1;
+		Page<BoardVO> data = repository.reviewlist(pageable, searchType, keyword, categoryNo);
 		model.addAttribute("rPage", data.getContent());
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPage", data.getTotalPages());
@@ -63,7 +69,8 @@ public class BoardController {
 			@RequestParam(name="keyword", required=false) String keyword
 			) {
 		Pageable pageable = PageRequest.of(page-1, 10);
-		Page<BoardVO> data = repository.minfolist(pageable, searchType, keyword);
+		int categoryNo = 2;
+		Page<BoardVO> data = repository.minfolist(pageable, searchType, keyword, categoryNo);
 		model.addAttribute("mPage", data.getContent());
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPage", data.getTotalPages());
@@ -77,7 +84,8 @@ public class BoardController {
 			@RequestParam(name="keyword", required=false) String keyword
 			) {
 		Pageable pageable = PageRequest.of(page-1, 10);
-		Page<BoardVO> data = repository.goodslist(pageable, searchType, keyword);
+		int categoryNo = 3;
+		Page<BoardVO> data = repository.goodslist(pageable, searchType, keyword, categoryNo);
 		model.addAttribute("gPage", data.getContent());
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPage", data.getTotalPages());
@@ -90,6 +98,7 @@ public class BoardController {
 	}
 	@RequestMapping(value="/write.do", method=RequestMethod.POST)
 	public String writeOK(BoardVO vo, @RequestParam("file") MultipartFile[] files) {
+		String author = "SessionScope.user.id";
 		repository.insertOne(vo);
 		int result = vo.getBno();
 		

@@ -22,54 +22,55 @@ public class BoardRepository {
 	
 	private final String NAME_SPACE = "BoardMapper";
 	
-	public Page<BoardVO> freelist(Pageable pageable, String searchType, String keyword) {
+	public Page<BoardVO> freelist(Pageable pageable, String searchType, String keyword, int categoryNo) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("offset", pageable.getOffset());
 		map.put("limit", pageable.getPageSize());
 		map.put("searchType", searchType);
 		map.put("keyword", keyword);
-		int total = count(searchType, keyword);
+		int total = count(searchType, keyword, categoryNo);
 		List<BoardVO> boards = template.selectList(NAME_SPACE + ".freelist", map);
 		return new PageImpl<BoardVO>(boards, pageable, total);
 	}
-	public Page<BoardVO> reviewlist(Pageable pageable, String searchType, String keyword) {
+	public Page<BoardVO> reviewlist(Pageable pageable, String searchType, String keyword, int categoryNo) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("offset", pageable.getOffset());
 		map.put("limit", pageable.getPageSize());
 		map.put("searchType", searchType);
 		map.put("keyword", keyword);
-		int total = count(searchType, keyword);
+		int total = count(searchType, keyword, categoryNo);
 		List<BoardVO> boards = template.selectList(NAME_SPACE + ".reviewlist", map);
 		return new PageImpl<BoardVO>(boards, pageable, total);
 	}
-	public Page<BoardVO> minfolist(Pageable pageable, String searchType, String keyword) {
+	public Page<BoardVO> minfolist(Pageable pageable, String searchType, String keyword, int categoryNo) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("offset", pageable.getOffset());
 		map.put("limit", pageable.getPageSize());
 		map.put("searchType", searchType);
 		map.put("keyword", keyword);
-		int total = count(searchType, keyword);
+		int total = count(searchType, keyword, categoryNo);
 		List<BoardVO> boards = template.selectList(NAME_SPACE + ".minfolist", map);
 		return new PageImpl<BoardVO>(boards, pageable, total);
 	}
-	public Page<BoardVO> goodslist(Pageable pageable, String searchType, String keyword) {
+	public Page<BoardVO> goodslist(Pageable pageable, String searchType, String keyword, int categoryNo) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("offset", pageable.getOffset());
 		map.put("limit", pageable.getPageSize());
 		map.put("searchType", searchType);
 		map.put("keyword", keyword);
-		int total = count(searchType, keyword);
+		int total = count(searchType, keyword, categoryNo);
 		List<BoardVO> boards = template.selectList(NAME_SPACE + ".goodslist", map);
 		return new PageImpl<BoardVO>(boards, pageable, total);
 	}
-	public int count(String searchType, String keyword) {
+	public int count(String searchType, String keyword, int categoryNo) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchType", searchType);
 		map.put("keyword", keyword);
+		map.put("categoryNo", categoryNo);
 		return template.selectOne(NAME_SPACE + ".count", map);
 	}
 	public int insertOne(BoardVO vo) {

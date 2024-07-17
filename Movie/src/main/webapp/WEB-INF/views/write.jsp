@@ -12,17 +12,21 @@
         <div class="container">
     <h1>게시글 작성</h1>
     <form action="write.do" method="post" enctype="multipart/form-data">
-		<select name="category" class="category">
+		<select name="categoryNo" class="category">
 	        <option value="0">영화 자유 게시판</option>
 			<option value="1">영화 리뷰 게시판</option>
         	<option value="2">영화 정보 게시판</option>
             <option value="3">영화 굿즈 게시판</option>
         </select>
         <select name="notice" class="notice" style="margin: 1rem;">
+        	<c:if test="${sessionScope.user.userType == 0}">
         	<option value="0">공지사항</option>
+        	</c:if>
             <option value="1">일반 글</option>
         </select>
+
         <br><br>
+        <input type="hidden" id="author" name="author" value="${sessionScope.user.id}">
         <div class="form-group">
             <label for="title">제목</label>
             <input type="text" id="title" name="title">

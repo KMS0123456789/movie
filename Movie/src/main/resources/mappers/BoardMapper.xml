@@ -65,6 +65,20 @@
 	<select id="count" resultType="int">
 		select count(*) from board
 		<where>
+			<choose>
+				<when test="categoryNo==0">
+					and category_no=0
+				</when>
+				<when test="categoryNo==1">
+					and category_no=1
+				</when>
+				<when test="categoryNo==2">
+					and category_no=2
+				</when>
+				<when test="categoryNo==3">
+					and category_no=3
+				</when>
+			</choose>
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
@@ -72,6 +86,6 @@
 	</select>
 	<insert id="insert" parameterType="cProject.movie.vo.BoardVO" useGeneratedKeys="true" keyProperty="bno">
 		insert into board(author, category_no, notice, hit, title, body)
-		values(#{author}, #{category}, #{notice}, 0, #{title}, #{body});
+		values(#{author}, ${categoryNo}, ${notice}, 0, #{title}, #{body});
 	</insert>
 </mapper>
