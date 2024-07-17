@@ -96,7 +96,9 @@
 					<%@ include file="./includes/b_logincase.jsp" %>
 				</c:otherwise>
 			</c:choose>
-			<button type="button" id="write"><a href="write.do">글 쓰기</a></button>
+			<c:if test="${!empty sessionScope.user.id}">
+				<button type="button" id="write"><a href="write.do">글 쓰기</a></button>
+			</c:if>
             <div>
                 <ul id="page">
                  <f:parseNumber integerOnly="true" var="pageGroup" value="${(currentPage - 1) / 10}" />
@@ -104,8 +106,8 @@
 					<c:set var="endPage" value="${(startPage + (10 - 1))}"></c:set>
 
 				<c:if test="${currentPage > 1}">
-						<li><a href="<c:url value="/board/freelist.do?page=1" />">&lt;&lt;</a></li>
-						<li><a href="<c:url value="/board/freelist.do?page=${currentPage-1}" />">&lt;</a></li>
+						<li><a href="<c:url value="/board/goodslist.do?page=1" />">&lt;&lt;</a></li>
+						<li><a href="<c:url value="/board/goodslist.do?page=${currentPage-1}" />">&lt;</a></li>
 				</c:if>
 				<c:forEach begin="${startPage}" end="${endPage > totalPage ? totalPage : endPage}" var="pageNum">
 					<c:choose>
@@ -113,13 +115,13 @@
 							<li><a>${pageNum}</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="<c:url value="/board/freelist.do?page=${pageNum}" />">${pageNum}</a></li>
+							<li><a href="<c:url value="/board/goodslist.do?page=${pageNum}" />">${pageNum}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				<c:if test="${currentPage < totalPage}">
-					<li><a href="<c:url value="/board/freelist.do?page=${currentPage+1}" />">&gt;</a></li>
-					<li><a href="<c:url value="/board/freelist.do?page=${totalPage}" />">&gt;&gt;</a></li>
+					<li><a href="<c:url value="/board/goodslist.do?page=${currentPage+1}" />">&gt;</a></li>
+					<li><a href="<c:url value="/board/goodslist.do?page=${totalPage}" />">&gt;&gt;</a></li>
 				</c:if>
                 </ul>
             </div>

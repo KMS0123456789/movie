@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<link href="<c:url value='/resources/css/logincase.css'/>" rel="stylesheet">
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="<c:url value='/resources/css/logincase.css'/>" rel="stylesheet">
 <style type="text/css">
 	#change{
             text-decoration: none;
@@ -17,7 +18,7 @@
             font-style: normal;
         }
         #user h2{
-            color: #ffc0cb;
+            color: black;
             border-bottom: 5px solid #a2a4dd;
             padding-bottom: 20px;
         }

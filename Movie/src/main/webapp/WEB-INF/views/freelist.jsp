@@ -97,7 +97,9 @@
 					<%@ include file="./includes/b_logincase.jsp" %>
 				</c:otherwise>
 			</c:choose>
-			<button type="button" id="write"><a href="write.do">글 쓰기</a></button>
+			<c:if test="${!empty sessionScope.user.id}">
+				<button type="button" id="write"><a href="write.do">글 쓰기</a></button>
+			</c:if>
             <div>
             <ul id="page">
                 <f:parseNumber integerOnly="true" var="pageGroup" value="${(currentPage - 1) / 10}" />
