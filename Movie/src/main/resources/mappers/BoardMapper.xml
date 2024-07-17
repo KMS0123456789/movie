@@ -26,6 +26,7 @@
 		select * from board 
 		<where>
 			and category_no=0
+			and delete_flag=0
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
@@ -37,6 +38,7 @@
 		select * from board
 		<where>
 			and category_no=1
+			and delete_flag=0
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
@@ -48,6 +50,7 @@
 		select * from board
 		<where>
 			and category_no=2
+			and delete_flag=0
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
@@ -59,6 +62,7 @@
 		select * from board
 		<where>
 			and category_no=3
+			and delete_flag=0
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
@@ -98,5 +102,8 @@
 	</select>
 	<update id="update" parameterType="cProject.movie.vo.BoardVO">
 		update board set title = #{title}, body = #{body} where bno = #{bno}; 
+	</update>
+	<update id="off" parameterType="cProject.movie.vo.BoardVO">
+		update board set delete_flag = 1 where bno = #{bno}; 
 	</update>
 </mapper>

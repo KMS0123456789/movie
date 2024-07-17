@@ -82,4 +82,7 @@ public class BoardRepository {
 	public int update(BoardVO vo) {
 		return template.update(NAME_SPACE + ".update", vo);
 	}
+	public int off(BoardVO vo) {
+		return template.update(NAME_SPACE + ".off", vo);
+	}
 }

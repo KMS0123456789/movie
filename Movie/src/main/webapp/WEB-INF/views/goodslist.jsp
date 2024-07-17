@@ -77,7 +77,7 @@
                     <c:forEach items="${gPage}" var="bvo">
 						<tr>
 							<td>${bvo.bno}</td>
-							<td><a href='<c:url value="/user/post.do?sno=${bvo.bno}"></c:url>'>${bvo.title}</a></td>
+							<td><a href='<c:url value="/board/post.do?bno=${bvo.bno}"></c:url>'>${bvo.title}</a></td>
 							<td>${bvo.author}</td>
 							<td>${bvo.createDate}</td>
 							<td>${bvo.hit}</td>
