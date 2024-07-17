@@ -58,19 +58,17 @@
         
     </div>
     <div class="button-group">
-    	<form action='<c:url value="/board/modify.do?bno=${bvo.bno}"></c:url>'method="get">
-        	<input type="submit" class="button" value="수정">
-        </form>
+       	<a href="<c:url value="/board/modify.do?bno=${vo.bno}"></c:url>"  class="button">수정</a>
         <form action="delete.do" method="post">
-			<input type="hidden" name="bno" value="${bvo.bno}">
+			<input type="hidden" name="bno" value="${vo.bno}">
 			<input type="submit" class="button" value="삭제">
 		</form>
 		<form action="police.do" method="post">
-			<input type="hidden" name="bno" value="${bvo.bno}">
+			<input type="hidden" name="bno" value="${vo.bno}">
 			<input type="submit" class="button" value="신고">
 		</form>
 		<form action="like.do" method="post">
-			<input type="hidden" name="bno" value="${bvo.bno}">
+			<input type="hidden" name="bno" value="${vo.bno}">
 			<input type="submit" class="button" value="좋아요">
 		</form>
         <a href="#" class="button">목록으로 돌아가기</a>
