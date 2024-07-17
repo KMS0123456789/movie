@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib  prefix="spring" uri="http://www.springframework.org/tags" %> 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -57,34 +59,41 @@
     <div class="post-content">
         
     </div>
-    <div class="button-group">
-       	<a href="<c:url value="/board/modify.do?bno=${vo.bno}"></c:url>"  class="button">수정</a>
-        <form action="off.do" method="post">
-			<input type="hidden" name="bno" value="${vo.bno}">
-			<input type="hidden" name="categoryNo" value="${vo.categoryNo}">
-			<input type="submit" class="button" value="삭제">
-		</form>
-		<form action="police.do" method="post">
-			<input type="hidden" name="bno" value="${vo.bno}">
-			<input type="submit" class="button" value="신고">
-		</form>
+    <div>
+    	<div  class="button-group">
+       		<a href="<c:url value="/board/modify.do?bno=${vo.bno}"></c:url>"  class="button">수정</a>
+       	</div>
+       	<div  class="button-group">
+	        <form action="off.do" method="post">
+				<input type="hidden" name="bno" value="${vo.bno}">
+				<input type="hidden" name="categoryNo" value="${vo.categoryNo}">
+				<input type="submit" class="button" value="삭제">
+			</form>
+		</div>
+		<div  class="button-group">
+			<form action="return.do" method="get">
+				<input type="hidden" name="categoryNo" value="${vo.categoryNo}">
+				<input type="submit" class="button" value="목록으로 돌아가기">
+	        </form>
+	     </div>
+    </div>
+	<div id="p_l_btn">
+        <div>
+            <form action="police.do" method="post">
+                <div id="p_l_btn1">
+                    <p> <img src="../resources/image/siren.jpg"> </p>
+                    <input type="hidden" name="bno" value="${vo.bno}">
+                    <input type="submit" class="buttons" value="신고">
+                </div>
+            </form>
+        </div>
+        <div id="p_l_btn2">
 		<form action="like.do" method="post">
 			<input type="hidden" name="bno" value="${vo.bno}">
-			<input type="submit" class="button" value="좋아요">
+			<input type="submit" class="buttons" value="♡ 좋아요">
 		</form>
-		<form action="return.do" method="get">
-			<input type="hidden" name="categoryNo" value="${vo.categoryNo}">
-			<input type="submit" class="button" value="목록으로 돌아가기">
-        </form>
+        </div>
     </div>
-    <script>
-        function confirmDelete(boardNo) {
-            if (confirm("게시글을 정말 삭제하시겠습니까?")) {
-                window.location.href = "/hiddenPost.jsp?id=" + boardNo;
-            }
-        }
-    </script>
-
     <div class="comment-section">
         <h2>댓글</h2>
         <div class="comment-form">
