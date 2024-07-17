@@ -61,6 +61,7 @@
        	<a href="<c:url value="/board/modify.do?bno=${vo.bno}"></c:url>"  class="button">수정</a>
         <form action="off.do" method="post">
 			<input type="hidden" name="bno" value="${vo.bno}">
+			<input type="hidden" name="categoryNo" value="${vo.categoryNo}">
 			<input type="submit" class="button" value="삭제">
 		</form>
 		<form action="police.do" method="post">
