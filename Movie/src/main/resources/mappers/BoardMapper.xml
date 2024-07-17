@@ -30,6 +30,7 @@
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
 		</where>
+		order by bno desc
 		limit #{offset}, #{limit}
 	</select>
 	<select id="reviewlist" resultMap="boardMap">
@@ -40,6 +41,7 @@
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
 		</where>
+		order by bno desc
 		limit #{offset}, #{limit}
 	</select>
 	<select id="minfolist" resultMap="boardMap">
@@ -50,6 +52,7 @@
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
 		</where>
+		order by bno desc
 		limit #{offset}, #{limit}
 	</select>
 	<select id="goodslist" resultMap="boardMap">
@@ -60,6 +63,7 @@
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
 		</where>
+		order by bno desc
 		limit #{offset}, #{limit}
 	</select>
 	<select id="count" resultType="int">
@@ -92,4 +96,7 @@
 			select * from board left join file on 
 			board.bno=file.bno where board.bno = #{bno};
 	</select>
+	<update id="update" parameterType="cProject.movie.vo.BoardVO">
+		update board set title = #{title}, body = #{body} where bno = #{bno}; 
+	</update>
 </mapper>

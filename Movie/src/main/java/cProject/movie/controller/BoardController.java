@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.multipart.MultipartFile;
 
-
 import cProject.movie.vo.FileVO;
 
 import cProject.movie.repo.BoardRepository;
@@ -115,6 +114,22 @@ public class BoardController {
 		model.addAttribute("vo", vo);
 		
 		return "post"; 
+	}
+	@RequestMapping(value="/modify.do", method=RequestMethod.GET)
+	public String modify(@RequestParam(name="bno", required=false, defaultValue="0") int bno, Model model) {
+		BoardVO vo = repository.selectOne(bno);
+		model.addAttribute("vo", vo);
+		return "modify";
+	}
+	@RequestMapping(value="/modify.do", method=RequestMethod.POST)
+	public String modifyOK(
+			BoardVO vo) {
+		int result = repository.update(vo);
+		if(result > 0) {
+			return "redirect:/board/post.do?bno="+vo.getBno();
+		}else {
+			return "redirect:/board/modify.do?bno="+vo.getBno();
+		}
 	}
 
 }

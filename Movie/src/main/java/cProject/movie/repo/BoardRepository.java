@@ -79,4 +79,7 @@ public class BoardRepository {
 	public BoardVO selectOne(int sno) {
 		return	template.selectOne(NAME_SPACE + ".findById" , sno);
 	}
+	public int update(BoardVO vo) {
+		return template.update(NAME_SPACE + ".update", vo);
+	}
 }
