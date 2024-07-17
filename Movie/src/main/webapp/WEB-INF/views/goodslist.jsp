@@ -85,11 +85,14 @@
                 </tbody>
             </table>
             <c:choose>
-				<c:when test="${empty sessionScope.user}">
-					<%@ include file="./includes/b_logincase.jsp" %>
+				<c:when test="${sessionScope.user.userType > 0}">
+					<%@ include file="./includes/userlogincase.jsp" %>
+				</c:when>
+				<c:when test="${sessionScope.user.userType == 0}">
+					<%@ include file="./includes/managerlogincase.jsp" %>
 				</c:when>
 				<c:otherwise>
-					<%@ include file="./includes/userlogincase.jsp" %>
+					<%@ include file="./includes/b_logincase.jsp" %>
 				</c:otherwise>
 			</c:choose>
 			<button type="button" id="write"><a href="write.do">글 쓰기</a></button>

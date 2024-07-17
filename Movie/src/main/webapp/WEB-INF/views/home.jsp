@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page session="false" %>
 <!DOCTYPE html>
@@ -36,21 +37,17 @@
             <div id="case">
                 <div id="free">리뷰게시판 최신 글</div>
             </div>
-            <%
-            	if(true){
-            		%><%@ include file="./includes/b_logincase.jsp" %><%
-            	}
-            %>
-             <%
-            	if(false){
-            		%><%@ include file="./includes/b_logincase.jsp" %><%
-            	}
-            %>
-             <%
-            	if(false){
-            		%><%@ include file="./includes/b_logincase.jsp" %><%
-            	}
-            %>
+             <c:choose>
+				<c:when test="${sessionScope.user.userType > 0}">
+					<%@ include file="./includes/userlogincase.jsp" %>
+				</c:when>
+				<c:when test="${sessionScope.user.userType == 0}">
+					<%@ include file="./includes/managerlogincase.jsp" %>
+				</c:when>
+				<c:otherwise>
+					<%@ include file="./includes/b_logincase.jsp" %>
+				</c:otherwise>
+			</c:choose>
         </div>
         <div id="container">
             <div id="case">
