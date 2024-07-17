@@ -31,18 +31,18 @@
     </header>
 
     <div class="container">
-    <h1 class="underline">제목:${vo.title}</h1>
-    <dl class="post-details">
+    	<h1 class="underline">제목:${vo.title}</h1>
+    	<dl class="post-details">
         <dt>작성자:${vo.author}</dt>
-        <dd></dd>
+        	<dd></dd>
         <dt>조회수:${vo.hit}</dt>
-        <dd></dd>
+        	<dd></dd>
         <dt>좋아요:</dt>
-        <dd></dd>
+        	<dd></dd>
         <dt>첨부파일:</dt>
-        <dd></dd>   
-    </dl>
-    <div class="star_rating" name="star_rating" id="star_rating" style="text-align: left;">
+        	<dd></dd>   
+    	</dl>
+   		<div class="star_rating" name="star_rating" id="star_rating" style="text-align: left;">
         <dt>별점:</dt>
         <dd>
         <fieldset>
@@ -58,12 +58,20 @@
         
     </div>
     <div class="button-group">
-    	<form action="modify." method="get">
-        	<a href="modify.do" class="button">수정</a>
+    	<form action='<c:url value="/board/modify.do?bno=${bvo.bno}"></c:url>'method="get">
+        	<input type="submit" class="button" value="수정">
         </form>
         <form action="delete.do" method="post">
-			<input type="hidden" name="bno" value="${vo.bno}">
+			<input type="hidden" name="bno" value="${bvo.bno}">
 			<input type="submit" class="button" value="삭제">
+		</form>
+		<form action="police.do" method="post">
+			<input type="hidden" name="bno" value="${bvo.bno}">
+			<input type="submit" class="button" value="신고">
+		</form>
+		<form action="like.do" method="post">
+			<input type="hidden" name="bno" value="${bvo.bno}">
+			<input type="submit" class="button" value="좋아요">
 		</form>
         <a href="#" class="button">목록으로 돌아가기</a>
     </div>
