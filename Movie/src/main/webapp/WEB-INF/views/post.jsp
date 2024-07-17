@@ -72,7 +72,7 @@
 			<input type="hidden" name="bno" value="${vo.bno}">
 			<input type="submit" class="button" value="좋아요">
 		</form>
-		<form action="return.do" method="post">
+		<form action="return.do" method="get">
 			<input type="hidden" name="categoryNo" value="${vo.categoryNo}">
 			<input type="submit" class="button" value="목록으로 돌아가기">
         </form>
