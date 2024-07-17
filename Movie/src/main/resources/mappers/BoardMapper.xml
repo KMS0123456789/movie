@@ -88,4 +88,8 @@
 		insert into board(author, category_no, notice, hit, title, body)
 		values(#{author}, ${categoryNo}, ${notice}, 0, #{title}, #{body});
 	</insert>
+	<select id="findById" parameterType="int"  resultMap="boardMap">
+			select * from board left join file on 
+			board.bno=file.bno where board.bno = #{bno};
+	</select>
 </mapper>

@@ -76,4 +76,7 @@ public class BoardRepository {
 	public int insertOne(BoardVO vo) {
 		return template.insert(NAME_SPACE + ".insert", vo);
 	}
+	public BoardVO selectOne(int sno) {
+		return	template.selectOne(NAME_SPACE + ".findById" , sno);
+	}
 }

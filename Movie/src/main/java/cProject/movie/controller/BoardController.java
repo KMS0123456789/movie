@@ -108,4 +108,13 @@ public class BoardController {
 			return "redirect:/board/freelist.do";
 		}
 	}
+	@RequestMapping(value="/post.do",method =RequestMethod.GET)
+	public String view(@RequestParam(name="bno" , defaultValue="0") int bno,Model model){
+		
+		BoardVO vo =repository.selectOne(bno);
+		model.addAttribute("vo", vo);
+		
+		return "post"; 
+	}
+
 }
