@@ -1,11 +1,13 @@
 @charset "UTF-8";
 body{
-  background-color: #e3d7ea;
+  background-image: linear-gradient(to top, #cd9cf2 0%, #f6f3ff 100%);
+  height: 100vh;
+  background-size: cover;
 }
 #case{
   width: 400px;
   height: 350px;
-  background-color: #fff0f5;
+  background-image: linear-gradient(to bottom, #ebc0fd 0%, #d9ded8 100%);
   border-radius: 20px;
   margin: 30px 20px;
   float: left;
@@ -19,6 +21,6 @@ body{
   border-radius: 15px;
   padding: 15px;
 }
-#container {
-	float: left;
+#container{
+  float: left;
 }

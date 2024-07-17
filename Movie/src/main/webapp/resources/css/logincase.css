@@ -1,60 +1,53 @@
-#login{
-    text-align: center;
-  }
-  #information{
-    margin: 0 auto;
-  }
-  input{
+#logincase{
+    width: 300px;
+    height: 350px;
+    background-image: linear-gradient(to bottom, #fbc2eb 0%, #a6c1ee 100%);
+    border-radius: 20px;
+    margin: 30px 20px;
+    float: right;
+    margin-left: 8rem;
+}
+#label{
+    margin-bottom: 10px;
+}
+#sub{
+    background-image: linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%);
+    padding: 10px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    font-family: "Gowun Batang", serif;
+    font-size: 20px;
+    font-style: normal;
+    margin-right: 20px;
+}
+#id,#pw{
     width: 200px;
     height: 40px;
     border-radius: 7px;
     margin-bottom: 15px;
     text-align: center;
     border: none;
+}
+#login{
+    text-align: center;
   }
-  #sub{
-    background-color: #ffb6c1;
-    width: 150px;
-    height: 50px;
-    border-radius: 10px;
-    cursor: pointer;
+#information{
+    margin: 0 auto;
+}
+#btn{
+    text-align: center;
+}
+#join a {
+    font-family: "Gowun Batang", serif;
     font-size: 20px;
-    border: none;
-  }
-  #label{
-    margin-bottom: 10px;
-  }
-  #btn{
-    text-align: center;
-  }
-  body{
-    background-color: #e3d7ea;
-  }
-  #case{
-    width: 400px;
-    height: 350px;
-    background-color: #fff0f5;
-    border-radius: 20px;
-    margin: 30px 20px;
-    float: left;
-  }
-  #free{
-    text-align: center;
-    background:#a2a4dd;
-    color: white;
-    font-family: "Gowun Dodum", sans-serif;
     font-style: normal;
-    border-radius: 15px;
-    padding: 15px;
-  }
-  #logincase{
-    width: 300px;
-    height: 350px;
-    background-color: #fff5ee;
-    border-radius: 20px;
-    margin-left: 10rem;
+    cursor: pointer;
+    color: black;
+    border-radius: 10px;
+    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+    padding: 10px 30px;
+}
+#join{
     display: inline-block;
-    margin-top: 1.7rem;
-    float: right;
-    margin-right: 5rem;
-  }
+}

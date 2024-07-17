@@ -11,6 +11,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Gowun+Dodum&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Orbit&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap');
     </style>
     <link rel="stylesheet" href="<c:url value='/resources/css/main.css'/>">
     <link rel="stylesheet" href="<c:url value='/resources/css/header_footer.css'/>">
@@ -21,10 +22,10 @@
             <div id="menu">
                 <ul>
                     <li><a href="home.do">영화 사이트</a></li>
-                    <li><a href="freelist.do">자유게시판</a></li>
-                    <li><a href="reviewlist.do">리뷰게시판</a></li>
-                    <li><a href="minfolist.do">영화 정보게시판</a></li>
-                    <li><a href="goodslist.do">굿즈 게시판</a></li>
+                    <li><a href="freelist.do">영화 자유 게시판</a></li>
+                    <li><a href="reviewlist.do">영화 리뷰 게시판</a></li>
+                    <li><a href="minfolist.do">영화 정보 게시판</a></li>
+                    <li><a href="goodslist.do">영화 굿즈 게시판</a></li>
                 </ul>
             </div>
         </nav>

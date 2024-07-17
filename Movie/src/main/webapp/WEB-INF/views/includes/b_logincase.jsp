@@ -15,6 +15,9 @@
                </div>
                <div id="btn">
                    <button type="submit" id="sub">로그인</button>
+                   <div id="join">
+                   		<a>회원가입</a>
+                   </div>
                </div>
            </form>
        </div>

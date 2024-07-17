@@ -10,6 +10,7 @@
             @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
             @import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Gowun+Dodum&display=swap');
             @import url('https://fonts.googleapis.com/css2?family=Orbit&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap');
         </style>
             <link href="<c:url value='/resources/css/header_footer.css'/>" rel="stylesheet">
             <link href="<c:url value='/resources/css/list.css'/>" rel="stylesheet">
