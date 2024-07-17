@@ -11,7 +11,25 @@
 		<result property="updateDate" column="update_date"/>
 		<result property="deleteDate" column="delete_date"/>
 	</resultMap>
+	
 	<select id="login" parameterType="cProject.movie.vo.UserVO" resultMap="userMap">
 		select id, user_type from user where id = #{id} and pw = #{pw}
+	</select>
+	
+	<insert id="join" parameterType="cProject.movie.vo.UserVO">
+		insert into user(id, pw, email, nick)
+		values(#{id}, #{pw}, #{email}, #{nick});
+	</insert>
+	
+	<select id="idCheck" parameterType="String" resultType="Integer">
+		select count(*) from user where id = #{id};
+	</select>
+	
+	<select id="nickCheck" parameterType="String" resultType="Integer">
+		select count(*) from user where nick = #{nick};
+	</select>
+	
+	<select id="emailCheck" parameterType="String" resultType="Integer">
+		select count(*) from user where email = #{email};
 	</select>
 </mapper>
