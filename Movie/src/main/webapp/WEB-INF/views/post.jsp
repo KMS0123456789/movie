@@ -109,14 +109,18 @@
         </form>
         <div class="comment-list">
             <div class="comment">
-                <div style="text-align: left;">작성자 : </div>
-
-                <div class="comment-actions">
+                
+				<c:forEach items="${vo.comments}" var="item">
+				<div style="text-align: left;">작성자 :${item.author} </div>
+				<div style="text-align: left;">${item.cbody} </div>
+				<div class="comment-actions">
                     <button class="btn_comment_diplay" type="button" onclick="confirmReply(this)">작성</button>
                     <button class="btn_comment_diplay" type="button" onclick="cancelReply(this)">취소</button>
                     <button type="button" onclick="modifyReply(this);">수정</button>
                     <button type="button" onclick="deleteReply(this);">삭제</button>
                 </div>
+			</c:forEach>
+                
             </div>
         </div>
     </div>

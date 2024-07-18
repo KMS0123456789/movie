@@ -129,9 +129,13 @@
 		values(#{author}, ${categoryNo}, ${notice}, 0, #{title}, #{body});
 	</insert>
 	<select id="findById" parameterType="int"  resultMap="boardMap">
-			select * from board left join file on 
-			board.bno=file.bno where board.bno = #{bno};
+			select * from board left join file on
+			board.bno=file.bno
+			left join comment on
+			board.bno=comment.bno where board.bno = #{bno};
+		
 	</select>
+	
 	<update id="update" parameterType="cProject.movie.vo.BoardVO">
 		update board set title = #{title}, body = #{body}, update_date = now() where bno = #{bno}; 
 	</update>
