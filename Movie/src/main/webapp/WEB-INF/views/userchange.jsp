@@ -45,7 +45,7 @@
                  <div id="userinfor">
                     <form id="nickForm" action="<c:url value='/user/changenick.do'/>" method="post">
                         <input type="hidden" name="id" value="${sessionScope.user.id}">
-                        <input type="text" name="nick" id="nick" placeholder="닉네임">
+                        <input type="text" name="nick" id="nick" placeholder="${sessionScope.user.id}">
                         <button type="button" id="checkNickButton">닉네임 중복확인</button>
                         <input type="submit" value="닉네임변경" id="btns">
                     </form>
