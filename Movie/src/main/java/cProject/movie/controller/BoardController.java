@@ -164,5 +164,9 @@ public class BoardController {
 			return "redirect:/board/board.do";
 		}
 	}
-
+	@RequestMapping(value="/mypage.do", method=RequestMethod.GET)
+	public String mypage() {
+		return "mypage";
+	}
+	
 }

@@ -4,7 +4,7 @@
 	<div id="logincase" >
        <div id="login">
            <h2>로그인</h2>
-           <form action="<c:url value='/board/login.do'/>" method="post">
+           <form action="<c:url value='/user/login.do'/>" method="post">
                <div class="information">
                    <div id="label"><label for="id">아이디</label></div>
                    <input type="text" name="id" placeholder="id를 입력하세요." id="id"><br>
@@ -15,10 +15,16 @@
                </div>
                <div id="btn">
                    <button type="submit" id="sub">로그인</button>
-                   <div id="join">
-                   		<a>회원가입</a>
-                   </div>
                </div>
            </form>
+           <div id="join">
+          		<a href="<c:url value="/user/join.do"/>">회원가입</a>
+           </div>
+           <div id="findId">
+          		<a href="<c:url value="/user/findId.do"/>">아이디 찾기</a>
+           </div>
+           <div id="findPw">
+          		<a href="<c:url value="/user/findPw.do"/>">비밀번호 찾기</a>
+           </div>
        </div>
 	</div>

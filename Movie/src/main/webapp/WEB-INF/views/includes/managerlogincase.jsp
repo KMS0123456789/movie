@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -40,7 +40,7 @@
             <h2 id="name">${sessionScope.user.nick}님</h2>
             <div><a href="#" id="change">회원정보 변경</a></div>
             <div><a href="#" id="change">관리자페이지</a></div>
-            <div><a href="logout.do" id="change">로그아웃</a></div>
+            <div><a href="<c:url value='/user/logout.do'/>" id="change">로그아웃</a></div>
         </div>
     </div>
 </body>
