@@ -7,13 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원정보 페이지</title>
     <style>
-        @import url('./main.css');
-        @import url('./header_footer.css');
         @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Gowun+Dodum&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Orbit&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Diphylleia&display=swap');
-        @import url('./userchange.css');
     </style>
     <link href="<c:url value='/resources/css/header_footer.css'/>" rel="stylesheet">
     <link href="<c:url value='/resources/css/userchgnge.css'/>" rel="stylesheet">
@@ -45,14 +42,16 @@
                     </form>
                 </div>
                 <div id="userinfor">
-                    <form>
-                        <input type="text" placeholder="닉네임" id="text">
+                    <form action="<c:url value="/user/changenick.do"/>" method="post">
+                    	<input type="hidden" name="id" value="${sessionScope.user.id}">
+                        <input type="text" name="nick" placeholder="닉네임" id="text">
                         <input type="submit" value="닉네임변경" id="btns">
                     </form>
                 </div>
                 <div id="userinfor">
-                    <form>
-                        <input type="text" placeholder="이메일" id="text">
+                    <form action="<c:url value="/user/changeemail.do"/>" method="post">
+                    	<input type="hidden" name="id" value="${sessionScope.user.id}">
+                        <input type="text" name="email" placeholder="이메일" id="text">
                         <input type="submit" value="이메일변경" id="btns">
                     </form>
                 </div>

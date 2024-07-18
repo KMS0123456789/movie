@@ -47,9 +47,14 @@ public class UserRepository {
     }
 
     public int changePw(UserVO vo) {
- 
-    	return template.update(NAME_SPACE + ".changePw", vo);
-         
+    	return template.update(NAME_SPACE + ".changePw", vo);        
+    }
+    
+    public int changenick(UserVO vo) {
+    	return template.update(NAME_SPACE + ".changenick", vo);  
+    }
+    public int changeemail(UserVO vo) {
+    	return template.update(NAME_SPACE + ".changeemail", vo);  
     }
 
 

@@ -147,4 +147,14 @@ public class UserController {
 	public String userchange() {
 		return "userchange";
 	}
+	@RequestMapping(value="/changenick.do", method=RequestMethod.POST)
+    public String changenick(UserVO vo) {
+        repository.changenick(vo);
+        return "redirect:/user/userchange.do";
+	}
+	@RequestMapping(value="/changeemail.do", method=RequestMethod.POST)
+    public String changeemail(UserVO vo) {
+        repository.changeemail(vo);
+        return "redirect:/user/userchange.do";
+	}
 }
