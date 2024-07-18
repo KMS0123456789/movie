@@ -20,7 +20,7 @@
             <nav>
                 <div id="menu">
                     <ul>
-                        <li><a href="home.do">영화 사이트</a></li>
+                        <li><a href="board.do">영화 사이트</a></li>
                         <li><a href="freelist.do">영화 자유 게시판</a></li>
                         <li><a href="reviewlist.do">영화 리뷰 게시판</a></li>
                         <li><a href="minfolist.do">영화 정보 게시판</a></li>
