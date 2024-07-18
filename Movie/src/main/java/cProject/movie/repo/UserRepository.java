@@ -39,5 +39,18 @@ public class UserRepository {
         return template.selectOne(NAME_SPACE + ".findId", email);
 	}
 	
-	
+	public UserVO findPw(String id, String email) {
+        UserVO userVO = new UserVO();
+        userVO.setId(id);
+        userVO.setEmail(email);
+        return template.selectOne(NAME_SPACE + ".findPw", userVO);
+    }
+
+    public int changePw(UserVO vo) {
+ 
+    	return template.update(NAME_SPACE + ".changePw", vo);
+         
+    }
+
+
 }

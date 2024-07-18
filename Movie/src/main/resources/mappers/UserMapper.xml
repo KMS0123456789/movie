@@ -37,4 +37,12 @@
         select id from user where email = #{email};
     </select>
     
+    <select id="findPw" parameterType="cProject.movie.vo.UserVO" resultMap="userMap">
+        SELECT id FROM user WHERE id = #{id} AND email = #{email}
+    </select>
+
+    <update id="changePw" parameterType="cProject.movie.vo.UserVO">
+        UPDATE user SET pw = #{pw} WHERE id = #{id}
+    </update>
+    
 </mapper>

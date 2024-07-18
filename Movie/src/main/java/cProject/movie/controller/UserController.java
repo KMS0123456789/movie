@@ -25,7 +25,6 @@ public class UserController {
 	
 	@Autowired
 	UserRepository repository;
-	private String id;
 	
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
 	public String loginOK(@ModelAttribute UserVO vo, HttpSession session, HttpServletRequest request) {
@@ -66,7 +65,6 @@ public class UserController {
 		}else {
 			map.put("result", "success");
 		}
-		
 		return map;
 	}
 	
@@ -82,8 +80,7 @@ public class UserController {
 			map.put("result", "failed");
 		}else {
 			map.put("result", "success");
-		}
-		
+		}		
 		return map;
 	}
 	
@@ -99,8 +96,7 @@ public class UserController {
 			map.put("result", "failed");
 		}else {
 			map.put("result", "success");
-		}
-		
+		}		
 		return map;
 	}
 	
@@ -109,8 +105,8 @@ public class UserController {
 		return "findid";
 	}
 	
-	@RequestMapping(value="/findId.do",method =RequestMethod.POST)
-	public String view(@RequestParam(name="email") String email, Model model){
+	@RequestMapping(value="/findId.do", method =RequestMethod.POST)
+	public String findIdOk(@RequestParam(name="email") String email, Model model){
 		
 		UserVO vo =repository.findId(email);
 		model.addAttribute("vo", vo);
@@ -126,6 +122,26 @@ public class UserController {
 	public String mypage() {
 		return "mypage";
 	}
+	
+	@RequestMapping(value="/findPw.do", method=RequestMethod.GET)
+	public String findPw() {
+		return "findpw";
+	}
+	
+	@RequestMapping(value="/findPw.do", method=RequestMethod.POST)
+    public String findPwOk(@RequestParam(name="id") String id, 
+                         @RequestParam(name="email") String email, 
+                         Model model) {
 		
-		
+		UserVO vo = repository.findPw(id, email);
+		model.addAttribute("vo", vo);
+		return "changepw";
+    }
+	
+	
+	@RequestMapping(value="/changePw.do", method=RequestMethod.POST)
+    public String changePwOk(UserVO vo) {
+        repository.changePw(vo);
+        return "redirect:/board/board.do";
+	}
 }

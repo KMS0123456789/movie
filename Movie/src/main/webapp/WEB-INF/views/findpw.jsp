@@ -5,8 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-    <title>ID 찾기</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <title>PW 변경</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Gowun+Dodum&display=swap');
@@ -29,10 +29,19 @@
             </div>
         </nav>
     </header>
-<body>
     <div class="container">
-        <h1>아이디 확인</h1>
-        <h1 style="color:white;">${vo.id}</h1>
+        <h1>비밀번호 찾기</h1>
+        <form action="findPw.do" method="POST">
+            <div class="form-group">
+                <label for="id">아이디</label>
+                <input type="text" name="id" id="id" placeholder="아이디" required>
+            </div><br>
+            <div class="form-group">
+                <label for="email">이메일</label>
+                <input type="text" name="email" id="email" placeholder="이메일" required>
+            </div><br>
+            <button type="submit" class="submit-btn">비밀번호 찾기</button>
+        </form>
     </div>
 </body>
 </html>
