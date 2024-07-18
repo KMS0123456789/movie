@@ -12,23 +12,9 @@
         @import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Gowun+Dodum&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Orbit&display=swap');
     </style>
-    <link href="<c:url value='/resources/css/header_footer.css' />" rel="stylesheet">
     <link href="<c:url value='/resources/css/join.css' />" rel="stylesheet">
 </head>
 <body style="background-color: #e3d7ea;">
-   <header>
-        <nav>
-            <div id="menu">
-                <ul>
-                    <li><a href="<c:url value='/board/board.do'/>">영화 사이트</a></li>
-                    <li><a href="<c:url value='/board/freelist.do'/>">영화 자유게시판</a></li>
-                    <li><a href="<c:url value='/board/reviewlist.do'/>">영화 리뷰게시판</a></li>
-                    <li><a href="<c:url value='/board/minfolist.do'/>">영화 정보게시판</a></li>
-                    <li><a href="<c:url value='/board/goodslist.do'/>">영화 굿즈 게시판</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
     <div class="container">
         <h1>회원가입</h1>
         <form action="join.do" method="post">
