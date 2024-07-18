@@ -133,11 +133,18 @@ public class UserController {
 		model.addAttribute("vo", vo);
 		return "changepw";
     }
-	
+	@RequestMapping(value="/changePw.do", method=RequestMethod.GET)
+	public String changePw() {
+		return "changepw";
+	}
 	
 	@RequestMapping(value="/changePw.do", method=RequestMethod.POST)
     public String changePwOk(UserVO vo) {
         repository.changePw(vo);
         return "redirect:/board/board.do";
+	}
+	@RequestMapping(value="/userchange.do", method=RequestMethod.GET)
+	public String userchange() {
+		return "userchange";
 	}
 }

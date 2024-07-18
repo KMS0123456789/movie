@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -24,11 +24,11 @@
         <nav>
             <div id="menu">
                 <ul>
-                    <li><a href="#">영화 사이트</a></li>
-                    <li><a href="#">자유게시판</a></li>
-                    <li><a href="#">리뷰게시판</a></li>
-                    <li><a href="#">영화 정보게시판</a></li>
-                    <li><a href="#">영화 굿즈게시판</a></li>
+                    <li><a href="<c:url value='/board/board.do'/>">영화 사이트</a></li>
+                    <li><a href="<c:url value='/board/freelist.do'/>">영화 자유게시판</a></li>
+                    <li><a href="<c:url value='/board/reviewlist.do'/>">영화 리뷰게시판</a></li>
+                    <li><a href="<c:url value='/board/minfolist.do'/>">영화 정보게시판</a></li>
+                    <li><a href="<c:url value='/board/goodslist.do'/>">영화 굿즈 게시판</a></li>
                 </ul>
             </div>
         </nav>
@@ -39,8 +39,9 @@
             <div id="user">
                 <div class="id">아이디</div>
                 <div id="userinfor">
-                    <form>
-                        <input type="button" value="비밀번호 변경" id="btns">
+                    <form action="<c:url value="/user/changePw.do"/>">
+                    	<input type="hidden" name="id" value="${sessionScope.user.id}">
+                        <input type="submit" value="비밀번호 변경" id="btns">
                     </form>
                 </div>
                 <div id="userinfor">
