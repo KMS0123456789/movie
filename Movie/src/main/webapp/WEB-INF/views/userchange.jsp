@@ -81,7 +81,7 @@
                 success: function(data) {
                     if (data.result == "success") {
                         nickCheck = true;
-                        alert("회원가입 가능한 닉네임");
+                        alert("변경 가능한 닉네임");
                     } else {
                         nickCheck = false;
                         alert("회원 닉네임 중복");
@@ -109,7 +109,7 @@
                 success: function(data) {
                     if (data.result == "success") {
                         emailCheck = true;
-                        alert("회원가입 가능한 이메일");
+                        alert("변경 가능한 이메일");
                     } else {
                         emailCheck = false;
                         alert("회원 이메일 중복");
