@@ -1,11 +1,11 @@
 #logincase{
     width: 300px;
-    height: 350px;
-    background-image: linear-gradient(to bottom, #fbc2eb 0%, #a6c1ee 100%);
+    height: 450px;
+    background-image: linear-gradient(to top, #c471f5 0%, #fa71cd 100%);
     border-radius: 20px;
     margin: 30px 20px;
     float: right;
-    margin-left: 8rem;
+    margin-left: 10rem;
 }
 #label{
     margin-bottom: 10px;
@@ -14,6 +14,18 @@
     background-image: linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%);
     padding: 10px 30px;
     border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    font-family: "Gowun Batang", serif;
+    font-size: 20px;
+    font-style: normal;
+    margin-right: 20px;
+    margin-bottom: 30px;
+}
+#join{
+    background-image: linear-gradient(to bottom, #ebc0fd 0%, #d9ded8 100%);
+    border-radius: 10px;
+    padding: 10px 30px;
     cursor: pointer;
     border: none;
     font-family: "Gowun Batang", serif;
@@ -31,23 +43,31 @@
 }
 #login{
     text-align: center;
-  }
-#information{
+}
+.information{
     margin: 0 auto;
+}
+.join{
+    margin-bottom: 30px;
+}
+.user{
+    display: inline-block;
 }
 #btn{
     text-align: center;
 }
-#join a {
-    font-family: "Gowun Batang", serif;
-    font-size: 20px;
-    font-style: normal;
-    cursor: pointer;
+a{
     color: black;
-    border-radius: 10px;
-    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
-    padding: 10px 30px;
+    text-decoration: none;
 }
-#join{
-    display: inline-block;
+#find a{
+    background-image: linear-gradient(to bottom, #ee9ca7 0%, #ffdde1 100%);
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    font-family: "Gowun Batang", serif;
+    font-size: 15px;
+    font-style: normal;
+    margin-right: 10px;
 }

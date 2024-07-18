@@ -17,14 +17,14 @@
                    <button type="submit" id="sub">로그인</button>
                </div>
            </form>
-           <div id="join">
-          		<a href="<c:url value="/user/join.do"/>">회원가입</a>
-           </div>
-           <div id="findId">
-          		<a href="<c:url value="/user/findId.do"/>">아이디 찾기</a>
-           </div>
-           <div id="findPw">
-          		<a href="<c:url value="/user/findPw.do"/>">비밀번호 찾기</a>
+           <div id="user">
+	           <div class="join">
+	          		<a href="<c:url value="/user/join.do"/>" id="join">회원가입</a>
+	           </div>
+	           <div id="find">
+	          		<a href="<c:url value="/user/findId.do"/>" id="findid">아이디 찾기</a>
+	          		<a href="<c:url value="/user/findPw.do"/>"id="findpw">비밀번호 찾기</a>
+	           </div>
            </div>
        </div>
 	</div>
