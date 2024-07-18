@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <title>회원정보 페이지</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
@@ -41,22 +42,98 @@
                         <input type="submit" value="비밀번호 변경" id="btns">
                     </form>
                 </div>
-                <div id="userinfor">
-                    <form action="<c:url value="/user/changenick.do"/>" method="post">
-                    	<input type="hidden" name="id" value="${sessionScope.user.id}">
-                        <input type="text" name="nick" placeholder="닉네임" id="text">
+                 <div id="userinfor">
+                    <form id="nickForm" action="<c:url value='/user/changenick.do'/>" method="post">
+                        <input type="hidden" name="id" value="${sessionScope.user.id}">
+                        <input type="text" name="nick" id="nick" placeholder="닉네임">
+                        <button type="button" id="checkNickButton">닉네임 중복확인</button>
                         <input type="submit" value="닉네임변경" id="btns">
                     </form>
                 </div>
                 <div id="userinfor">
-                    <form action="<c:url value="/user/changeemail.do"/>" method="post">
-                    	<input type="hidden" name="id" value="${sessionScope.user.id}">
-                        <input type="text" name="email" placeholder="이메일" id="text">
+                    <form id="emailForm" action="<c:url value='/user/changeemail.do'/>" method="post">
+                        <input type="hidden" name="id" value="${sessionScope.user.id}">
+                        <input type="text" name="email" id="email" placeholder="이메일">
+                        <button type="button" id="checkEmailButton">이메일 중복확인</button>
                         <input type="submit" value="이메일변경" id="btns">
                     </form>
                 </div>
             </div>
         </div>
     </section>
+    <script>
+        let nickCheck = false;
+        let emailCheck = false;
+
+        $("#checkNickButton").on("click", function() {
+            let nick = $("#nick");
+            if (nick.val().trim() == "") {
+                alert("닉네임을 입력해주세요");
+                return;
+            }
+
+            $.ajax({
+                type: "post",
+                url: "<c:url value='/user/nickCheck.do'/>",
+                data: {
+                    "nick": nick.val()
+                },
+                success: function(data) {
+                    if (data.result == "success") {
+                        nickCheck = true;
+                        alert("회원가입 가능한 닉네임");
+                    } else {
+                        nickCheck = false;
+                        alert("회원 닉네임 중복");
+                    }
+                },
+                error: function() {
+                    alert("서버 요청 중 오류가 발생했습니다.");
+                }
+            });
+        });
+
+        $("#checkEmailButton").on("click", function() {
+            let email = $("#email");
+            if (email.val().trim() == "") {
+                alert("이메일을 입력해주세요");
+                return;
+            }
+
+            $.ajax({
+                type: "post",
+                url: "<c:url value='/user/emailCheck.do'/>",
+                data: {
+                    "email": email.val()
+                },
+                success: function(data) {
+                    if (data.result == "success") {
+                        emailCheck = true;
+                        alert("회원가입 가능한 이메일");
+                    } else {
+                        emailCheck = false;
+                        alert("회원 이메일 중복");
+                    }
+                },
+                error: function() {
+                    alert("서버 요청 중 오류가 발생했습니다.");
+                }
+            });
+        });
+
+        $("#nickForm").on("submit", function(e) {
+            if (!nickCheck) {
+                alert("닉네임 변경 불가");
+                e.preventDefault();
+            }
+        });
+
+        $("#emailForm").on("submit", function(e) {
+            if (!emailCheck) {
+                alert("이메일 변경 불가");
+                e.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html>
