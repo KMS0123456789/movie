@@ -21,7 +21,7 @@
         <nav>
             <div id="menu">
                 <ul>
-                    <li><a href="home.do">영화 사이트</a></li>
+                    <li><a href="board.do">영화 사이트</a></li>
                     <li><a href="freelist.do">자유게시판</a></li>
                     <li><a href="reviewlist.do">리뷰게시판</a></li>
                     <li><a href="minfolist.do">영화 정보게시판</a></li>
@@ -99,10 +99,14 @@
     </div>
     <div class="comment-section">
         <h2>댓글</h2>
-        <div class="comment-form">
-            <textarea placeholder="댓글을 입력하세요" id="ta_reply"></textarea><br>
-            <button type="button" id="btn_reply_submit" style="margin-right: 1rem;">댓글 작성</button>
-        </div>
+        <form action='<c:url value="/comment/cWrite.do" />' method="post">
+	        <div class="comment-form">
+	        	<input type="hidden" name="bno" value="${vo.bno}">
+	        	<input type="hidden" name="author" value="${sessionScope.user.id}">
+	            <textarea placeholder="댓글을 입력하세요" id="cbody" name="cbody"></textarea><br>
+	            <button type="submit" id="btn_reply_submit" style="margin-right: 1rem;">댓글 작성</button>
+	        </div>
+        </form>
         <div class="comment-list">
             <div class="comment">
                 <div style="text-align: left;">작성자 : </div>

@@ -12,6 +12,17 @@
 		<result property="creataeDate" column="create_date"/>
 		<result property="updateDate" column="update_date"/>
 		<result property="deleteDate" column="delete_date"/>
+		<collection property="Cpolices" ofType="cProject.movie.vo.CpoliceVO">
+			<id property="policeNo" column="police_no"/>
+			<result property="id" column="id"/>
+			<result property="cno" column="cno"/>
+			<result property="policeDate" column="police_date"/>
+			<result property="policeReason" column="police_reason"/>
+			<result property="policeResult" column="police_result"/>
+		</collection>
 	</resultMap>
-	
+	<insert id="insert" parameterType="cProject.movie.vo.CommentVO">
+		insert into comment(author, bno, cbody)
+		values(#{author}, ${bno}, #{cbody});
+	</insert>
 </mapper>
