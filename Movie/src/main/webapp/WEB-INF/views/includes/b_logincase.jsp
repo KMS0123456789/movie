@@ -4,7 +4,7 @@
 	<div id="logincase" >
        <div id="login">
            <h2>로그인</h2>
-           <form action="login.do" method="post">
+           <form action="<c:url value='/board/login.do'/>" method="post">
                <div class="information">
                    <div id="label"><label for="id">아이디</label></div>
                    <input type="text" name="id" placeholder="id를 입력하세요." id="id"><br>
