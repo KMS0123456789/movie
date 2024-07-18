@@ -117,6 +117,15 @@ public class UserController {
 		
 		return "findidresult"; 
 	}
+	@RequestMapping(value="/logout.do", method=RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/board/freelist.do";
+	}
+	@RequestMapping(value="/mypage.do", method=RequestMethod.GET)
+	public String mypage() {
+		return "mypage";
+	}
 		
 		
 }

@@ -40,7 +40,7 @@
             <h2 id="name">${sessionScope.user.nick}님</h2>
             <div><a href="#" id="change">회원정보 변경</a></div>
             <div><a href="#" id="change">관리자페이지</a></div>
-            <div><a href="#" id="change">로그아웃</a></div>
+            <div><a href="logout.do" id="change">로그아웃</a></div>
         </div>
     </div>
 </body>

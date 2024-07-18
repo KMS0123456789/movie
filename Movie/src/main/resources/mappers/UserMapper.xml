@@ -13,7 +13,7 @@
 	</resultMap>
 	
 	<select id="login" parameterType="cProject.movie.vo.UserVO" resultMap="userMap">
-		select id, user_type from user where id = #{id} and pw = #{pw}
+		select id, user_type,nick from user where id = #{id} and pw = #{pw}
 	</select>
 	
 	<insert id="join" parameterType="cProject.movie.vo.UserVO">
