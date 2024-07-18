@@ -1,0 +1,85 @@
+@charset "UTF-8";
+#my{
+    font-size: 30px;
+    font-family: "Diphylleia", serif;
+    font-style: normal;
+    padding-bottom: 40px;
+    text-align: center;
+}
+#main{
+    margin-left: 40px;
+}
+#btn{
+    width: 120px;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    background-color: #a2a4dd;
+    font-size: 15px;
+    font-family: "Gowun Dodum", sans-serif;
+    font-style: normal;
+}
+.btn{
+    margin-left: 5rem;
+}
+#btn-list{
+    border-bottom: 6px solid #e6e6fa;
+    max-width: 90%;
+}
+checkbox{
+    size: 10px;
+}
+#table{
+    margin-left: 5rem;
+    border-collapse: collapse;
+    width: 80%;
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+th{
+    background-color: #fff0f5;
+    padding: 13px 5px;
+    border-bottom: 1px solid black;
+}
+td{
+    padding: 10px 5px;
+}
+td:nth-child(2){
+    text-align: left;
+    cursor: pointer;
+}
+#page{
+    list-style: none;
+    text-align: center;
+    padding: 0px;
+    cursor: pointer;
+}
+#page li{
+    display: inline-block;
+    background-color: #dda0dd;
+    border-radius: 10px;
+    padding: 0.5rem 0.8rem;
+}
+tr:hover{
+    background-color: #9370db;
+}
+#btn2{
+    max-width: 84.3%;
+    text-align: right;
+}
+.btn{
+    width: 120px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #a2a4dd;
+    font-size: 15px;
+    font-family: "Gowun Dodum", sans-serif;
+    font-style: normal;
+    border: none;
+}

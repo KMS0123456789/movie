@@ -17,7 +17,6 @@
     <link href="<c:url value='/resources/css/header_footer.css'/>" rel="stylesheet"> 
 </head>
 <body>
-<body style="background-color: #e3d7ea;">
     <header>
         <nav>
             <div id="menu">
@@ -31,7 +30,6 @@
             </div>
         </nav>
     </header>
-
     <div class="container">
     	<h1 class="underline">제목:${vo.title}</h1>
     	<dl class="post-details">
@@ -60,22 +58,27 @@
         
     </div>
     <div>
-    	<div  class="button-group">
-       		<a href="<c:url value="/board/modify.do?bno=${vo.bno}"></c:url>"  class="button">수정</a>
-       	</div>
-       	<div  class="button-group">
-	        <form action="off.do" method="post">
-				<input type="hidden" name="bno" value="${vo.bno}">
-				<input type="hidden" name="categoryNo" value="${vo.categoryNo}">
-				<input type="submit" class="button" value="삭제">
-			</form>
-		</div>
+    	<c:if test="${(sessionScope.user.id) eq (vo.author)}">
+	    	<div class="button-group">
+	       		<a href="<c:url value="/board/modify.do?bno=${vo.bno}"></c:url>"  class="button">수정</a>
+	       	</div>
+       	</c:if>
+ 		<c:if test="${((sessionScope.user.id) eq (vo.author)) or (sessionScope.user.userType == 0)}">
+	       	<div  class="button-group">
+		        <form action="off.do" method="post">
+					<input type="hidden" name="bno" value="${vo.bno}">
+					<input type="hidden" name="categoryNo" value="${vo.categoryNo}">
+					<input type="submit" class="button" value="삭제">
+				</form>
+			</div>
+		</c:if>
 		<div  class="button-group">
 			<form action="return.do" method="get">
 				<input type="hidden" name="categoryNo" value="${vo.categoryNo}">
 				<input type="submit" class="button" value="목록으로 돌아가기">
 	        </form>
 	     </div>
+	     
     </div>
 	<div id="p_l_btn">
         <div>

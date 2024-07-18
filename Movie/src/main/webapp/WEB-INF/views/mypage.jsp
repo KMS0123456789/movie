@@ -12,6 +12,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Diphylleia&display=swap');
     </style>
     <link href="<c:url value='/resources/css/header_footer.css'/>" rel="stylesheet">
+    <link href="<c:url value='/resources/css/mypage.css'/>" rel="stylesheet">
 </head>
 <body>
     <header>
