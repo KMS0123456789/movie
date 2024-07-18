@@ -20,7 +20,7 @@ import cProject.movie.vo.BoardVO;
 import cProject.movie.vo.UserVO;
 
 @Controller
-@RequestMapping("/board")
+@RequestMapping("/user")
 public class UserController {
 	
 	@Autowired
@@ -33,7 +33,7 @@ public class UserController {
 		if (request.getHeader("Referer") != null) {
 		    return "redirect:" + request.getHeader("Referer");
 		}else {
-			return "redirect:/home";
+			return "redirect:/board/board.do";
 		}
 	}
 	
@@ -46,7 +46,7 @@ public class UserController {
 	public String joinOk(UserVO vo) {
 		int result = repository.join(vo);
 		if(result>0) {
-			return "redirect:/board/home.do";
+			return "redirect:/board/board.do";
 		}else {
 			return "redirect:/board/join.do";
 		}
@@ -116,7 +116,7 @@ public class UserController {
 	@RequestMapping(value="/logout.do", method=RequestMethod.GET)
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:/board/freelist.do";
+		return "redirect:/board/board.do";
 	}
 	@RequestMapping(value="/mypage.do", method=RequestMethod.GET)
 	public String mypage() {
