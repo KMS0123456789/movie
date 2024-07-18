@@ -18,6 +18,34 @@ public class BoardVO {
 	private String updateDate;
 	private String deleteDate;
 	private List<FileVO> files;
+	private List<CommentVO> comments;
+	private List<LikeVO> likes;
+	private List<StarVO> stars;
+	private List<BpoliceVO> Bpolices;
+	public List<CommentVO> getComments() {
+		return comments;
+	}
+	public void setComments(List<CommentVO> comments) {
+		this.comments = comments;
+	}
+	public List<LikeVO> getLikes() {
+		return likes;
+	}
+	public void setLikes(List<LikeVO> likes) {
+		this.likes = likes;
+	}
+	public List<StarVO> getStars() {
+		return stars;
+	}
+	public void setStars(List<StarVO> stars) {
+		this.stars = stars;
+	}
+	public List<BpoliceVO> getBpolices() {
+		return Bpolices;
+	}
+	public void setBpolices(List<BpoliceVO> bpolices) {
+		Bpolices = bpolices;
+	}
 	public List<FileVO> getFiles() {
 		return files;
 	}

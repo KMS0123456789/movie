@@ -21,6 +21,38 @@
 			<result property="filePath" column="file_path"/>
 			<result property="fileSize" column="file_size"/>
 		</collection>
+		<collection property="comments" ofType="cProject.movie.vo.CommentVO">
+			<id property="cno" column="cno"/>
+			<result property="author" column="author"/>
+			<result property="bno" column="bno"/>
+			<result property="pCno" column="p_cno"/>
+			<result property="cbody" column="cbody"/>
+			<result property="deleteFlag" column="delete_flag"/>
+			<result property="policeFlag" column="police_flag"/>
+			<result property="createDate" column="create_date"/>
+			<result property="updateDate" column="update_date"/>
+			<result property="deleteDate" column="delete_date"/>
+		</collection>
+		<collection property="likes" ofType="cProject.movie.vo.LikeVO">
+			<id property="likeNo" column="like_no"/>
+			<result property="likeUser" column="like_user"/>
+			<result property="bno" column="bno"/>
+			<result property="likeDate" column="like_date"/>
+		</collection>
+		<collection property="stars" ofType="cProject.movie.vo.StarVO">
+			<id property="starNo" column="star_no"/>
+			<result property="author" column="author"/>
+			<result property="bno" column="bno"/>
+			<result property="star" column="star"/>
+		</collection>
+		<collection property="Bpolices" ofType="cProject.movie.vo.BpoliceVO">
+			<id property="policeNo" column="police_no"/>
+			<result property="id" column="id"/>
+			<result property="bno" column="bno"/>
+			<result property="policeDate" column="police_date"/>
+			<result property="policeReason" column="police_reason"/>
+			<result property="policeResult" column="police_result"/>
+		</collection>
 	</resultMap>
 	<select id="freelist" resultMap="boardMap">
 		select * from board 
