@@ -104,7 +104,7 @@ public class BoardController {
 		if(result > 0) {
 			return "redirect:/board/post.do?bno="+vo.getBno();
 		}else {
-			return "redirect:/board/freelist.do";
+			return "redirect:/board/board.do";
 		}
 	}
 	@RequestMapping(value="/post.do",method =RequestMethod.GET)
@@ -144,10 +144,10 @@ public class BoardController {
 			}else if(categoryNo == 3) {
 				return "redirect:/board/goodslist.do";
 			}else {
-				return "redirect:/board/home.do";
+				return "redirect:/board/board.do";
 			}
 		}else {
-			return "redirect:/board/home.do";
+			return "redirect:/board/board.do";
 		}
 	}
 	@RequestMapping(value="/return.do", method=RequestMethod.GET)
@@ -161,7 +161,7 @@ public class BoardController {
 		}else if(categoryNo == 3) {
 			return "redirect:/board/goodslist.do";
 		}else {
-			return "redirect:/board/main.do";
+			return "redirect:/board/board.do";
 		}
 	}
 
