@@ -76,7 +76,7 @@
 			
 			$.ajax({
 				type : "post",
-				url : "<c:url value='/board/idCheck.do'/>",
+				url : "<c:url value='/user/idCheck.do'/>",
 				data : {
 					"id" : id.val()
 				},
@@ -102,7 +102,7 @@
 			
 			$.ajax({
 				type : "post",
-				url : "<c:url value='/board/nickCheck.do'/>",
+				url : "<c:url value='/user/nickCheck.do'/>",
 				data : {
 					"nick" : nick.val()
 				},
@@ -128,7 +128,7 @@
 			
 			$.ajax({
 				type : "post",
-				url : "<c:url value='/board/emailCheck.do'/>",
+				url : "<c:url value='/user/emailCheck.do'/>",
 				data : {
 					"email" : email.val()
 				},
