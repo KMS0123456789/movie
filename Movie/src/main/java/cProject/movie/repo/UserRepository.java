@@ -1,5 +1,8 @@
 package cProject.movie.repo;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -31,4 +34,10 @@ public class UserRepository {
 	public int emailCheck(String email) {
 		return template.selectOne(NAME_SPACE +".emailCheck", email);
 	}
+	
+	public UserVO findId(String email) {
+        return template.selectOne(NAME_SPACE + ".findId", email);
+	}
+	
+	
 }

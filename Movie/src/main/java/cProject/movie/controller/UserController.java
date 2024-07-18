@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cProject.movie.repo.UserRepository;
+import cProject.movie.vo.BoardVO;
 import cProject.movie.vo.UserVO;
 
 @Controller
@@ -23,6 +25,7 @@ public class UserController {
 	
 	@Autowired
 	UserRepository repository;
+	private String id;
 	
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
 	public String loginOK(@ModelAttribute UserVO vo, HttpSession session, HttpServletRequest request) {
@@ -100,4 +103,20 @@ public class UserController {
 		
 		return map;
 	}
+	
+	@RequestMapping(value="/findId.do", method=RequestMethod.GET)
+	public String findId() {
+		return "findid";
+	}
+	
+	@RequestMapping(value="/findId.do",method =RequestMethod.POST)
+	public String view(@RequestParam(name="email") String email, Model model){
+		
+		UserVO vo =repository.findId(email);
+		model.addAttribute("vo", vo);
+		
+		return "findidresult"; 
+	}
+		
+		
 }

@@ -12,9 +12,23 @@
         @import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Gowun+Dodum&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Orbit&display=swap');
     </style>
+    <link href="<c:url value='/resources/css/header_footer.css' />" rel="stylesheet">
     <link href="<c:url value='/resources/css/join.css' />" rel="stylesheet">
 </head>
-<body>
+<body style="background-color: #e3d7ea;">
+    <header>
+        <nav>
+            <div id="menu">
+                <ul>
+                    <li><a href="home.do">영화 사이트</a></li>
+                    <li><a href="freelist.do">자유게시판</a></li>
+                    <li><a href="reviewlist.do">리뷰게시판</a></li>
+                    <li><a href="minfolist.do">영화 정보게시판</a></li>
+                    <li><a href="goodslist.do">굿즈 게시판</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
     <div class="container">
         <h1>회원가입</h1>
         <form action="join.do" method="post">
@@ -22,24 +36,27 @@
                 <label for="id">아이디</label>
                 <input type="text" id="id" name="id">
                 <button type="button" id="checkIdButton">아이디 중복확인</button>
+               	
             </div>
             <div class="form-group">
-                <label for="pw">비밀번호</label>
+                <label for="password">비밀번호</label>
                 <input type="password" id="pw" name="pw">
             </div>
             <div class="form-group">
-                <label for="pwValid">비밀번호 확인</label>
+                <label for="passwordValid">비밀번호 확인</label>
                 <input type="password" id="pwValid" name="pwValid">
             </div>
             <div class="form-group">
-                <label for="nick">닉네임</label>
+                <label for="nickname">닉네임</label>
                 <input type="text" id="nick" name="nick">
                 <button type="button" id="checkNickButton">닉네임 중복확인</button>
+                
             </div>
             <div class="form-group">
                 <label for="email">이메일</label>
                 <input type="text" id="email" name="email">
                 <button type="button" id="checkEmailButton">이메일 중복확인</button>
+                
             </div>
             <button type="submit" class="submit-btn">가입하기</button>
         </form>

@@ -61,6 +61,8 @@ h1 {
 
 .submit-btn:hover {background: #6dd5ed; font-family: Orbit, sans-serif;}
 
+.result-box {margin-bottom: 10rem; text-align: center; }
+
 #checkIdButton {font-family: Orbit, sans-serif; margin-top: 0.5rem;}
 
 #checkUsernameButton {font-family: Orbit, sans-serif; margin-top: 0.5rem;}

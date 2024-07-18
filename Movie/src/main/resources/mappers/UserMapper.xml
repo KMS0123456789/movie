@@ -32,4 +32,9 @@
 	<select id="emailCheck" parameterType="String" resultType="Integer">
 		select count(*) from user where email = #{email};
 	</select>
+	
+	 <select id="findId" parameterType="String" resultMap="userMap">
+        select id from user where email = #{email};
+    </select>
+    
 </mapper>
