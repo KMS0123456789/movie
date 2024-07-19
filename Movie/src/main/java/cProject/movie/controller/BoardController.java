@@ -66,8 +66,8 @@ public class BoardController {
 	public String reviewlist(Model model, BoardVO vo, 
 			@RequestParam(name="page", required=false, defaultValue = "1") int page,
 			@RequestParam(name="searchType", required=false) String searchType,
-			@RequestParam(name="keyword", required=false) String keyword
-			) {
+			@RequestParam(name="keyword", required=false) String keyword,
+			HttpSession session) {
 		Pageable pageable = PageRequest.of(page-1, 10);
 		int categoryNo = 1;
 		Page<BoardVO> data = repository.reviewlist(pageable, searchType, keyword, categoryNo);
@@ -75,14 +75,18 @@ public class BoardController {
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPage", data.getTotalPages());
 		model.addAttribute("pageSize", 10);
+		
+		session.getAttribute("user");
+		session.removeAttribute("s");
+		
 		return "reviewlist";
 	}
 	@RequestMapping(value="/minfolist.do", method=RequestMethod.GET)
 	public String minfolist(Model model, BoardVO vo, 
 			@RequestParam(name="page", required=false, defaultValue = "1") int page,
 			@RequestParam(name="searchType", required=false) String searchType,
-			@RequestParam(name="keyword", required=false) String keyword
-			) {
+			@RequestParam(name="keyword", required=false) String keyword,
+			HttpSession session) {
 		Pageable pageable = PageRequest.of(page-1, 10);
 		int categoryNo = 2;
 		Page<BoardVO> data = repository.minfolist(pageable, searchType, keyword, categoryNo);
@@ -90,14 +94,18 @@ public class BoardController {
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPage", data.getTotalPages());
 		model.addAttribute("pageSize", 10);
+		
+		session.getAttribute("user");
+		session.removeAttribute("s");
+		
 		return "minfolist";
 	}
 	@RequestMapping(value="/goodslist.do", method=RequestMethod.GET)
 	public String goodslist(Model model, BoardVO vo, 
 			@RequestParam(name="page", required=false, defaultValue = "1") int page,
 			@RequestParam(name="searchType", required=false) String searchType,
-			@RequestParam(name="keyword", required=false) String keyword
-			) {
+			@RequestParam(name="keyword", required=false) String keyword,
+			HttpSession session) {
 		Pageable pageable = PageRequest.of(page-1, 10);
 		int categoryNo = 3;
 		Page<BoardVO> data = repository.goodslist(pageable, searchType, keyword, categoryNo);
@@ -105,6 +113,10 @@ public class BoardController {
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPage", data.getTotalPages());
 		model.addAttribute("pageSize", 10);
+		
+		session.getAttribute("user");
+		session.removeAttribute("s");
+		
 		return "goodslist";
 	}
 	@RequestMapping(value="/write.do", method=RequestMethod.GET)
