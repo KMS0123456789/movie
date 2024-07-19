@@ -105,21 +105,26 @@
 	        	<input type="hidden" name="bno" value="${vo.bno}">
 	        	<input type="hidden" name="author" value="${sessionScope.user.id}">
 	            <textarea placeholder="댓글을 입력하세요" id="cbody" name="cbody"></textarea><br>
-	            <button type="submit" id="btn_reply_submit" style="margin-right: 1rem;">댓글 작성</button>
+	            <c:if test="${!empty sessionScope.user.id}">
+	            	<button type="submit" id="btn_reply_submit" style="margin-right: 1rem;">댓글 작성</button>
+	       		</c:if>
 	        </div>
         </form>
 		
 		<div class="comment-list">
 		    <div class="comment">
 		        <c:forEach items="${vo.comments}" var="item">
-		            <div style="text-align: left;">작성자 :${item.author}</div>
-		            <div style="text-align: left;">${item.cbody}</div>
-		            <div class="comment-actions">
-		                <button class="btn_comment_diplay" type="button" onclick="confirmReply(${item.cno}, this)" style="visibility: hidden;">작성</button>
-		                <button class="btn_comment_diplay" type="button" onclick="cancelReply(this)" style="visibility: hidden;" data-original-text="${item.cbody}">취소</button>
-		                <button type="button" class="modifyReply" onclick="modifyReply(this)">수정</button>
-		                <button type="button" class="deleteReply" onclick="deleteReply(${item.cno}, this)">삭제</button>
-		            </div>
+		        	<c:if test="${item.deleteFlag == 0}">
+			            <div style="text-align: left;">작성자 :${item.author}</div>
+			            <div style="text-align: left;">${item.cbody}</div>
+			            <div class="comment-actions">
+			            	<textarea placeholder="댓글을 입력하세요" id="cbody" name="cbody" style="visibility: hidden;"></textarea>
+			                <button class="btn_comment_diplay" type="button" onclick="confirmReply(${item.cno}, this)" style="visibility: hidden;">작성</button>
+			                <button class="btn_comment_diplay" type="button" onclick="cancelReply(this)" style="visibility: hidden;" data-original-text="${item.cbody}">취소</button>
+			                <button type="button" class="modifyReply" onclick="modifyReply(this)">수정</button>
+			                <button type="button" class="deleteReply" onclick="deleteReply(${item.cno}, this)">삭제</button>
+			            </div>
+		            </c:if>
 		        </c:forEach>
 		    </div>
 		</div>
@@ -131,112 +136,21 @@
     function modifyReply(obj) {
         // "작성" 및 "취소" 버튼을 보이게 함
         $(obj).siblings(".btn_comment_diplay").css("visibility", "visible");
+        $(obj).siblings("#cbody").css("visibility", "visible");
         // "수정" 및 "삭제" 버튼을 숨김
         $(obj).css("visibility", "hidden");
         $(obj).siblings(".deleteReply").css("visibility", "hidden");
-        // 댓글 입력 필드를 활성화
-        $(obj).parent().parent().children("input").attr("readonly", false);
     }
 
-    function confirmReply(cno, obj) {
-        let cbody = $(obj).parent().parent().children("input").val();
-
-        $.ajax({
-            url: "replyModifyOk.jsp",
-            method: "post",
-            data: {
-                "cno": cno,
-                "cbody": cbody
-            },
-            success: function (data) {
-                let objData = JSON.parse(data.trim());
-                if (objData.result == "success") {
-                    // "작성" 및 "취소" 버튼 숨김
-                    $(obj).parent().children(".btn_comment_diplay").css("visibility", "hidden");
-                    // "수정" 및 "삭제" 버튼 보임
-                    $(obj).siblings(".modifyReply").css("visibility", "visible");
-                    $(obj).siblings(".deleteReply").css("visibility", "visible");
-                    // 댓글 입력 필드를 비활성화
-                    $(obj).parent().parent().children("input").attr("readonly", true);
-                    $(obj).parent().parent().children("input").val(cbody);
-                } else {
-                    alert("댓글 수정 에러");
-                }
-            }
-        });
-    }
 
     function cancelReply(obj) {
         // "작성" 및 "취소" 버튼 숨김
         $(obj).parent().children(".btn_comment_diplay").css("visibility", "hidden");
+        $(obj).siblings("#cbody").css("visibility", "hidden");
         // "수정" 및 "삭제" 버튼 보임
         $(obj).siblings(".modifyReply").css("visibility", "visible");
         $(obj).siblings(".deleteReply").css("visibility", "visible");
-        // 댓글 입력 필드를 비활성화하고 기존 값 복원
-        $(obj).parent().parent().children("input").attr("readonly", true);
-        // 기존 댓글 내용 복원
-        let originalText = $(obj).data("originalText");
-        $(obj).parent().parent().children("input").val(originalText);
     }
-
-    function deleteReply(cno, obj) {
-        $.ajax({
-            url: "replyDeleteOk.jsp",
-            method: "post",
-            data: {
-                "cno": cno
-            },
-            success: function (data) {
-                let objData = JSON.parse(data.trim());
-                if (objData.result == "success") {
-                    $(obj).parent().parent().remove();
-                } else {
-                    alert("댓글 삭제 에러");
-                }
-            }
-        });
-    }
-
-    $("#btn_reply_submit").on("click", function () {
-        let replyElement = $("#ta_reply");
-
-        if (replyElement.val().trim() == "") {
-            alert("댓글을 입력하세요.");
-            return;
-        }
-
-        $.ajax({
-            url: "replyOk.jsp",
-            method: "post",
-            data: {
-                "reply": replyElement.val(),
-            },
-            success: function (data) {
-                let objData = JSON.parse(data.trim());
-                if (objData.result == "success") {
-                    let element = '';
-                    element += '<div class="comment">';
-                    element += '<div>작성자 : </div>';
-                    element += '<div>AUTHOR_PLACEHOLDER</div>';
-                    element += '<input type="text" readonly="readonly" value="' + replyElement.val() + '">';
-                    element += '<div class="comment-actions">';
-                    element += '<button class="btn_comment_diplay" type="button" onclick="confirmReply(' + objData.cno + ', this)" style="visibility: hidden;">작성</button>';
-                    element += '<button class="btn_comment_diplay" type="button" onclick="cancelReply(this)" style="visibility: hidden;" data-original-text="' + replyElement.val() + '">취소</button>';
-                    element += '<button type="button" onclick="modifyReply(this);" class="modifyReply">수정</button>';
-                    element += '<button type="button" onclick="deleteReply(' + objData.cno + ', this);" class="deleteReply">삭제</button>';
-                    element += '</div>';
-                    element += '</div>';
-
-                    $(".comment-list").append(element);
-                    replyElement.val("");
-                } else {
-                    alert("댓글 작성 에러");
-                }
-            }
-        });
-    });
 </script>
-
-
 </body>
 </html>
