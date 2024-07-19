@@ -12,9 +12,10 @@
         @import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Gowun+Dodum&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Orbit&display=swap');
     </style>
-     <link href="<c:url value='/resources/css/post.css'/>" rel="stylesheet">
+    <link href="<c:url value='/resources/css/post.css'/>" rel="stylesheet">
     <link href="<c:url value='/resources/css/star.css'/>" rel="stylesheet"> 
     <link href="<c:url value='/resources/css/header_footer.css'/>" rel="stylesheet"> 
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
     <header>
@@ -109,18 +110,20 @@
         </form>
         <div class="comment-list">
             <div class="comment">
-                
 				<c:forEach items="${vo.comments}" var="item">
-				<div style="text-align: left;">작성자 :${item.author} </div>
-				<div style="text-align: left;">${item.cbody} </div>
-				<div class="comment-actions">
-                    <button class="btn_comment_diplay" type="button" onclick="confirmReply(this)">작성</button>
-                    <button class="btn_comment_diplay" type="button" onclick="cancelReply(this)">취소</button>
-                    <button type="button" onclick="modifyReply(this);">수정</button>
-                    <button type="button" onclick="deleteReply(this);">삭제</button>
-                </div>
+				
+			<div style="text-align: left;">작성자 :${item.author} </div>
+			<div style="text-align: left;">${item.cbody} </div>
+			<div class="comment-actions">
+									
+					<button class="btn_comment_diplay" type="button" >작성</button>
+                    <button class="btn_comment_diplay" type="button" >취소</button>
+                    <button type="button" class="modifyReply"  onclick="cancelReply(this)">수정</button>
+                    <button type="button" class="deleteReply">삭제</button>
+               </div>
+               
+         		
 			</c:forEach>
-                
             </div>
         </div>
     </div>
