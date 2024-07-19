@@ -108,31 +108,33 @@
 	            <button type="submit" id="btn_reply_submit" style="margin-right: 1rem;">댓글 작성</button>
 	        </div>
         </form>
-        <div class="comment-list">
-            <div class="comment">
-				<c:forEach items="${vo.comments}" var="item">
-				
-			<div style="text-align: left;">작성자 :${item.author} </div>
-			<div style="text-align: left;">${item.cbody} </div>
-			<div class="comment-actions">
-									
-					<button class="btn_comment_diplay" type="button" >작성</button>
-                    <button class="btn_comment_diplay" type="button" >취소</button>
-                    <button type="button" class="modifyReply"  onclick="cancelReply(this)">수정</button>
-                    <button type="button" class="deleteReply">삭제</button>
-               </div>
-               
-         		
-			</c:forEach>
-            </div>
-        </div>
+		
+		<div class="comment-list">
+		    <div class="comment">
+		        <c:forEach items="${vo.comments}" var="item">
+		            <div style="text-align: left;">작성자 :${item.author}</div>
+		            <div style="text-align: left;">${item.cbody}</div>
+		            <div class="comment-actions">
+		                <button class="btn_comment_diplay" type="button" onclick="confirmReply(${item.cno}, this)" style="visibility: hidden;">작성</button>
+		                <button class="btn_comment_diplay" type="button" onclick="cancelReply(this)" style="visibility: hidden;" data-original-text="${item.cbody}">취소</button>
+		                <button type="button" class="modifyReply" onclick="modifyReply(this)">수정</button>
+		                <button type="button" class="deleteReply" onclick="deleteReply(${item.cno}, this)">삭제</button>
+		            </div>
+		        </c:forEach>
+		    </div>
+		</div>
+        
     </div>
 </div>
 
 <script>
     function modifyReply(obj) {
-        $(obj).parent().children(".btn_comment_diplay").css("visibility", "visible");
+        // "작성" 및 "취소" 버튼을 보이게 함
+        $(obj).siblings(".btn_comment_diplay").css("visibility", "visible");
+        // "수정" 및 "삭제" 버튼을 숨김
         $(obj).css("visibility", "hidden");
+        $(obj).siblings(".deleteReply").css("visibility", "hidden");
+        // 댓글 입력 필드를 활성화
         $(obj).parent().parent().children("input").attr("readonly", false);
     }
 
@@ -149,8 +151,12 @@
             success: function (data) {
                 let objData = JSON.parse(data.trim());
                 if (objData.result == "success") {
+                    // "작성" 및 "취소" 버튼 숨김
                     $(obj).parent().children(".btn_comment_diplay").css("visibility", "hidden");
-                    $(obj).next().next().css("visibility", "visible");
+                    // "수정" 및 "삭제" 버튼 보임
+                    $(obj).siblings(".modifyReply").css("visibility", "visible");
+                    $(obj).siblings(".deleteReply").css("visibility", "visible");
+                    // 댓글 입력 필드를 비활성화
                     $(obj).parent().parent().children("input").attr("readonly", true);
                     $(obj).parent().parent().children("input").val(cbody);
                 } else {
@@ -160,11 +166,17 @@
         });
     }
 
-    function cancelReply(obj, cbody) {
+    function cancelReply(obj) {
+        // "작성" 및 "취소" 버튼 숨김
         $(obj).parent().children(".btn_comment_diplay").css("visibility", "hidden");
-        $(obj).next().css("visibility", "visible");
+        // "수정" 및 "삭제" 버튼 보임
+        $(obj).siblings(".modifyReply").css("visibility", "visible");
+        $(obj).siblings(".deleteReply").css("visibility", "visible");
+        // 댓글 입력 필드를 비활성화하고 기존 값 복원
         $(obj).parent().parent().children("input").attr("readonly", true);
-        $(obj).parent().parent().children("input").val(cbody);
+        // 기존 댓글 내용 복원
+        let originalText = $(obj).data("originalText");
+        $(obj).parent().parent().children("input").val(originalText);
     }
 
     function deleteReply(cno, obj) {
@@ -208,10 +220,10 @@
                     element += '<div>AUTHOR_PLACEHOLDER</div>';
                     element += '<input type="text" readonly="readonly" value="' + replyElement.val() + '">';
                     element += '<div class="comment-actions">';
-                    element += '<button class="btn_comment_diplay" type="button" onclick="confirmReply(' + objData.cno + ', this)">작성</button>';
-                    element += '<button class="btn_comment_diplay" type="button" onclick="cancelReply(this)">취소</button>';
-                    element += '<button type="button" onclick="modifyReply(this);">수정</button>';
-                    element += '<button type="button" onclick="deleteReply(' + objData.cno + ', this);">삭제</button>';
+                    element += '<button class="btn_comment_diplay" type="button" onclick="confirmReply(' + objData.cno + ', this)" style="visibility: hidden;">작성</button>';
+                    element += '<button class="btn_comment_diplay" type="button" onclick="cancelReply(this)" style="visibility: hidden;" data-original-text="' + replyElement.val() + '">취소</button>';
+                    element += '<button type="button" onclick="modifyReply(this);" class="modifyReply">수정</button>';
+                    element += '<button type="button" onclick="deleteReply(' + objData.cno + ', this);" class="deleteReply">삭제</button>';
                     element += '</div>';
                     element += '</div>';
 
@@ -224,5 +236,7 @@
         });
     });
 </script>
+
+
 </body>
 </html>
