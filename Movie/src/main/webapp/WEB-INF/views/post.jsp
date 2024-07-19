@@ -115,6 +115,7 @@
 		            <div style="text-align: left;">작성자 :${item.author}</div>
 		            <div style="text-align: left;">${item.cbody}</div>
 		            <div class="comment-actions">
+		            <input type="text" readonly="readonly"  ${item.cbody}>
 		                <button class="btn_comment_diplay" type="button" onclick="confirmReply(${item.cno}, this)" style="visibility: hidden;">작성</button>
 		                <button class="btn_comment_diplay" type="button" onclick="cancelReply(this)" style="visibility: hidden;" data-original-text="${item.cbody}">취소</button>
 		                <button type="button" class="modifyReply" onclick="modifyReply(this)">수정</button>
