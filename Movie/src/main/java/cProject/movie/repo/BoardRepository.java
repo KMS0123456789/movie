@@ -89,4 +89,23 @@ public class BoardRepository {
 	public int off(BoardVO vo) {
 		return template.update(NAME_SPACE + ".off", vo);
 	}
+	public Page<BoardVO> myWrite(Pageable pageable, String searchType, String keyword, String author) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("offset", pageable.getOffset());
+		map.put("limit", pageable.getPageSize());
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		map.put("author", author);
+		int total = myWriteCount(searchType, keyword, author);
+		List<BoardVO> boards = template.selectList(NAME_SPACE + ".myWrite", map);
+		return new PageImpl<BoardVO>(boards, pageable, total);
+	}
+	public int myWriteCount(String searchType, String keyword, String author) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		map.put("author", author);
+		return template.selectOne(NAME_SPACE + ".myWriteCount", map);
+	}
 }

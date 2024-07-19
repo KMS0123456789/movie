@@ -157,4 +157,26 @@
 	<update id="off" parameterType="cProject.movie.vo.BoardVO">
 		update board set delete_flag = 1 delete_date = now() where bno = #{bno}; 
 	</update>
+	<select id="myWrite" resultMap="boardMap">
+		select * from board
+		<where>
+			and author = #{author}
+			and delete_flag=0
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+		order by bno desc
+		limit #{offset}, #{limit}
+	</select>
+	<select id="myWriteCount" resultType="int">
+		select count(*) from board
+		<where>
+			and author = #{author}
+			and delete_flag=0
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+	</select>
 </mapper>

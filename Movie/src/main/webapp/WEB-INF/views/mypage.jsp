@@ -35,10 +35,19 @@
     <section id="main">
         <div id="my">마이페이지</div>
         <div id="btn-list">
-            <button id="btn" class="btn">작성 글</button>
-            <button id="btn">작성 댓글</button>
-            <button id="btn">좋아요 누른 글</button>
-            <button id="btn">신고 한 글</button>
+        	<form action='<c:url value="/board/myWrite.do"/>' method="get">
+        		<input type="hidden" name="author" value="${sessionScope.user.id}">
+        		<button id="btn" class="btn" type="submit">작성 글</button>
+        	</form>
+        	<form>
+        		<button id="btn" class="btn" type="submit">작성 댓글</button>
+        	</form>
+        	<form>
+        		<button id="btn" class="btn" type="submit">좋아요 글</button>
+        	</form>
+        	<form>
+        		<button id="btn" class="btn" type="submit">신고 글</button>
+        	</form>
         </div>
         <table id="table">
             <thead>
@@ -52,67 +61,47 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>안녕하세요</td>
-                    <td>작성자1</td>
-                    <td>2024.07.10</td>
-                    <td>10</td>
-                    <td><input type="checkbox"></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>안녕하세요</td>
-                    <td>작성자1</td>
-                    <td>2024.07.10</td>
-                    <td>10</td>
-                    <td><input type="checkbox"></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>안녕하세요</td>
-                    <td>작성자1</td>
-                    <td>2024.07.10</td>
-                    <td>10</td>
-                    <td><input type="checkbox"></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>안녕하세요</td>
-                    <td>작성자1</td>
-                    <td>2024.07.10</td>
-                    <td>10</td>
-                    <td><input type="checkbox"></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>안녕하세요</td>
-                    <td>작성자1</td>
-                    <td>2024.07.10</td>
-                    <td>10</td>
-                    <td><input type="checkbox"></td>
-                </tr>
+                <c:forEach items="${my}" var="my">
+						<tr>
+							<td>${my.bno}</td>
+							<td><a href='<c:url value="/board/post.do?bno=${my.bno}"></c:url>'>${my.title}</a></td>
+							<td>${my.author}</td>
+							<td>${my.createDate}</td>
+							<td>${my.hit}</td>
+							<td><input type="checkbox"></td>
+						</tr>
+				</c:forEach>
             </tbody>
         </table>
         <div id="btn2">
             <button class="btn">삭제</button>
         </div>
-        <ul id="page">
-            <li><a>&lt;&lt;</a></li>
-            <li><a>&lt;</a></li>
-            <li><a>1</a></li>
-            <li><a>2</a></li>
-            <li><a>3</a></li>
-            <li><a>4</a></li>
-            <li><a>5</a></li>
-            <li><a>6</a></li>
-            <li><a>7</a></li>
-            <li><a>8</a></li>
-            <li><a>9</a></li>
-            <li><a>10</a></li>
-            <li><a>&gt;</a></li>
-            <li><a>&gt;&gt;</a></li>
-        </ul>
+        <div>
+                <ul id="page">
+                 <f:parseNumber integerOnly="true" var="pageGroup" value="${(currentPage - 1) / 10}" />
+					<c:set var="startPage" value="${(pageGroup * 10 + 1)}"></c:set>
+					<c:set var="endPage" value="${(startPage + (10 - 1))}"></c:set>
+
+				<c:if test="${currentPage > 1}">
+						<li><a href="<c:url value="/board/myWrite.do?page=1" />">&lt;&lt;</a></li>
+						<li><a href="<c:url value="/board/myWrite.do?page=${currentPage-1}" />">&lt;</a></li>
+				</c:if>
+				<c:forEach begin="${startPage}" end="${endPage > totalPage ? totalPage : endPage}" var="pageNum">
+					<c:choose>
+						<c:when test="${currentPage == pageNum}">
+							<li><a>${pageNum}</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="<c:url value="/board/myWrite.do?page=${pageNum}" />">${pageNum}</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<c:if test="${currentPage < totalPage}">
+					<li><a href="<c:url value="/board/myWrite.do?page=${currentPage+1}" />">&gt;</a></li>
+					<li><a href="<c:url value="/board/myWrite.do?page=${totalPage}" />">&gt;&gt;</a></li>
+				</c:if>
+                </ul>
+            </div>
     	</section>
     	</c:when>
     	<c:otherwise>

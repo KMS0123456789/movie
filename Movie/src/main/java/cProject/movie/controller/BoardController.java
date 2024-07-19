@@ -174,5 +174,19 @@ public class BoardController {
 	public String mypage() {
 		return "mypage";
 	}
+	@RequestMapping(value="/myWrite.do", method=RequestMethod.GET)
+	public String myWrite(Model model, String author, 
+			@RequestParam(name="page", required=false, defaultValue = "1") int page,
+			@RequestParam(name="searchType", required=false) String searchType,
+			@RequestParam(name="keyword", required=false) String keyword
+			) {
+		Pageable pageable = PageRequest.of(page-1, 10);
+		Page<BoardVO> data = repository.myWrite(pageable, searchType, keyword, author);
+		model.addAttribute("my", data.getContent());
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPage", data.getTotalPages());
+		model.addAttribute("pageSize", 10);
+		return "mypage";
+	}
 	
 }
