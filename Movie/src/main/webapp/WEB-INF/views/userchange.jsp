@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -18,8 +19,6 @@
     <link href="<c:url value='/resources/css/main.css'/>" rel="stylesheet">
 </head>
 <body>
-<c:choose>
-	<c:when test="${!empty sessionScope.user.id}">
     <header>
         <nav>
             <div id="menu">
@@ -63,7 +62,6 @@
             </div>
         </div>
     </section>
-
     <script>
         let nickCheck = false;
         let emailCheck = false;
@@ -138,13 +136,5 @@
             }
         });
     </script>
-  </c:when>
-  <c:otherwise>
-    		<%
-    			String url = "localhost:8080/controller/board/board.do";
-    			response.sendRedirect(url);
-    		%>
-   </c:otherwise>
-</c:choose>
 </body>
 </html>

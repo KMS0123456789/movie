@@ -33,6 +33,24 @@
 	<context:component-scan base-package="cProject.movie.repo" />
 	<context:component-scan base-package="cProject.movie.vo" />
 	
+	<interceptors>
+		<interceptor>
+			<!-- 이 인터셉터는 모든 url 요청을 가로챈다. -->
+			<mapping path="/**"/>
+			<!-- exclude-mapping으로 설정된 path는 인터셉터가 가로채지 않는다. -->
+			<exclude-mapping path="/user/login.do"/>
+			<exclude-mapping path="/board/freelist.do"/>
+			<exclude-mapping path="/board/post.do"/>
+			<exclude-mapping path="/board/minfolist.do"/>
+			<exclude-mapping path="/board/goodslist.do"/>
+			<exclude-mapping path="/board/reviewlist.do"/>
+			<exclude-mapping path="/board/board.do"/>
+			<exclude-mapping path="/user/join.do"/>
+			<exclude-mapping path="/user/findId.do"/>
+			<exclude-mapping path="/user/findPw.do"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+	</interceptors>
 	
 	
 </beans:beans>

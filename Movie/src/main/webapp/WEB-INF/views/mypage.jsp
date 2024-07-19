@@ -18,8 +18,6 @@
     <link href="<c:url value='/resources/css/main.css'/>" rel="stylesheet">
 </head>
 <body>
-<c:choose>
-    <c:when test="${!empty sessionScope.user.id}">
     <header>
         <nav>
             <div id="menu">
@@ -109,18 +107,5 @@
             </ul>
         </div>
     </section>
-    </c:when>
-    <c:otherwise>
-        <%
-            String url = "localhost:8080/controller/board/board.do";
-            response.sendRedirect(url);
-        %>
-    </c:otherwise>
-</c:choose>
-
-<script>
-
-</script>
-
 </body>
 </html>
