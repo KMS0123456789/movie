@@ -64,7 +64,7 @@
        	</c:if>
  		<c:if test="${((sessionScope.user.id) eq (vo.author)) or (sessionScope.user.userType == 0)}">
 	       	<div  class="button-group">
-		        <form action="off.do" method="post">
+		        <form action="<c:url value='/board/off.do'/>" method="post">
 					<input type="hidden" name="bno" value="${vo.bno}">
 					<input type="hidden" name="categoryNo" value="${vo.categoryNo}">
 					<input type="submit" class="button" value="삭제">

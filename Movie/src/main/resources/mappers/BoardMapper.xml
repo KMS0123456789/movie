@@ -156,7 +156,7 @@
 		update board set title = #{title}, body = #{body}, update_date = now() where bno = #{bno}; 
 	</update>
 	<update id="off" parameterType="cProject.movie.vo.BoardVO">
-		update board set delete_flag = 1 delete_date = now() where bno = #{bno}; 
+		update board set delete_flag = 1, delete_date = now() where bno = #{bno}; 
 	</update>
 	<select id="myWrite" resultMap="boardMap">
 		select * from board
@@ -181,6 +181,6 @@
 		</where>
 	</select>
 	<update id="myWriteOff" parameterType="cProject.movie.vo.BoardVO">
-		update board set delete_flag = 1 delete_date = now() where bno = #{bno}; 
+		update board set delete_flag = 1, delete_date = now() where bno = #{bno}; 
 	</update>
 </mapper>
