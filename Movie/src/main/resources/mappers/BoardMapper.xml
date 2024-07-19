@@ -54,6 +54,15 @@
 			<result property="policeResult" column="police_result"/>
 		</collection>
 	</resultMap>
+	<select id="board" resultMap="boardMap">
+		(select * from  board where category_no = 0 and delete_flag = 0 order by bno desc limit 10) 
+		union 
+		(select * from  board where category_no = 1 and delete_flag = 0 order by bno desc limit 10)
+		union 
+		(select * from  board where category_no = 2 and delete_flag = 0 order by bno desc limit 10) 
+		union 
+		(select * from  board where category_no = 3 and delete_flag = 0 order by bno desc limit 10)
+	</select>
 	<select id="freelist" resultMap="boardMap">
 		select * from board 
 		<where>
@@ -132,8 +141,14 @@
 			select * from board left join file on
 			board.bno=file.bno
 			left join comment on
-			board.bno=comment.bno where board.bno = #{bno};
-		
+			board.bno=comment.bno 
+			left join like_no on
+			board.bno=like_no.bno
+			left join star on
+			board.bno=star.bno
+			left join bpolice on
+			board.bno=bpolice.bno
+			where board.bno = #{bno};	
 	</select>
 	
 	<update id="update" parameterType="cProject.movie.vo.BoardVO">

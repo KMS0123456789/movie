@@ -33,11 +33,28 @@
     <section>
         <div id="container">
             <div id="case">
-                <div id="free">자유게시판 최신 글</div>
-                
+                <div id="free">영화 자유게시판 최신 글</div>
+                <c:forEach items="${list}" var="list">
+                	<c:if test="${list.categoryNo == 0 and list.deleteFlag == 0}">
+                		<table>
+	                		<tr>
+								<td><a href='<c:url value="/board/post.do?bno=${list.bno}"></c:url>'>${list.title}</a></td>
+							</tr>
+                		</table>
+                	</c:if>
+                </c:forEach>
             </div>
             <div id="case">
-                <div id="free">리뷰게시판 최신 글</div>
+                <div id="free">영화 리뷰게시판 최신 글</div>
+                <c:forEach items="${list}" var="list">
+                	<c:if test="${list.categoryNo == 1 and list.deleteFlag == 0}">
+                		<table>
+	                		<tr>
+								<td><a href='<c:url value="/board/post.do?bno=${list.bno}"></c:url>'>${list.title}</a></td>
+							</tr>
+                		</table>
+                	</c:if>
+                </c:forEach>
             </div>
              <c:choose>
 				<c:when test="${sessionScope.user.userType > 0}">
@@ -54,9 +71,27 @@
         <div id="container">
             <div id="case">
                 <div id="free">영화 정보게시판 최신 글</div>
+                <c:forEach items="${list}" var="list">
+                	<c:if test="${list.categoryNo == 2 and list.deleteFlag == 0}">
+                		<table>
+	                		<tr>
+								<td><a href='<c:url value="/board/post.do?bno=${list.bno}"></c:url>'>${list.title}</a></td>
+							</tr>
+                		</table>
+                	</c:if>
+                </c:forEach>
             </div>
             <div id="case">
                 <div id="free">영화 굿즈게시판 최신 글</div>
+                <c:forEach items="${list}" var="list">
+                	<c:if test="${list.categoryNo == 3 and list.deleteFlag == 0}">
+                		<table>
+	                		<tr>
+								<td><a href='<c:url value="/board/post.do?bno=${list.bno}"></c:url>'>${list.title}</a></td>
+							</tr>
+                		</table>
+                	</c:if>
+                </c:forEach>
             </div>
         </div>
     </section>

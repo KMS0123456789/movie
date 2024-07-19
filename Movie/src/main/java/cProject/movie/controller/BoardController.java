@@ -31,6 +31,12 @@ public class BoardController {
 	@Autowired
 	BoardRepository repository;
 	
+	@RequestMapping(value="/board.do", method=RequestMethod.GET)
+	public String board(BoardVO vo, Model model) {
+		List<BoardVO> list = (List<BoardVO>) repository.board(vo);
+		model.addAttribute("list", list);
+		return "home";
+	}
 	@RequestMapping(value="/freelist.do", method=RequestMethod.GET)
 	public String freelist(Model model, BoardVO vo, 
 			@RequestParam(name="page", required=false, defaultValue = "1") int page,

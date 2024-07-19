@@ -22,6 +22,10 @@ public class BoardRepository {
 	
 	private final String NAME_SPACE = "BoardMapper";
 	
+	public List<BoardVO> board(BoardVO vo) {
+		return template.selectList(NAME_SPACE + ".board", vo);
+	}
+	
 	public Page<BoardVO> freelist(Pageable pageable, String searchType, String keyword, int categoryNo) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
