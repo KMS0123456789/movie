@@ -3,12 +3,17 @@ package cProject.movie.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import cProject.movie.repo.CommentRepository;
+import cProject.movie.vo.BoardVO;
 import cProject.movie.vo.CommentVO;
 
 @Controller
@@ -59,5 +64,20 @@ public class CommentController {
 		}else {
 			return "redirect:/home";
 		}
+	}
+	@RequestMapping(value="/myComment.do", method=RequestMethod.GET)
+	public String myWrite(Model model, String author, 
+			@RequestParam(name="page", required=false, defaultValue = "1") int page,
+			@RequestParam(name="searchType", required=false) String searchType,
+			@RequestParam(name="keyword", required=false) String keyword
+			) {
+		Pageable pageable = PageRequest.of(page-1, 10);
+		Page<CommentVO> data = repository.myComment(pageable, searchType, keyword, author);
+		model.addAttribute("myComment", data.getContent());
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPage", data.getTotalPages());
+		model.addAttribute("pageSize", 10);
+		model.addAttribute("author",author);
+		return "mypage";
 	}
 }

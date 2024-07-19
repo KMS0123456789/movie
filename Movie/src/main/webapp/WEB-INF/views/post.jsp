@@ -21,11 +21,11 @@
         <nav>
             <div id="menu">
                 <ul>
-                    <li><a href="board.do">영화 사이트</a></li>
-                    <li><a href="freelist.do">영화 자유 게시판</a></li>
-                    <li><a href="reviewlist.do">영화 리뷰 게시판</a></li>
-                    <li><a href="minfolist.do">영화 정보 게시판</a></li>
-                    <li><a href="goodslist.do">영화 굿즈 게시판</a></li>
+                    <li><a href="<c:url value='/board/board.do'/>">영화 사이트</a></li>
+                    <li><a href="<c:url value='/board/freelist.do'/>">영화 자유게시판</a></li>
+                    <li><a href="<c:url value='/board/reviewlist.do'/>">영화 리뷰게시판</a></li>
+                    <li><a href="<c:url value='/board/minfolist.do'/>">영화 정보게시판</a></li>
+                    <li><a href="<c:url value='/board/goodslist.do'/>">영화 굿즈 게시판</a></li>
                 </ul>
             </div>
         </nav>
@@ -42,19 +42,22 @@
         <dt>첨부파일:</dt>
         	<dd></dd>   
     	</dl>
-   		<div class="star_rating" name="star_rating" id="star_rating" style="text-align: left;">
-        <dt>별점:</dt>
-        <dd>
-        <fieldset>
-            <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
-            <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
-            <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
-            <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
-            <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
-        </fieldset>
-        </dd>
-    </div>
-    	<div class="post-content">       
+    	<c:if test="${vo.categoryNo == 1}">
+    		<div class="star_rating" name="star_rating" id="star_rating" style="text-align: left;">
+	        <dt>별점:</dt>
+	        <dd>
+	        <fieldset>
+	            <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
+	            <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
+	            <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
+	            <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
+	            <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
+	        </fieldset>
+	        </dd>
+    	</div>
+    	</c:if>
+    <div class="post-content">
+    	${vo.body}
     </div>
     <div>
     	<c:if test="${(sessionScope.user.id) eq (vo.author)}">

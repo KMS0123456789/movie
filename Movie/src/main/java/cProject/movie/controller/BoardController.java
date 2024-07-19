@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import cProject.movie.vo.FileVO;
 
 import cProject.movie.repo.BoardRepository;
+import cProject.movie.repo.FileRepository;
 import cProject.movie.vo.BoardVO;
 
 @Controller
@@ -30,6 +32,10 @@ import cProject.movie.vo.BoardVO;
 public class BoardController {
 	@Autowired
 	BoardRepository repository;
+	@Autowired
+	ServletContext servletContext;
+	@Autowired
+	FileRepository fileRepository;
 	
 	@RequestMapping(value="/board.do", method=RequestMethod.GET)
 	public String board(BoardVO vo, Model model) {
@@ -103,11 +109,37 @@ public class BoardController {
 	}
 	@RequestMapping(value="/write.do", method=RequestMethod.POST)
 	public String writeOK(BoardVO vo, @RequestParam("file") MultipartFile[] files) {
-		String author = "SessionScope.user.id";
 		repository.insertOne(vo);
 		int result = vo.getBno();
 		
+		String uploadDir = servletContext.getRealPath("/uploads/");
+		File dir = new File(uploadDir);
+		if(!dir.exists()) {
+			dir.mkdirs();
+		}
+		List<FileVO> fileList = new ArrayList<>();
+		for(MultipartFile file : files) {
+			if(!file.isEmpty()) {
+				String originFileName = file.getOriginalFilename();
+				String uniqueFileName = UUID.randomUUID().toString()+"."+getFileExtension(originFileName);
+				String filePath = uploadDir + uniqueFileName;
+				try {
+					file.transferTo(new File(filePath));
+					FileVO filevo = new FileVO();
+					filevo.setBno(result);
+					filevo.setFileName(originFileName);
+					filevo.setFilePath(filePath);
+					filevo.setFileSize(file.getSize()+"");
+					fileList.add(filevo);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		if(result > 0) {
+			if(fileList.size() != 0) {
+				fileRepository.insert(fileList);
+			}
 			return "redirect:/board/post.do?bno="+vo.getBno();
 		}else {
 			return "redirect:/board/board.do";
@@ -182,7 +214,7 @@ public class BoardController {
 			) {
 		Pageable pageable = PageRequest.of(page-1, 10);
 		Page<BoardVO> data = repository.myWrite(pageable, searchType, keyword, author);
-		model.addAttribute("my", data.getContent());
+		model.addAttribute("myWrite", data.getContent());
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPage", data.getTotalPages());
 		model.addAttribute("pageSize", 10);
@@ -197,6 +229,13 @@ public class BoardController {
 		}else {
 			return "redirect:/board/board.do";
 		}
+	}
+	public String getFileExtension(String fileName) {
+		int index = fileName.lastIndexOf(".");
+		if(index == -1) {
+			return "";
+		}
+		return fileName.substring(index+1);
 	}
 	
 }

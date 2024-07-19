@@ -59,23 +59,23 @@
                         <th>작성일</th>
                         <th>조회</th>
                     </tr>
-                    <tr>
-                        <td>공지사항</td>
-                        <td>공지1</td>
-                        <td>관리자</td>
-                        <td>20240710</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td>공지사항</td>
-                        <td>공지2</td>
-                        <td>관리자</td>
-                        <td>20240710</td>
-                        <td>0</td>
-                    </tr>
                 </thead>
                 <tbody>
                     <c:forEach items="${fPage}" var="bvo">
+                    <c:if test="${bvo.notice == 0}">
+						<tr>
+							<td>공지</td>
+							<td><a href='<c:url value="/board/post.do?bno=${bvo.bno}"></c:url>'>${bvo.title}</a></td>
+							<td>${bvo.author}</td>
+							<td>${bvo.createDate}</td>
+							<td>${bvo.hit}</td>
+						</tr>
+					</c:if>
+					</c:forEach>
+                </tbody>
+                <tbody>
+                    <c:forEach items="${fPage}" var="bvo">
+                    <c:if test="${bvo.notice == 1}">
 						<tr>
 							<td>${bvo.bno}</td>
 							<td><a href='<c:url value="/board/post.do?bno=${bvo.bno}"></c:url>'>${bvo.title}</a></td>
@@ -83,6 +83,7 @@
 							<td>${bvo.createDate}</td>
 							<td>${bvo.hit}</td>
 						</tr>
+					</c:if>
 					</c:forEach>
                 </tbody>
             </table>

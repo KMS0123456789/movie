@@ -1,5 +1,7 @@
 package cProject.movie.vo;
 
+import java.util.List;
+
 public class CommentVO {
 	private int cno;
     private String author;
@@ -11,7 +13,16 @@ public class CommentVO {
     private String createDate;
     private String updateDate;
     private String deleteDate;
-    
+    private List<CpoliceVO> Cpolices;
+	public List<CpoliceVO> getCpolices() {
+		return Cpolices;
+	}
+	public void setCpolices(List<CpoliceVO> cpolices) {
+		Cpolices = cpolices;
+	}
+	public void setpCno(int pCno) {
+		this.pCno = pCno;
+	}
 	public int getCno() {
 		return cno;
 	}

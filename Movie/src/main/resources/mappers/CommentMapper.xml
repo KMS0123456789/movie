@@ -9,7 +9,7 @@
 		<result property="cbody" column="cbody"/>
 		<result property="deleteFlag" column="delete_flag"/>
 		<result property="policeFlag" column="police_flag"/>
-		<result property="creataeDate" column="create_date"/>
+		<result property="createDate" column="create_date"/>
 		<result property="updateDate" column="update_date"/>
 		<result property="deleteDate" column="delete_date"/>
 		<collection property="Cpolices" ofType="cProject.movie.vo.CpoliceVO">
@@ -31,4 +31,26 @@
 	<update id="off" parameterType="int">
 			update comment set delete_flag = 1 ,delete_date = now() where cno = #{cno}; 
 	</update>
+	<select id="myComment" resultMap="commentMap">
+		select * from comment
+		<where>
+			and author = #{author}
+			and delete_flag=0
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+		order by cno desc
+		limit #{offset}, #{limit}
+	</select>
+	<select id="myCommentCount" resultType="int">
+		select count(*) from comment
+		<where>
+			and author = #{author}
+			and delete_flag=0
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+	</select>
 </mapper>

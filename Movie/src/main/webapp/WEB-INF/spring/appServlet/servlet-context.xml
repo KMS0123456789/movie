@@ -37,9 +37,7 @@
 	
 	<interceptors>
 		<interceptor>
-			<!-- 이 인터셉터는 모든 url 요청을 가로챈다. -->
 			<mapping path="/**"/>
-			<!-- exclude-mapping으로 설정된 path는 인터셉터가 가로채지 않는다. -->
 			<exclude-mapping path="/user/login.do"/>
 			<exclude-mapping path="/board/freelist.do"/>
 			<exclude-mapping path="/board/post.do"/>
@@ -50,6 +48,8 @@
 			<exclude-mapping path="/user/join.do"/>
 			<exclude-mapping path="/user/findId.do"/>
 			<exclude-mapping path="/user/findPw.do"/>
+			<exclude-mapping path="/resources/**"/>
+			<exclude-mapping path="/user/logout.do"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 	</interceptors>
