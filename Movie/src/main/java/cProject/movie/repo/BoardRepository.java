@@ -108,4 +108,7 @@ public class BoardRepository {
 		map.put("author", author);
 		return template.selectOne(NAME_SPACE + ".myWriteCount", map);
 	}
+	public int myWriteOff(BoardVO vo) {
+		return template.update(NAME_SPACE + ".myWriteOff", vo);
+	}
 }

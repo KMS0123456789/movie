@@ -141,14 +141,15 @@
 			select * from board left join file on
 			board.bno=file.bno
 			left join comment on
-			board.bno=comment.bno 
+			board.bno=comment.bno
 			left join like_no on
 			board.bno=like_no.bno
 			left join star on
 			board.bno=star.bno
 			left join bpolice on
 			board.bno=bpolice.bno
-			where board.bno = #{bno};	
+			where board.bno = #{bno}
+			and comment.delete_flag != 1
 	</select>
 	
 	<update id="update" parameterType="cProject.movie.vo.BoardVO">
@@ -179,4 +180,7 @@
 			</if>
 		</where>
 	</select>
+	<update id="myWriteOff" parameterType="cProject.movie.vo.BoardVO">
+		update board set delete_flag = 1 delete_date = now() where bno = #{bno}; 
+	</update>
 </mapper>

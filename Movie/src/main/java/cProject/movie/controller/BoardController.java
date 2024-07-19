@@ -186,7 +186,17 @@ public class BoardController {
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPage", data.getTotalPages());
 		model.addAttribute("pageSize", 10);
+		model.addAttribute("author",author);
 		return "mypage";
+	}
+	@RequestMapping(value="/myWriteOff.do", method=RequestMethod.POST)
+	public String myWriteOff(BoardVO vo) {
+		int result = repository.off(vo);
+		if(result > 0) {
+			return "redirect:/board/mypage.do";
+		}else {
+			return "redirect:/board/board.do";
+		}
 	}
 	
 }
