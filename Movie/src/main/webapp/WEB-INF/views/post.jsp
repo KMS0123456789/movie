@@ -23,10 +23,10 @@
             <div id="menu">
                 <ul>
                     <li><a href="board.do">영화 사이트</a></li>
-                    <li><a href="freelist.do">자유게시판</a></li>
-                    <li><a href="reviewlist.do">리뷰게시판</a></li>
-                    <li><a href="minfolist.do">영화 정보게시판</a></li>
-                    <li><a href="goodslist.do">굿즈 게시판</a></li>
+                    <li><a href="freelist.do">영화 자유 게시판</a></li>
+                    <li><a href="reviewlist.do">영화 리뷰 게시판</a></li>
+                    <li><a href="minfolist.do">영화 정보 게시판</a></li>
+                    <li><a href="goodslist.do">영화 굿즈 게시판</a></li>
                 </ul>
             </div>
         </nav>
@@ -110,37 +110,43 @@
 	       		</c:if>
 	        </div>
         </form>
-		
-		<div class="comment-list">
-		    <div class="comment">
-		        <c:forEach items="${vo.comments}" var="item">
-		        	<c:if test="${item.deleteFlag == 0}">
-			            <div style="text-align: left;">작성자 :${item.author}</div>
-			            <div style="text-align: left;">${item.cbody}</div>
-			            <div class="comment-actions">
-			            	<textarea placeholder="댓글을 입력하세요" id="cbody" name="cbody" style="visibility: hidden;"></textarea>
-			                <button class="btn_comment_diplay" type="button" onclick="confirmReply(${item.cno}, this)" style="visibility: hidden;">작성</button>
-			                <button class="btn_comment_diplay" type="button" onclick="cancelReply(this)" style="visibility: hidden;" data-original-text="${item.cbody}">취소</button>
+        <c:forEach items="${vo.comments}" var="item">
+        	<div class="comment-list">
+		    	<div class="comment">
+			           <div style="text-align: left;">작성자 :${item.author}</div>
+			           <div class="comment-actions">
+			            	<form action='<c:url value="/comment/cModify.do"/>' method="post">
+			            		<input type="text"  readonly="readonly" style="text-align: left " name="cbody"value="${item.cbody}">
+			            		<input type="hidden" name="cno" value="${item.cno}">
+			               		<button class="btn_comment_diplay" type="submit"  style="visibility: hidden;">작성</button>
+			               		<button class="btn_comment_diplay" type="button" onclick="cancelReply(this)" style="visibility: hidden;" data-original-text="${item.cbody}">취소</button>	
+			               	</form>		                
 			                <button type="button" class="modifyReply" onclick="modifyReply(this)">수정</button>
-			                <button type="button" class="deleteReply" onclick="deleteReply(${item.cno}, this)">삭제</button>
-			            </div>
-		            </c:if>
-		        </c:forEach>
-		    </div>
-		</div>
-        
-    </div>
+			                <form  action='<c:url value="/comment/cOff.do"/>' method="post">
+			            		<input type="hidden" name="cno" value="${item.cno}">
+			                	<button type="submit" class="deleteReply" >삭제</button>
+			                </form>
+			             </div>	                   
+				</div>    
+    		</div>
+	</c:forEach>		
 </div>
+ 
 
+ 
+ 
+ 
 <script>
-    function modifyReply(obj) {
-        // "작성" 및 "취소" 버튼을 보이게 함
-        $(obj).siblings(".btn_comment_diplay").css("visibility", "visible");
-        $(obj).siblings("#cbody").css("visibility", "visible");
-        // "수정" 및 "삭제" 버튼을 숨김
-        $(obj).css("visibility", "hidden");
-        $(obj).siblings(".deleteReply").css("visibility", "hidden");
-    }
+function modifyReply(obj) {
+    // "작성" 및 "취소" 버튼을 보이게 함
+    $(obj).parent().children().children(".btn_comment_diplay").css("visibility", "visible");
+    $(obj).parent().children().children("#cbody").css("visibility", "visible");
+    $(obj).parent().children().children("input").attr("readonly",false);
+    // "수정" 및 "삭제" 버튼을 숨김
+    $(obj).css("visibility", "hidden");
+    $(obj).siblings(".deleteReply").css("visibility", "hidden");
+}
+
 
 
     function cancelReply(obj) {

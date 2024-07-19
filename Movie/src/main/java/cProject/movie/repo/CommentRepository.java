@@ -17,4 +17,11 @@ public class CommentRepository {
 	public int insertOne(CommentVO vo, int bno, String author, String cbody) {
 		return template.insert(NAME_SPACE + ".insert", vo);
 	}
+	public int modifyOne(CommentVO vo, int bno, String author, String cbody) {
+		return template.update(NAME_SPACE + ".update", vo);
+	}
+	
+	public int offOne(CommentVO vo, int bno, String author, String cbody, int cno) {
+		return template.update(NAME_SPACE + ".off", vo);
+	}
 }

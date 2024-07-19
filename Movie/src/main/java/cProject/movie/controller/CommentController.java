@@ -14,8 +14,10 @@ import cProject.movie.vo.CommentVO;
 @Controller
 @RequestMapping("/comment")
 public class CommentController {
+	
 	@Autowired
 	CommentRepository repository;
+	
 	@RequestMapping(value="/cWrite.do", method=RequestMethod.POST)
 	public String writeOK(CommentVO vo, HttpServletRequest request,
 			@RequestParam(name="bno", required=false, defaultValue="0") int bno,
@@ -29,5 +31,33 @@ public class CommentController {
 			return "redirect:/home";
 		}
 	}
-
+	
+	@RequestMapping(value="/cModify.do", method=RequestMethod.POST)
+	public String modifyOk(CommentVO vo, HttpServletRequest request,
+			@RequestParam(name="bno", required=false, defaultValue="0") int bno,
+			@RequestParam(name="author", required=false) String author,
+			@RequestParam(name="cbody", required=false) String cbody) {
+		repository.modifyOne(vo, bno,author,cbody);
+		
+		if (request.getHeader("Referer") != null) {
+		    return "redirect:" + request.getHeader("Referer");
+		}else {
+			return "redirect:/home";
+		}
+	}
+	
+	@RequestMapping(value="/cOff.do", method=RequestMethod.POST)
+	public String offOk(CommentVO vo, HttpServletRequest request,
+			@RequestParam(name="bno", required=false, defaultValue="0") int bno,
+			@RequestParam(name="author", required=false) String author,
+			@RequestParam(name="cbody", required=false) String cbody,
+			@RequestParam(name="cno", required=false) int cno) {
+		repository.offOne(vo, bno,author,cbody,cno);
+		
+		if (request.getHeader("Referer") != null) {
+		    return "redirect:" + request.getHeader("Referer");
+		}else {
+			return "redirect:/home";
+		}
+	}
 }

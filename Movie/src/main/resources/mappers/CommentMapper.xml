@@ -29,6 +29,6 @@
 			update comment set cbody = #{cbody} ,update_date = now() where cno= #{cno}; 
 	</update>
 	<update id="off" parameterType="int">
-			update comment set delete_flag = 1 delete_date = now() where cno = #{cno}; 
+			update comment set delete_flag = 1 ,delete_date = now() where cno = #{cno}; 
 	</update>
 </mapper>
