@@ -33,6 +33,8 @@
 	<context:component-scan base-package="cProject.movie.repo" />
 	<context:component-scan base-package="cProject.movie.vo" />
 	
+	<beans:bean id="loginInterceptor" class="cProject.movie.controller.LoginSessionInterceptor"></beans:bean>
+	
 	<interceptors>
 		<interceptor>
 			<!-- 이 인터셉터는 모든 url 요청을 가로챈다. -->
