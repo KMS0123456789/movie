@@ -1,16 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib  prefix="spring" uri="http://www.springframework.org/tags" %> 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-        @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Gowun+Dodum&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Orbit&display=swap');
+     @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+     @import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Gowun+Dodum&display=swap');
+     @import url('https://fonts.googleapis.com/css2?family=Orbit&display=swap');
     </style>
     <link href="<c:url value='/resources/css/post.css'/>" rel="stylesheet">
     <link href="<c:url value='/resources/css/star.css'/>" rel="stylesheet"> 
@@ -55,8 +54,7 @@
         </fieldset>
         </dd>
     </div>
-    <div class="post-content">
-        
+    	<div class="post-content">       
     </div>
     <div>
     	<c:if test="${(sessionScope.user.id) eq (vo.author)}">
@@ -78,8 +76,7 @@
 				<input type="hidden" name="categoryNo" value="${vo.categoryNo}">
 				<input type="submit" class="button" value="목록으로 돌아가기">
 	        </form>
-	     </div>
-	     
+	     </div>	     
     </div>
 	<div id="p_l_btn">
         <div>
@@ -114,7 +111,7 @@
         	<div class="comment-list">
 		    	<div class="comment">
 			           <div style="text-align: left;">작성자 :${item.author}</div>
-			           <div class="comment-actions">
+			           	<div class="comment-actions">
 			            	<form action='<c:url value="/comment/cModify.do"/>' method="post">
 			            		<input type="text"  readonly="readonly" style="text-align: left " name="cbody"value="${item.cbody}">
 			            		<input type="hidden" name="cno" value="${item.cno}">
@@ -131,11 +128,7 @@
     		</div>
 	</c:forEach>		
 </div>
- 
 
- 
- 
- 
 <script>
 function modifyReply(obj) {
     // "작성" 및 "취소" 버튼을 보이게 함
@@ -146,9 +139,6 @@ function modifyReply(obj) {
     $(obj).css("visibility", "hidden");
     $(obj).siblings(".deleteReply").css("visibility", "hidden");
 }
-
-
-
     function cancelReply(obj) {
         // "작성" 및 "취소" 버튼 숨김
         $(obj).parent().children(".btn_comment_diplay").css("visibility", "hidden");
