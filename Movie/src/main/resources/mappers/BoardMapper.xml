@@ -183,4 +183,8 @@
 	<update id="myWriteOff" parameterType="cProject.movie.vo.BoardVO">
 		update board set delete_flag = 1, delete_date = now() where bno = #{bno}; 
 	</update>
+	
+	<update id="update_readhit" parameterType="int">
+		update board set hit = hit  + 1 where bno = #{bno};
+	</update>
 </mapper>

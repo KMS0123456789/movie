@@ -22,7 +22,7 @@ import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.multipart.MultipartFile;
 
 import cProject.movie.vo.FileVO;
-
+import jdk.nashorn.internal.ir.RuntimeNode.Request;
 import cProject.movie.repo.BoardRepository;
 import cProject.movie.repo.FileRepository;
 import cProject.movie.vo.BoardVO;
@@ -47,8 +47,8 @@ public class BoardController {
 	public String freelist(Model model, BoardVO vo, 
 			@RequestParam(name="page", required=false, defaultValue = "1") int page,
 			@RequestParam(name="searchType", required=false) String searchType,
-			@RequestParam(name="keyword", required=false) String keyword
-			) {
+			@RequestParam(name="keyword", required=false) String keyword,
+			HttpSession session) {
 		Pageable pageable = PageRequest.of(page-1, 10);
 		int categoryNo = 0;
 		Page<BoardVO> data = repository.freelist(pageable, searchType, keyword, categoryNo);
@@ -56,6 +56,10 @@ public class BoardController {
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPage", data.getTotalPages());
 		model.addAttribute("pageSize", 10);
+		
+		session.getAttribute("user");
+		session.removeAttribute("s");
+		
 		return "freelist";
 	}
 	@RequestMapping(value="/reviewlist.do", method=RequestMethod.GET)
@@ -146,9 +150,18 @@ public class BoardController {
 		}
 	}
 	@RequestMapping(value="/post.do",method =RequestMethod.GET)
-	public String view(@RequestParam(name="bno" , defaultValue="0") int bno,Model model){
+	public String view(@RequestParam(name="bno" , defaultValue="0") int bno,Model model, HttpSession session){
 		
 		BoardVO vo =repository.selectOne(bno);
+			
+		session.getAttribute("user");
+		
+		String show = (String)session.getAttribute("s");
+		if( show == null) {
+			int res = repository.update_readhit(bno);
+			session.setAttribute("s", "check");
+		}
+		
 		model.addAttribute("vo", vo);
 		
 		return "post"; 

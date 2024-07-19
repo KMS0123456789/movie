@@ -111,4 +111,8 @@ public class BoardRepository {
 	public int myWriteOff(BoardVO vo) {
 		return template.update(NAME_SPACE + ".myWriteOff", vo);
 	}
+	public int update_readhit(int bno) {
+		int res = template.update(NAME_SPACE + ".update_readhit" , bno);
+		return res;
+	}
 }
