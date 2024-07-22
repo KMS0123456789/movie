@@ -38,7 +38,7 @@
 	<div id="logincase" >
         <div id="user">
             <h2 id="name">${sessionScope.user.nick}님</h2>
-            <div><a href="#" id="change">관리자페이지</a></div>
+            <div><a href="<c:url value='/board/manager.do'/>" id="change">관리자페이지</a></div>
             <div><a href="<c:url value='/board/mypage.do'/>" id="change">마이페이지</a></div>
             <div><a href="<c:url value='/user/logout.do'/>" id="change">로그아웃</a></div>
         </div>

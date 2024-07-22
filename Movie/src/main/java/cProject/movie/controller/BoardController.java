@@ -265,6 +265,35 @@ public class BoardController {
 		}
 		return fileName.substring(index+1);
 	}
+	@RequestMapping(value="/manager.do", method=RequestMethod.GET)
+	public String manager() {
+		return "manager";
+	}
+	@RequestMapping(value="/offWrite.do", method=RequestMethod.GET)
+	public String offWrite(Model model, String author, 
+			@RequestParam(name="page", required=false, defaultValue = "1") int page,
+			@RequestParam(name="searchType", required=false) String searchType,
+			@RequestParam(name="keyword", required=false) String keyword
+			) {
+		Pageable pageable = PageRequest.of(page-1, 10);
+		Page<BoardVO> data = repository.offWrite(pageable, searchType, keyword, author);
+		model.addAttribute("offWrite", data.getContent());
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPage", data.getTotalPages());
+		model.addAttribute("pageSize", 10);
+		model.addAttribute("author",author);
+		return "manager";
+	}
+	@RequestMapping(value="/writeOn.do", method=RequestMethod.POST)
+	public String writeOn(BoardVO vo) {
+		int result = repository.writeOn(vo);
+		if(result > 0) {
+			return "redirect:/board/manager.do";
+		}else {
+			return "redirect:/board/manager.do";
+		}
+		
+	}
 	
 	
 }

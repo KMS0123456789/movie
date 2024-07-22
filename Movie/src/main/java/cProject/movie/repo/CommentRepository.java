@@ -40,11 +40,11 @@ public class CommentRepository {
 		map.put("searchType", searchType);
 		map.put("keyword", keyword);
 		map.put("author", author);
-		int total = myWriteCount(searchType, keyword, author);
+		int total = myCommentCount(searchType, keyword, author);
 		List<CommentVO> comments = template.selectList(NAME_SPACE + ".myComment", map);
 		return new PageImpl<CommentVO>(comments, pageable, total);
 	}
-	public int myWriteCount(String searchType, String keyword, String author) {
+	public int myCommentCount(String searchType, String keyword, String author) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchType", searchType);
 		map.put("keyword", keyword);
@@ -53,5 +53,27 @@ public class CommentRepository {
 	}
 	public int myCommentOff(CommentVO vo) {
 		return template.update(NAME_SPACE + ".myCommentOff", vo);
+	}
+public Page<CommentVO> offComment(Pageable pageable, String searchType, String keyword, String author) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("offset", pageable.getOffset());
+		map.put("limit", pageable.getPageSize());
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		map.put("author", author);
+		int total = offCommentCount(searchType, keyword, author);
+		List<CommentVO> comments = template.selectList(NAME_SPACE + ".offComment", map);
+		return new PageImpl<CommentVO>(comments, pageable, total);
+	}
+	public int offCommentCount(String searchType, String keyword, String author) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		map.put("author", author);
+		return template.selectOne(NAME_SPACE + ".offCommentCount", map);
+	}
+	public int commentOn(CommentVO vo) {
+		return template.update(NAME_SPACE + ".commentOn", vo);
 	}
 }

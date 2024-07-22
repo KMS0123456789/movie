@@ -56,4 +56,27 @@
 	<update id="myCommentOff" parameterType="int">
 		update comment set delete_flag = 1 , delete_date = now() where cno = #{cno}; 
 	</update>
+	<select id="offComment" resultMap="commentMap">
+		select * from comment
+		<where>
+			and delete_flag=1
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+		order by cno desc
+		limit #{offset}, #{limit}
+	</select>
+	<select id="offCommentCount" resultType="int">
+		select count(*) from comment
+		<where>
+			and delete_flag=1
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+	</select>
+	<update id="commentOn" parameterType="int">
+		update comment set delete_flag = 0 ,delete_date = null where cno = #{cno}; 
+	</update>
 </mapper>

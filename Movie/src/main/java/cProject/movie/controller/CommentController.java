@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import cProject.movie.repo.CommentRepository;
-import cProject.movie.vo.BoardVO;
 import cProject.movie.vo.CommentVO;
 
 @Controller
@@ -66,7 +65,7 @@ public class CommentController {
 		}
 	}
 	@RequestMapping(value="/myComment.do", method=RequestMethod.GET)
-	public String myWrite(Model model, String author, 
+	public String myComment(Model model, String author, 
 			@RequestParam(name="page", required=false, defaultValue = "1") int page,
 			@RequestParam(name="searchType", required=false) String searchType,
 			@RequestParam(name="keyword", required=false) String keyword
@@ -89,5 +88,30 @@ public class CommentController {
 		}else {
 			return "redirect:/board/mypage.do";
 		}
+	}
+	@RequestMapping(value="/offComment.do", method=RequestMethod.GET)
+	public String offComment(Model model, String author, 
+			@RequestParam(name="page", required=false, defaultValue = "1") int page,
+			@RequestParam(name="searchType", required=false) String searchType,
+			@RequestParam(name="keyword", required=false) String keyword
+			) {
+		Pageable pageable = PageRequest.of(page-1, 10);
+		Page<CommentVO> data = repository.offComment(pageable, searchType, keyword, author);
+		model.addAttribute("offComment", data.getContent());
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPage", data.getTotalPages());
+		model.addAttribute("pageSize", 10);
+		model.addAttribute("author",author);
+		return "manager";
+	}
+	@RequestMapping(value="/commentOn.do", method=RequestMethod.POST)
+	public String writeOn(CommentVO vo) {
+		int result = repository.commentOn(vo);
+		if(result > 0) {
+			return "redirect:/board/manager.do";
+		}else {
+			return "redirect:/board/manager.do";
+		}
+		
 	}
 }
