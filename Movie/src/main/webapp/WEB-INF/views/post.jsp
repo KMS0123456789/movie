@@ -89,14 +89,11 @@
     </div>
 	<div id="p_l_btn">
         <div>
-            <form action="police.do" method="post">
-                <div id="p_l_btn1">
-                    <p> <img src="../resources/image/siren.jpg"> </p>
-                    <input type="hidden" name="bno" value="${vo.bno}">
-                    <input type="submit" class="buttons" value="신고">
-                </div>
-            </form>
-        </div>
+		    <div id="p_l_btn1">
+		        <p> <img src="../resources/image/siren.jpg"> </p>
+		        <button type="button" class="buttons" onclick="openModal()">신고</button>
+		    </div>
+		</div>
         <c:if test="${sessionScope.user.id != null}">
 	        <div id="p_l_btn2">
 	        <c:forEach items="${vo.likes}" var="like" varStatus="likes" begin="0" end="0">
@@ -153,7 +150,24 @@
     		</div>
 	</c:forEach>		
 </div>
-
+<!-- 신고 모달 -->
+<div id="policeModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h2>신고 사유 선택</h2>
+        <form id="policeForm" action='<c:url value="/bpolice/police.do"/>' method="post">
+            <input type="hidden" name="bno" value="${vo.bno}">
+            <input type="hidden" name="id" value="${sessionScope.user.id}">
+            <input type="radio" id="spam" name="policeReason" value="스팸">
+            <label for="spam">스팸</label><br>
+            <input type="radio" id="abusive" name="policeReason" value="욕설">
+            <label for="abusive">욕설</label><br>
+            <input type="radio" id="personal" name="policeReason" value="개인정보 노출">
+            <label for="personal">개인정보 노출</label><br>
+            <button type="submit">신고하기</button>
+            <button type="button" onclick="closeModal()">취소</button>
+        </form>
+    </div>
+</div>
 <script>
 function modifyReply(obj) {
     // "작성" 및 "취소" 버튼을 보이게 함
@@ -170,6 +184,21 @@ function modifyReply(obj) {
         // "수정" 및 "삭제" 버튼 보임
         $(".modifyReply").css("visibility", "visible");
         $(".deleteReply").css("visibility", "visible");
+    }
+    
+    function openModal() {
+        document.getElementById('policeModal').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('policeModal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        var modal = document.getElementById('policeModal');
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
     }
 </script>
 </body>
