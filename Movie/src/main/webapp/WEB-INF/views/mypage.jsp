@@ -51,42 +51,63 @@
                 <button id="btn" class="btn" type="submit">신고 글</button>
             </form>
         </div>
-        <table id="table">
-            <thead>
-                <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>작성일</th>
-                    <th>조회수</th>
-                    <th><input type="checkbox" id="checkAll" onclick="toggleAll(this)" name="bno"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${myWrite}" var="my">
-                    <tr>
-                        <td>${my.bno}</td>
-                        <td><a href='<c:url value="/board/post.do?bno=${my.bno}"></c:url>'>${my.title}</a></td>
-                        <td>${my.author}</td>
-                        <td>${my.createDate}</td>
-                        <td><input type="checkbox" class="checkItem" name="bno" value="${my.bno}"></td>
-                    </tr>
-                </c:forEach>
-                <c:forEach items="${myComment}" var="my">
-                    <tr>
-                        <td>${my.cno}</td>
-                        <td><a href='<c:url value="/board/post.do?bno=${my.bno}"></c:url>'>${my.cbody}</a></td>
-                        <td>${my.author}</td>
-                        <td>${my.createDate}</td>
-                        <td><input type="checkbox" class="checkItem" name="bno" value="${my.bno}"></td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
+	        <table id="table">
+	        	<c:if test="${myWrite != null}">
+	            <thead>
+	                <tr>
+	                    <th>번호</th>
+	                    <th>제목</th>
+	                    <th>작성자</th>
+	                    <th>작성일</th>
+	                    <th>수정</th>
+	                    <th>삭제</th>
+	                </tr>
+	            </thead>
+	            </c:if>
+	            <c:if test="${myComment != null}">
+	            <thead>
+	                <tr>
+	                    <th>번호</th>
+	                    <th>제목</th>
+	                    <th>작성자</th>
+	                    <th>작성일</th>
+	                    <th>삭제</th>
+	                </tr>
+	            </thead>
+	            </c:if>
+	            <tbody>
+	                <c:forEach items="${myWrite}" var="my">
+	                    <tr>
+	                        <td>${my.bno}</td>
+	                        <td><a href='<c:url value="/board/post.do?bno=${my.bno}"></c:url>'>${my.title}</a></td>
+	                        <td>${my.author}</td>
+	                        <td>${my.createDate}</td>
+	                        <td><button><a href="<c:url value="/board/modify.do?bno=${my.bno}"></c:url>">수정</a></button></td>
+	                        <td>
+		              			<form action='<c:url value="/board/myWriteOff.do"/>' method="post">
+						        	<input type="hidden" name="bno" value="${my.bno}">
+						        	<button type="submit">삭제</button>
+						        </form>
+					        </td>
+	                    </tr>
+	                </c:forEach>
+	                <c:forEach items="${myComment}" var="my">
+	                    <tr>
+	                        <td>${my.cno}</td>
+	                        <td><a href='<c:url value="/board/post.do?bno=${my.bno}"></c:url>'>${my.cbody}</a></td>
+	                        <td>${my.author}</td>
+	                        <td>${my.createDate}</td>
+	                        <td>
+	                        	<form action='<c:url value="/comment/myCommentOff.do"/>' method="post">
+						        	<input type="hidden" name="cno" value="${my.cno}">
+						        	<button type="submit">삭제</button>
+						        </form>
+	                        </td>
+	                    </tr>
+	                </c:forEach>
+	            </tbody>
+	        </table>
         <div id="btn2">
-        	<form>
-        		<button>삭제</button>
-        	</form>
         </div>
         <c:if test="${myWrite != null}">
         	<div>

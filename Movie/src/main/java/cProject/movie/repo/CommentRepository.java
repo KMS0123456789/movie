@@ -32,7 +32,7 @@ public class CommentRepository {
 	public int offOne(CommentVO vo, int bno, String author, String cbody, int cno) {
 		return template.update(NAME_SPACE + ".off", vo);
 	}
-public Page<CommentVO> myComment(Pageable pageable, String searchType, String keyword, String author) {
+	public Page<CommentVO> myComment(Pageable pageable, String searchType, String keyword, String author) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("offset", pageable.getOffset());
@@ -50,5 +50,8 @@ public Page<CommentVO> myComment(Pageable pageable, String searchType, String ke
 		map.put("keyword", keyword);
 		map.put("author", author);
 		return template.selectOne(NAME_SPACE + ".myCommentCount", map);
+	}
+	public int myCommentOff(CommentVO vo) {
+		return template.update(NAME_SPACE + ".myCommentOff", vo);
 	}
 }

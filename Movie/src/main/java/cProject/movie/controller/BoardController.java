@@ -1,6 +1,7 @@
 package cProject.movie.controller;
 
 import java.io.File;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -250,10 +252,11 @@ public class BoardController {
 	public String myWriteOff(BoardVO vo) {
 		int result = repository.off(vo);
 		if(result > 0) {
-			return "redirect:/board/mypage.do";
+			return "redirect:/board/myWrite.do";
 		}else {
-			return "redirect:/board/board.do";
+			return "redirect:/board/mypage.do";
 		}
+		
 	}
 	public String getFileExtension(String fileName) {
 		int index = fileName.lastIndexOf(".");

@@ -80,4 +80,14 @@ public class CommentController {
 		model.addAttribute("author",author);
 		return "mypage";
 	}
+	@RequestMapping(value="/myCommentOff.do", method=RequestMethod.POST)
+	public String myCommentOff(CommentVO vo) {
+		int result = repository.myCommentOff(vo);
+		
+		if (result > 0) {
+		    return "redirect:/comment/myComment.do";
+		}else {
+			return "redirect:/board/mypage.do";
+		}
+	}
 }

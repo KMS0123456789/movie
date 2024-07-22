@@ -53,4 +53,7 @@
 			</if>
 		</where>
 	</select>
+	<update id="myCommentOff" parameterType="int">
+		update comment set delete_flag = 1 , delete_date = now() where cno = #{cno}; 
+	</update>
 </mapper>

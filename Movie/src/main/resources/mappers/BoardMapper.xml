@@ -181,7 +181,7 @@
 		</where>
 	</select>
 	<update id="myWriteOff" parameterType="cProject.movie.vo.BoardVO">
-		update board set delete_flag = 1, delete_date = now() where bno = #{bno}; 
+		update board set delete_flag = 1, delete_date = now() where bno = #{bno};
 	</update>
 	
 	<update id="update_readhit" parameterType="int">
