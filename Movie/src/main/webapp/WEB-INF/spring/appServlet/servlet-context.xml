@@ -52,7 +52,7 @@
 			<exclude-mapping path="/user/logout.do"/>
 			<exclude-mapping path="/user/idCheck.do"/>
 			<exclude-mapping path="/user/nickCheck.do"/>
-			<exclude-mapping path="/user/emailidCheck.do"/>
+			<exclude-mapping path="/user/emailCheck.do"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 	</interceptors>
