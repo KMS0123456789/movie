@@ -5,6 +5,7 @@ public class LikeVO {
 		private String likeUser;
 		private int bno;
 		private String likeDate;
+		
 		public String getLikeDate() {
 			return likeDate;
 		}

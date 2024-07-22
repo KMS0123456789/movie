@@ -92,8 +92,9 @@
             </form>
         </div>
         <div id="p_l_btn2">
-		<form action="like.do" method="post">
+		<form action="<c:url value='/like/like.do'/>"  method="post">
 			<input type="hidden" name="bno" value="${vo.bno}">
+			<input type="hidden" name="likeUser" value="${sessionScope.user.id }">
 			<input type="submit" class="buttons" value="♡ 좋아요">
 		</form>
         </div>

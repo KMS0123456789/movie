@@ -7,4 +7,16 @@
 		<result property="bno" column="bno"/>
 		<result property="likeDate" column="like_date"/>
 	</resultMap>
+	
+	<select id="findlike" resultType="int">
+		select count(*) from like_no where bno = #{bno} and like_user = #{likeUser}
+	</select>
+	
+	<insert id="likeOn">
+		insert into like_no(like_user, bno)values(#{likeUser},#{bno})
+	</insert>
+	
+	<delete id="likeOff">
+		delete from like_no where bno = #{bno} and like_user = #{likeUser}
+	</delete>
 </mapper>
