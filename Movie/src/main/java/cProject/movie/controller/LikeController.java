@@ -20,20 +20,27 @@ public class LikeController {
 	LikeRepository repository;
 	
 	@RequestMapping(value="/like.do", method=RequestMethod.POST)
-	public String like(LikeVO vo, HttpServletRequest request, Model model,
+	public String likeUp(LikeVO like, HttpServletRequest request, Model model,
 			@RequestParam("bno") int bno,
 			@RequestParam("likeUser") String likeUser) {
-		
-		vo.setBno(vo.getBno());
-		vo.setLikeUser(vo.getLikeUser());
-		
-		model.addAttribute("findlike", bno);
-		model.addAttribute("likeOn", likeUser);
-		
+
+		model.addAttribute("bno", bno);
+		model.addAttribute("likeUser", likeUser);
+		repository.likeUp(like);
 		if (request.getHeader("Referer") != null) {
 		    return "redirect:" + request.getHeader("Referer");
 		}else {
-			return "redirect:/home";
+			return "redirect:/board/board.do";
 		}
 	}
+	@RequestMapping(value="/likeOff.do", method=RequestMethod.POST)
+	public String likeOff(LikeVO like, HttpServletRequest request) {
+		repository.likeOff(like);
+		if (request.getHeader("Referer") != null) {
+		    return "redirect:" + request.getHeader("Referer");
+		}else {
+			return "redirect:/board/board.do";
+		}
+	}
+	
 }

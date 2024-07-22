@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib  prefix="spring" uri="http://www.springframework.org/tags" %> 
+<%@taglib  prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -38,7 +38,13 @@
         <dt>조회수:${vo.hit}</dt>
         	<dd></dd>
         <dt>좋아요:</dt>
-        	<dd></dd>
+        	<dd>
+        		<c:forEach items="${vo.likes}" var="like" varStatus="likes">
+					<c:if test="${likes.last}">
+						${likes.count}
+					</c:if>
+        		</c:forEach>
+        	</dd>
         <dt>첨부파일:</dt>
         	<dd></dd>   
     	</dl>
@@ -91,13 +97,28 @@
                 </div>
             </form>
         </div>
-        <div id="p_l_btn2">
-		<form action="<c:url value='/like/like.do'/>"  method="post">
-			<input type="hidden" name="bno" value="${vo.bno}">
-			<input type="hidden" name="likeUser" value="${sessionScope.user.id }">
-			<input type="submit" class="buttons" value="♡ 좋아요">
-		</form>
-        </div>
+        <c:if test="${sessionScope.user.id != null}">
+	        <div id="p_l_btn2">
+	        <c:forEach items="${vo.likes}" var="like" varStatus="likes" begin="0" end="0">
+	        	<c:choose>
+	        		<c:when test="${(sessionScope.user.id) ne like.likeUser}">
+						<form action="<c:url value='/like/like.do'/>"  method="post">
+							<input type="hidden" name="bno" value="${vo.bno}">
+							<input type="hidden" name="likeUser" value="${sessionScope.user.id}">
+							<input type="submit" class="buttons" value="🤍 좋아요">
+						</form>
+					</c:when>
+					<c:when test="${(sessionScope.user.id) eq like.likeUser}">
+						<form action="<c:url value='/like/likeOff.do'/>"  method="post">
+							<input type="hidden" name="bno" value="${vo.bno}">
+							<input type="hidden" name="likeUser" value="${sessionScope.user.id}">
+							<input type="submit" class="buttons" value="❤️ 좋아요">
+						</form>
+					</c:when>
+	        	</c:choose>
+	        </c:forEach>
+	        </div>
+	    </c:if>
     </div>
     <div class="comment-section">
         <h2>댓글</h2>
@@ -120,7 +141,7 @@
 			            		<input type="text"  readonly="readonly" style="text-align: left " name="cbody"value="${item.cbody}">
 			            		<input type="hidden" name="cno" value="${item.cno}">
 			               		<button class="btn_comment_diplay" type="submit"  style="visibility: hidden;">작성</button>
-			               		<button class="btn_comment_diplay" type="button" onclick="cancelReply(this)" style="visibility: hidden;" data-original-text="${item.cbody}">취소</button>	
+			               		<button class="btn_comment_diplay" type="button" onclick="cancelReply(this)" style="visibility: hidden;" value="${item.cbody}">취소</button>	
 			               	</form>		                
 			                <button type="button" class="modifyReply" onclick="modifyReply(this)">수정</button>
 			                <form  action='<c:url value="/comment/cOff.do"/>' method="post">
@@ -146,10 +167,9 @@ function modifyReply(obj) {
     function cancelReply(obj) {
         // "작성" 및 "취소" 버튼 숨김
         $(obj).parent().children(".btn_comment_diplay").css("visibility", "hidden");
-        $(obj).siblings("#cbody").css("visibility", "hidden");
         // "수정" 및 "삭제" 버튼 보임
-        $(obj).siblings(".modifyReply").css("visibility", "visible");
-        $(obj).siblings(".deleteReply").css("visibility", "visible");
+        $(".modifyReply").css("visibility", "visible");
+        $(".deleteReply").css("visibility", "visible");
     }
 </script>
 </body>

@@ -117,15 +117,19 @@
 			<choose>
 				<when test="categoryNo==0">
 					and category_no=0
+					and delete_flag=0
 				</when>
 				<when test="categoryNo==1">
 					and category_no=1
+					and delete_flag=0
 				</when>
 				<when test="categoryNo==2">
 					and category_no=2
+					and delete_flag=0
 				</when>
 				<when test="categoryNo==3">
 					and category_no=3
+					and delete_flag=0
 				</when>
 			</choose>
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">

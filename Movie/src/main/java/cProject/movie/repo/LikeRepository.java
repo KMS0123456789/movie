@@ -16,15 +16,11 @@ public class LikeRepository {
 	
 	private final String NAME_SPACE = "LikeMapper";
 	
-	public int likeOn(LikeVO vo) {
-		return template.insert(NAME_SPACE+ ".likeOn", vo);
+	public int likeUp(LikeVO vo) {
+		return template.insert(NAME_SPACE+ ".likeUp", vo);
 	}
-	
 	public int likeOff(LikeVO vo) {
-		return template.delete(NAME_SPACE + ".likeOff", vo);
+		return template.delete(NAME_SPACE+ ".likeOff", vo);
 	}
 	
-	public int findlike(LikeVO vo) {
-		return template.selectOne(NAME_SPACE + ".findlike", vo);
-	}
 }
