@@ -1,14 +1,22 @@
 package cProject.movie.vo;
 
+import java.util.List;
+
 public class CpoliceVO {
 	private int policeNo;
     private String id;
     private int cno;
-
 	private String policeDate;
     private String policeReason;
     private String policeResult;
+    private List<CommentVO> comments;
     
+	public List<CommentVO> getComments() {
+		return comments;
+	}
+	public void setComments(List<CommentVO> comments) {
+		this.comments = comments;
+	}
 	public int getPoliceNo() {
 		return policeNo;
 	}

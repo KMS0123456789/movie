@@ -1,5 +1,7 @@
 package cProject.movie.vo;
 
+import java.util.List;
+
 public class BpoliceVO {
 	private int policeNo;
 	private String id;
@@ -7,6 +9,13 @@ public class BpoliceVO {
 	private String policeDate;
 	private String policeReason;
 	private int policeResult;
+	private List<BoardVO> boards;
+	public List<BoardVO> getBoards() {
+		return boards;
+	}
+	public void setBoards(List<BoardVO> boards) {
+		this.boards = boards;
+	}
 	public int getPoliceNo() {
 		return policeNo;
 	}

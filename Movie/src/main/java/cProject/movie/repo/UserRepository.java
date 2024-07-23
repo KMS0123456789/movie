@@ -1,12 +1,18 @@
 package cProject.movie.repo;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import cProject.movie.vo.BoardVO;
+import cProject.movie.vo.CpoliceVO;
 import cProject.movie.vo.UserVO;
 
 @Repository
@@ -60,6 +66,39 @@ public class UserRepository {
     public int changeemail(UserVO vo) {
     	return template.update(NAME_SPACE + ".changeemail", vo);  
     }
-
-
+    public Page<UserVO> countUpolice(Pageable pageable, String searchType, String keyword) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("offset", pageable.getOffset());
+		map.put("limit", pageable.getPageSize());
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		int total = upoliceCount(searchType, keyword);
+		List<UserVO> users = template.selectList(NAME_SPACE + ".selectPolice", map);
+		return new PageImpl<UserVO>(users, pageable, total);
+	}
+    
+    public int upoliceCount(String searchType, String keyword) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		return template.selectOne(NAME_SPACE + ".upoliceCount", map);
+	}
+    public Page<UserVO> offUser(Pageable pageable, String searchType, String keyword) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("offset", pageable.getOffset());
+		map.put("limit", pageable.getPageSize());
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		int total = offUserCount(searchType, keyword);
+		List<UserVO> users = template.selectList(NAME_SPACE + ".offUser", map);
+		return new PageImpl<UserVO>(users, pageable, total);
+	}
+	public int offUserCount(String searchType, String keyword) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		return template.selectOne(NAME_SPACE + ".offUserCount", map);
+	}
 }

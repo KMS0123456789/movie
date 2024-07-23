@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cProject.movie.repo.UserRepository;
 import cProject.movie.vo.BoardVO;
+import cProject.movie.vo.CpoliceVO;
 import cProject.movie.vo.UserVO;
 
 @Controller
@@ -168,5 +172,33 @@ public class UserController {
     public String changeemail(UserVO vo) {
         repository.changeemail(vo);
         return "redirect:/user/userchange.do";
+	}
+	@RequestMapping(value="/policeUser.do", method=RequestMethod.GET)
+	public String policeUser(Model model, 
+			@RequestParam(name="page", required=false, defaultValue = "1") int page,
+			@RequestParam(name="searchType", required=false) String searchType,
+			@RequestParam(name="keyword", required=false) String keyword
+			) {
+		Pageable pageable = PageRequest.of(page-1, 10);
+		Page<UserVO> data = repository.countUpolice(pageable, searchType, keyword);
+		model.addAttribute("policeUser", data.getContent());
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPage", data.getTotalPages());
+		model.addAttribute("pageSize", 10);
+		return "manager";
+	}
+	@RequestMapping(value="/offUser.do", method=RequestMethod.GET)
+	public String offUser(Model model,
+			@RequestParam(name="page", required=false, defaultValue = "1") int page,
+			@RequestParam(name="searchType", required=false) String searchType,
+			@RequestParam(name="keyword", required=false) String keyword
+			) {
+		Pageable pageable = PageRequest.of(page-1, 10);
+		Page<UserVO> data = repository.offUser(pageable, searchType, keyword);
+		model.addAttribute("offUser", data.getContent());
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPage", data.getTotalPages());
+		model.addAttribute("pageSize", 10);
+		return "manager";
 	}
 }

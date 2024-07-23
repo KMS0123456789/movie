@@ -10,6 +10,22 @@
 		<result property="createDate" column="create_date"/>
 		<result property="updateDate" column="update_date"/>
 		<result property="deleteDate" column="delete_date"/>
+		<collection property="Bpolices" ofType="cProject.movie.vo.BpoliceVO">
+			<id property="policeNo" column="police_no"/>
+			<result property="id" column="id"/>
+			<result property="bno" column="bno"/>
+			<result property="policeDate" column="police_date"/>
+			<result property="policeReason" column="police_reason"/>
+			<result property="policeResult" column="police_result"/>
+		</collection>
+		<collection property="Cpolices" ofType="cProject.movie.vo.CpoliceVO">
+			<id property="policeNo" column="police_no"/>
+			<result property="id" column="id"/>
+			<result property="cno" column="cno"/>
+			<result property="policeDate" column="police_date"/>
+			<result property="policeReason" column="police_reason"/>
+			<result property="policeResult" column="police_result"/>
+		</collection>
 	</resultMap>
 	
 	<select id="login" parameterType="cProject.movie.vo.UserVO" resultMap="userMap">
@@ -56,4 +72,41 @@
     <update id="changeemail" parameterType="cProject.movie.vo.UserVO">
         UPDATE user SET email = #{email} WHERE id = #{id}
     </update>
+    <select id="selectPolice" resultMap="userMap">
+    	select user.id, nick from user
+	    	left join bpolice on user.id = bpolice.id
+	    	left join cpolice on user.id = cpolice.id
+	    	<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+					and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		limit #{offset}, #{limit}
+    </select>
+    
+    <select id="upoliceCount" resultType="int">
+		select count(*) from user 
+	    	left join bpolice on user.id = bpolice.id
+	    	left join cpolice on user.id = cpolice.id
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+	</select>
+	<select id="offUser" resultMap="userMap">
+		select * from user 
+		<where>
+			and user_type=2
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+		limit #{offset}, #{limit}
+	</select>
+	<select id="offUserCount" resultType="int">
+		select count(*) from user
+		<where>
+			and user_type=2
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+	</select>
 </mapper>

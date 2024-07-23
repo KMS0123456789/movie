@@ -8,6 +8,18 @@
 		<result property="policeDate" column="police_date"/>
 		<result property="policeReason" column="police_reason"/>
 		<result property="policeResult" column="police_result"/>
+		<collection property="comments" ofType="cProject.movie.vo.CommentVO">
+			<id property="cno" column="cno"/>
+			<result property="author" column="author"/>
+			<result property="bno" column="bno"/>
+			<result property="pCno" column="p_cno"/>
+			<result property="cbody" column="cbody"/>
+			<result property="deleteFlag" column="delete_flag"/>
+			<result property="policeFlag" column="police_flag"/>
+			<result property="createDate" column="create_date"/>
+			<result property="updateDate" column="update_date"/>
+			<result property="deleteDate" column="delete_date"/>
+		</collection>
 	</resultMap>
 	<insert id="insertcPolice" parameterType="cProject.movie.vo.CpoliceVO">
         INSERT INTO cpolice (id, cno, police_date, police_reason, police_result)
@@ -32,5 +44,21 @@
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
 		</where>
+	</select>
+	<select id="selectPolice" resultMap="cPoliceMap">
+    	select cpolice.cno, cpolice.police_reason, comment.bno, comment.cbody from 
+    		cpolice left join comment on cpolice.cno = comment.cno
+	    	<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+					and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		order by cpolice.cno desc
+		limit #{offset}, #{limit}
+    </select>
+    
+    <select id="cpoliceCount" resultType="int">
+		select count(*) from cpolice left join comment on cpolice.cno = comment.cno
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
 	</select>
 </mapper>

@@ -55,5 +55,20 @@ public class CpoliceController {
 		model.addAttribute("author",author);
 		return "mypage";
 	}
+    @RequestMapping(value="/policeComment.do", method=RequestMethod.GET)
+	public String policeComment(Model model, String author, 
+			@RequestParam(name="page", required=false, defaultValue = "1") int page,
+			@RequestParam(name="searchType", required=false) String searchType,
+			@RequestParam(name="keyword", required=false) String keyword
+			) {
+		Pageable pageable = PageRequest.of(page-1, 10);
+		Page<CpoliceVO> data = repository.countCpolice(pageable, searchType, keyword, author);
+		model.addAttribute("policeComment", data.getContent());
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPage", data.getTotalPages());
+		model.addAttribute("pageSize", 10);
+		model.addAttribute("author",author);
+		return "manager";
+	}
  
 }

@@ -11,6 +11,21 @@
         <result property="policeDate" column="police_date"/>
         <result property="policeReason" column="police_reason"/>
         <result property="policeResult" column="police_result"/>
+        <collection property="boards" ofType="cProject.movie.vo.BoardVO">
+			<id property="bno" column="bno"/>
+			<result property="author" column="author"/>
+			<result property="bno" column="bno"/>
+			<result property="categoryN0" column="category_no"/>
+			<result property="notice" column="notice"/>
+			<result property="hit" column="hit"/>
+			<result property="title" column="title"/>
+			<result property="body" column="body"/>
+			<result property="deleteFlag" column="delete_flag"/>
+			<result property="policeFlag" column="police_flag"/>
+			<result property="createDate" column="create_date"/>
+			<result property="updateDate" column="update_date"/>
+			<result property="deleteDate" column="delete_date"/>
+		</collection>
     </resultMap>
 
     <insert id="insertbPolice" parameterType="cProject.movie.vo.BpoliceVO">
@@ -19,7 +34,8 @@
     </insert>
     
     <select id="selectPolice" resultMap="bPoliceMap">
-    	select * from bpolice left join board on bpolice.bno = board.bno
+    	select bpolice.bno, bpolice.police_reason, board.title from bpolice 
+    		left join board on bpolice.bno = board.bno
 	    	<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 					and ${searchType} like concat('%',#{keyword},'%')
 			</if>

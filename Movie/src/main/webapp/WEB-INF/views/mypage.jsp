@@ -271,6 +271,34 @@
 	            </ul>
         	</div>
         </c:if>
+        <c:if test="${myPoliceComment != null}">
+        	<div>
+	            <ul id="page">
+	                <f:parseNumber integerOnly="true" var="pageGroup" value="${(currentPage - 1) / 10}" />
+	                <c:set var="startPage" value="${(pageGroup * 10 + 1)}"></c:set>
+	                <c:set var="endPage" value="${(startPage + (10 - 1))}"></c:set>
+	
+	                <c:if test="${currentPage > 1}">
+	                    <li><a href="<c:url value='/cpolice/myPoliceComment.do?author=${author}&page=1' />">&lt;&lt;</a></li>
+	                    <li><a href="<c:url value='/cpolice/myPoliceComment.do?author=${author}&page=${currentPage-1}' />">&lt;</a></li>
+	                </c:if>
+	                <c:forEach begin="${startPage}" end="${endPage > totalPage ? totalPage : endPage}" var="pageNum">
+	                    <c:choose>
+	                        <c:when test="${currentPage == pageNum}">
+	                            <li><a>${pageNum}</a></li>
+	                        </c:when>
+	                        <c:otherwise>
+	                            <li><a href="<c:url value='/cpolice/myPoliceComment.do?author=${author}&page=${pageNum}' />">${pageNum}</a></li>
+	                        </c:otherwise>
+	                    </c:choose>
+	                </c:forEach>
+	                <c:if test="${currentPage < totalPage}">
+	                    <li><a href="<c:url value='/cpolice/myPoliceComment.do?author=${author}&page=${currentPage+1}' />">&gt;</a></li>
+	                    <li><a href="<c:url value='/cpolice/myPoliceComment.do?author=${author}&page=${totalPage}' />">&gt;&gt;</a></li>
+	                </c:if>
+	            </ul>
+        	</div>
+        </c:if>
     </section>
 </body>
 </html>

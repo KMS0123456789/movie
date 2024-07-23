@@ -46,4 +46,24 @@ public class CpoliceRepository {
 		map.put("author", author);
 		return template.selectOne(NAME_SPACE + ".myPoliceCommentCount", map);
 	}
+	public Page<CpoliceVO> countCpolice(Pageable pageable, String searchType, String keyword, String author) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("offset", pageable.getOffset());
+		map.put("limit", pageable.getPageSize());
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		map.put("author", author);
+		int total = cpoliceCount(searchType, keyword, author);
+		List<CpoliceVO> boards = template.selectList(NAME_SPACE + ".selectPolice", map);
+		return new PageImpl<CpoliceVO>(boards, pageable, total);
+	}
+    
+    public int cpoliceCount(String searchType, String keyword, String author) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		map.put("author", author);
+		return template.selectOne(NAME_SPACE + ".cpoliceCount", map);
+	}
 }
