@@ -9,5 +9,8 @@
 		<result property="policeReason" column="police_reason"/>
 		<result property="policeResult" column="police_result"/>
 	</resultMap>
-	
+	<insert id="insertcPolice" parameterType="cProject.movie.vo.CpoliceVO">
+        INSERT INTO cpolice (id, cno, police_date, police_reason, police_result)
+        VALUES (#{id}, #{cno}, NOW(), #{policeReason}, 0)
+    </insert>
 </mapper>

@@ -4,7 +4,8 @@ public class CpoliceVO {
 	private int policeNo;
     private String id;
     private int cno;
-    private String policeDate;
+
+	private String policeDate;
     private String policeReason;
     private String policeResult;
     

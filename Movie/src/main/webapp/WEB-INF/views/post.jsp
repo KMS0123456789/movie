@@ -128,8 +128,8 @@
 	            	<button type="submit" id="btn_reply_submit" style="margin-right: 1rem;">댓글 작성</button>
 	       		</c:if>
 	        </div>
-        </form>
-        <c:forEach items="${vo.comments}" var="item">
+        </form>        
+      <c:forEach items="${vo.comments}" var="item">        
         	<div class="comment-list">
 		    	<div class="comment">
 			           <div style="text-align: left;">작성자 :${item.author}</div>
@@ -148,7 +148,30 @@
 			             </div>	                   
 				</div>    
     		</div>
-	</c:forEach>		
+		<div id="p_l_btn">
+        <div>
+		    <div id="p_l_btn1">
+		        <button type="button" class="buttons" onclick="openCModal()">신고</button>
+		    </div>
+		</div>
+			<div id="CpoliceModal" class="modal" style="display: none;">
+			    <div class="modal-content">
+			        	<h2>신고 사유 선택</h2>
+			        <form id="policeForm" action='<c:url value="/cpolice/police.do"/>' method="post">
+			            <input type="hidden" name="cno" value="${item.cno}">
+			            <input type="hidden" name="id" value="${sessionScope.user.id}">
+			            <input type="radio" id="spam" name="policeReason" value="스팸">
+			            <label for="spam">스팸</label><br>
+			            <input type="radio" id="abusive" name="policeReason" value="욕설">
+			            <label for="abusive">욕설</label><br>
+			            <input type="radio" id="personal" name="policeReason" value="개인정보 노출">
+			            <label for="personal">개인정보 노출</label><br>
+			            <button type="submit">신고하기</button>
+			            <button type="button" onclick="closeCModal()">취소</button>
+			        </form>
+			    </div>
+			</div>
+</c:forEach>		
 </div>
 <!-- 신고 모달 -->
 <div id="policeModal" class="modal" style="display: none;">
@@ -189,7 +212,12 @@ function modifyReply(obj) {
     function openModal() {
         document.getElementById('policeModal').style.display = 'block';
     }
-
+    function openCModal() {
+        document.getElementById('CpoliceModal').style.display = 'block';
+    }
+    function closeCModal() {
+        document.getElementById('CpoliceModal').style.display = 'none';
+    }
     function closeModal() {
         document.getElementById('policeModal').style.display = 'none';
     }
