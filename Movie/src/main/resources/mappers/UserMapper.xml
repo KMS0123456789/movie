@@ -44,9 +44,15 @@
     <update id="changePw" parameterType="cProject.movie.vo.UserVO">
         UPDATE user SET pw = #{pw} WHERE id = #{id}
     </update>
+    
+    <update id="myChangePw" parameterType="cProject.movie.vo.UserVO">
+        UPDATE user SET pw = #{pw} WHERE id = #{id}
+    </update>
+    
     <update id="changenick" parameterType="cProject.movie.vo.UserVO">
         UPDATE user SET nick = #{nick} WHERE id = #{id}
     </update>
+    
     <update id="changeemail" parameterType="cProject.movie.vo.UserVO">
         UPDATE user SET email = #{email} WHERE id = #{id}
     </update>

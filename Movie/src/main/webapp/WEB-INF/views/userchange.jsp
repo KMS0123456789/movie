@@ -38,7 +38,7 @@
             <div id="user">
                 <div class="id">아이디</div>
                 <div id="userinfor">
-                    <form action="<c:url value="/user/changePw.do"/>">
+                    <form action="<c:url value="/user/myChangePw.do"/>">
                     	<input type="hidden" name="id" value="${sessionScope.user.id}">
                         <input type="submit" value="비밀번호 변경" id="btns">
                     </form>
@@ -46,7 +46,7 @@
                  <div id="userinfor">
                     <form id="nickForm" action="<c:url value='/user/changenick.do'/>" method="post">
                         <input type="hidden" name="id" value="${sessionScope.user.id}">
-                        <input type="text" name="nick" id="nick" placeholder="${sessionScope.user.id}">
+                        <input type="text" name="nick" id="nick" placeholder="닉네임">
                         <button type="button" id="checkNickButton">닉네임 중복확인</button>
                         <input type="submit" value="닉네임변경" id="btns">
                     </form>

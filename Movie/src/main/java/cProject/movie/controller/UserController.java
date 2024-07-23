@@ -143,6 +143,18 @@ public class UserController {
         repository.changePw(vo);
         return "redirect:/board/board.do";
 	}
+	
+	@RequestMapping(value="/myChangePw.do", method=RequestMethod.GET)
+    public String myChangePw() {
+        return "mychangepw";
+    }
+
+	@RequestMapping(value="/myChangePw.do", method=RequestMethod.POST)
+    public String myChangePwOk(UserVO vo) {
+        repository.myChangePw(vo);
+        return "redirect:/board/board.do";
+    }
+	
 	@RequestMapping(value="/userchange.do", method=RequestMethod.GET)
 	public String userchange() {
 		return "userchange";

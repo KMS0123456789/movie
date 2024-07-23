@@ -48,6 +48,8 @@
 			<exclude-mapping path="/user/join.do"/>
 			<exclude-mapping path="/user/findId.do"/>
 			<exclude-mapping path="/user/findPw.do"/>
+			<exclude-mapping path="/user/changePw.do"/>
+			<exclude-mapping path="/user/myChangePw.do"/>
 			<exclude-mapping path="/resources/**"/>
 			<exclude-mapping path="/user/logout.do"/>
 			<exclude-mapping path="/user/idCheck.do"/>
