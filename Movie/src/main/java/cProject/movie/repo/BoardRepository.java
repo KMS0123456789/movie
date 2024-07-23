@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 
 import cProject.movie.vo.BoardVO;
+import cProject.movie.vo.LikeVO;
 
 @Repository
 public class BoardRepository {
@@ -136,5 +137,24 @@ public class BoardRepository {
 	}
 	public int writeOn(BoardVO vo) {
 		return template.update(NAME_SPACE + ".writeOn", vo);
+	}
+public Page<BoardVO> myLike(Pageable pageable, String searchType, String keyword, String likeUser) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("offset", pageable.getOffset());
+		map.put("limit", pageable.getPageSize());
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		map.put("likeUser", likeUser);
+		int total = myLikeCount(searchType, keyword, likeUser);
+		List<BoardVO> likes = template.selectList(NAME_SPACE + ".myLike", map);
+		return new PageImpl<BoardVO>(likes, pageable, total);
+	}
+	public int myLikeCount(String searchType, String keyword, String likeUser) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		map.put("likeUser", likeUser);
+		return template.selectOne(NAME_SPACE + ".myLikeCount", map);
 	}
 }

@@ -42,8 +42,8 @@
             	<input type="hidden" name="author" value="${sessionScope.user.id}">
                 <button id="btn" class="btn" type="submit">작성 댓글</button>
             </form>
-            <form>
-            	<input type="hidden" name="author" value="${sessionScope.user.id}">
+            <form action='<c:url value="/board/myLike.do"/>'>
+            	<input type="hidden" name="likeUser" value="${sessionScope.user.id}">
                 <button id="btn" class="btn" type="submit">좋아요 글</button>
             </form>
             <form>
@@ -75,6 +75,14 @@
 	                </tr>
 	            </thead>
 	            </c:if>
+	            <c:if test="${myLike != null}">
+	            <thead>
+	                <tr>
+	                    <th>글 번호</th>
+	                    <th>글 제목</th>
+	                </tr>
+	            </thead>
+	            </c:if>
 	            <tbody>
 	                <c:forEach items="${myWrite}" var="my">
 	                    <tr>
@@ -103,6 +111,12 @@
 						        	<button type="submit">삭제</button>
 						        </form>
 	                        </td>
+	                    </tr>
+	                </c:forEach>
+	                <c:forEach items="${myLike}" var="my">
+	                    <tr>
+	                        <td>${my.bno}</td>
+	                        <td><a href='<c:url value="/board/post.do?bno=${my.bno}"></c:url>'>${my.title}</a></td>
 	                    </tr>
 	                </c:forEach>
 	            </tbody>
@@ -173,8 +187,8 @@
 	                <c:set var="endPage" value="${(startPage + (10 - 1))}"></c:set>
 	
 	                <c:if test="${currentPage > 1}">
-	                    <li><a href="<c:url value='/board/myLike.do?author=${author}&page=1' />">&lt;&lt;</a></li>
-	                    <li><a href="<c:url value='/board/myLike.do?author=${author}&page=${currentPage-1}' />">&lt;</a></li>
+	                    <li><a href="<c:url value='/like/myLike.do?likeUser=${likeUser}&page=1' />">&lt;&lt;</a></li>
+	                    <li><a href="<c:url value='/like/myLike.do?likeUser=${likeUser}&page=${currentPage-1}' />">&lt;</a></li>
 	                </c:if>
 	                <c:forEach begin="${startPage}" end="${endPage > totalPage ? totalPage : endPage}" var="pageNum">
 	                    <c:choose>
@@ -182,7 +196,7 @@
 	                            <li><a>${pageNum}</a></li>
 	                        </c:when>
 	                        <c:otherwise>
-	                            <li><a href="<c:url value='/board/myLike.do?author=${author}&page=${pageNum}' />">${pageNum}</a></li>
+	                            <li><a href="<c:url value='/like/myLike.do?likeUser=${likeUser}&page=${pageNum}' />">${pageNum}</a></li>
 	                        </c:otherwise>
 	                    </c:choose>
 	                </c:forEach>
@@ -201,8 +215,8 @@
 	                <c:set var="endPage" value="${(startPage + (10 - 1))}"></c:set>
 	
 	                <c:if test="${currentPage > 1}">
-	                    <li><a href="<c:url value='/board/myPolice.do?author=${author}&page=1' />">&lt;&lt;</a></li>
-	                    <li><a href="<c:url value='/board/myPolice.do?author=${author}&page=${currentPage-1}' />">&lt;</a></li>
+	                    <li><a href="<c:url value='/like/myLike.do?likeUser=${likeUser}&page=1' />">&lt;&lt;</a></li>
+	                    <li><a href="<c:url value='/like/myLike.do?likeUser=${likeUser}&page=${currentPage-1}' />">&lt;</a></li>
 	                </c:if>
 	                <c:forEach begin="${startPage}" end="${endPage > totalPage ? totalPage : endPage}" var="pageNum">
 	                    <c:choose>

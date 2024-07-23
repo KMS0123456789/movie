@@ -24,6 +24,7 @@ import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.multipart.MultipartFile;
 
 import cProject.movie.vo.FileVO;
+import cProject.movie.vo.LikeVO;
 import jdk.nashorn.internal.ir.RuntimeNode.Request;
 import cProject.movie.repo.BoardRepository;
 import cProject.movie.repo.FileRepository;
@@ -293,6 +294,21 @@ public class BoardController {
 			return "redirect:/board/manager.do";
 		}
 		
+	}
+	@RequestMapping(value="/myLike.do", method=RequestMethod.GET)
+	public String myLike(Model model, String likeUser, 
+			@RequestParam(name="page", required=false, defaultValue = "1") int page,
+			@RequestParam(name="searchType", required=false) String searchType,
+			@RequestParam(name="keyword", required=false) String keyword
+			) {
+		Pageable pageable = PageRequest.of(page-1, 10);
+		Page<BoardVO> data = repository.myLike(pageable, searchType, keyword, likeUser);
+		model.addAttribute("myLike", data.getContent());
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPage", data.getTotalPages());
+		model.addAttribute("pageSize", 10);
+		model.addAttribute("likeUser",likeUser);
+		return "mypage";
 	}
 	
 	

@@ -214,4 +214,24 @@
 	<update id="writeOn" parameterType="cProject.movie.vo.BoardVO">
 		update board set delete_flag = 0, delete_date = null where bno = #{bno};
 	</update>
+	<select id="myLike" resultMap="boardMap">
+		select * from like_no left join board on like_no.bno = board.bno
+		<where>
+			and like_user = #{likeUser}
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+		order by like_no.bno desc
+		limit #{offset}, #{limit}
+	</select>
+	<select id="myLikeCount" resultType="int">
+		select count(*) from like_no left join board on like_no.bno = board.bno
+		<where>
+			and like_no.like_user = #{likeUser}
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+	</select>
 </mapper>
