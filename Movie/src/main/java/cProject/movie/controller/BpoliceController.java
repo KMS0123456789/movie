@@ -68,4 +68,19 @@ public class BpoliceController {
 			return "redirect:/board/manager.do";
 		}
     }
+    @RequestMapping(value="/myPoliceWrite.do", method=RequestMethod.GET)
+	public String myPoliceWrite(Model model, String author, 
+			@RequestParam(name="page", required=false, defaultValue = "1") int page,
+			@RequestParam(name="searchType", required=false) String searchType,
+			@RequestParam(name="keyword", required=false) String keyword
+			) {
+		Pageable pageable = PageRequest.of(page-1, 10);
+		Page<BpoliceVO> data = repository.myPoliceWrite(pageable, searchType, keyword, author);
+		model.addAttribute("myPoliceWrite", data.getContent());
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPage", data.getTotalPages());
+		model.addAttribute("pageSize", 10);
+		model.addAttribute("author",author);
+		return "mypage";
+	}
 }

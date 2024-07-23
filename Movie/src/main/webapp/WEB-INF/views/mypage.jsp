@@ -46,9 +46,13 @@
             	<input type="hidden" name="likeUser" value="${sessionScope.user.id}">
                 <button id="btn" class="btn" type="submit">좋아요 글</button>
             </form>
-            <form>
+            <form action='<c:url value="/bpolice/myPoliceWrite.do"/>'>
             	<input type="hidden" name="author" value="${sessionScope.user.id}">
                 <button id="btn" class="btn" type="submit">신고 글</button>
+            </form>
+            <form action='<c:url value="/cpolice/myPoliceComment.do"/>'>
+            	<input type="hidden" name="author" value="${sessionScope.user.id}">
+                <button id="btn" class="btn" type="submit">신고 댓글</button>
             </form>
         </div>
 	        <table id="table">
@@ -80,6 +84,24 @@
 	                <tr>
 	                    <th>글 번호</th>
 	                    <th>글 제목</th>
+	                </tr>
+	            </thead>
+	            </c:if>
+	            <c:if test="${myPoliceWrite != null}">
+	            <thead>
+	                <tr>
+	                    <th>번호</th>
+	                    <th>제목</th>
+	                    <th>신고 사유</th>
+	                </tr>
+	            </thead>
+	            </c:if>
+	             <c:if test="${myPoliceComment != null}">
+	            <thead>
+	                <tr>
+	                    <th>번호</th>
+	                    <th>제목</th>
+	                    <th>신고 사유</th>
 	                </tr>
 	            </thead>
 	            </c:if>
@@ -117,6 +139,20 @@
 	                    <tr>
 	                        <td>${my.bno}</td>
 	                        <td><a href='<c:url value="/board/post.do?bno=${my.bno}"></c:url>'>${my.title}</a></td>
+	                    </tr>
+	                </c:forEach>
+	                <c:forEach items="${myPoliceWrite}" var="my">
+	                    <tr>
+	                        <td>${my.bno}</td>
+	                        <td><a href='<c:url value="/board/post.do?bno=${my.bno}"></c:url>'>신고한 게시글 입니다</a></td>
+							<td>${my.policeReason}</td>
+	                    </tr>
+	                </c:forEach>
+	                <c:forEach items="${myPoliceComment}" var="my">
+	                    <tr>
+	                        <td>${my.cno}</td>
+	                        <td><a>신고한 댓글 입니다</a></td>
+							<td>${my.policeReason}</td>
 	                    </tr>
 	                </c:forEach>
 	            </tbody>
@@ -207,7 +243,7 @@
 	            </ul>
         	</div>
         </c:if>
-        <c:if test="${myPolice != null}">
+        <c:if test="${myPoliceWrite != null}">
         	<div>
 	            <ul id="page">
 	                <f:parseNumber integerOnly="true" var="pageGroup" value="${(currentPage - 1) / 10}" />
@@ -215,8 +251,8 @@
 	                <c:set var="endPage" value="${(startPage + (10 - 1))}"></c:set>
 	
 	                <c:if test="${currentPage > 1}">
-	                    <li><a href="<c:url value='/like/myLike.do?likeUser=${likeUser}&page=1' />">&lt;&lt;</a></li>
-	                    <li><a href="<c:url value='/like/myLike.do?likeUser=${likeUser}&page=${currentPage-1}' />">&lt;</a></li>
+	                    <li><a href="<c:url value='/bpolice/myPoliceWrite.do?author=${author}&page=1' />">&lt;&lt;</a></li>
+	                    <li><a href="<c:url value='/bpolice/myPoliceWrite.do?author=${author}&page=${currentPage-1}' />">&lt;</a></li>
 	                </c:if>
 	                <c:forEach begin="${startPage}" end="${endPage > totalPage ? totalPage : endPage}" var="pageNum">
 	                    <c:choose>
@@ -224,13 +260,13 @@
 	                            <li><a>${pageNum}</a></li>
 	                        </c:when>
 	                        <c:otherwise>
-	                            <li><a href="<c:url value='/board/myPolice.do?author=${author}&page=${pageNum}' />">${pageNum}</a></li>
+	                            <li><a href="<c:url value='/bpolice/myPoliceWrite.do?author=${author}&page=${pageNum}' />">${pageNum}</a></li>
 	                        </c:otherwise>
 	                    </c:choose>
 	                </c:forEach>
 	                <c:if test="${currentPage < totalPage}">
-	                    <li><a href="<c:url value='/board/myPolice.do?author=${author}&page=${currentPage+1}' />">&gt;</a></li>
-	                    <li><a href="<c:url value='/board/myPolice.do?author=${author}&page=${totalPage}' />">&gt;&gt;</a></li>
+	                    <li><a href="<c:url value='/bpolice/myPoliceWrite.do?author=${author}&page=${currentPage+1}' />">&gt;</a></li>
+	                    <li><a href="<c:url value='/bpolice/myPoliceWrite.do?author=${author}&page=${totalPage}' />">&gt;&gt;</a></li>
 	                </c:if>
 	            </ul>
         	</div>

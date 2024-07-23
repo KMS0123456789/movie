@@ -46,7 +46,11 @@
         		</c:forEach>
         	</dd>
         <dt>첨부파일:</dt>
-        	<dd></dd>   
+        	<dd>
+	        	<c:forEach items="${vo.files}" var="file">
+	    			${file.fileName}
+	    		</c:forEach>
+        	</dd>   
     	</dl>
     	<c:if test="${vo.categoryNo == 1}">
     		<div class="star_rating" name="star_rating" id="star_rating" style="text-align: left;">
@@ -63,6 +67,10 @@
     	</div>
     	</c:if>
     <div class="post-content">
+    	<c:forEach items="${vo.files}" var="file">
+    		<%-- <img alt="이미지" src="${file.filePath}" onerror="this.style.display='none'"> --%> 
+    		<img alt="이미지" src="<c:url value="${file.filePath}" />">
+    	</c:forEach>
     	${vo.body}
     </div>
     <div>

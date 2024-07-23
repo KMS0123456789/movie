@@ -137,12 +137,13 @@ public class BoardController {
 		if(!dir.exists()) {
 			dir.mkdirs();
 		}
+		
 		List<FileVO> fileList = new ArrayList<>();
 		for(MultipartFile file : files) {
 			if(!file.isEmpty()) {
 				String originFileName = file.getOriginalFilename();
 				String uniqueFileName = UUID.randomUUID().toString()+"."+getFileExtension(originFileName);
-				String filePath = uploadDir + uniqueFileName;
+				String filePath = "/uploads/" + uniqueFileName;
 				try {
 					file.transferTo(new File(filePath));
 					FileVO filevo = new FileVO();

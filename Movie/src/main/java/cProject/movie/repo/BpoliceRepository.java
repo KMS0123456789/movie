@@ -49,4 +49,23 @@ public class BpoliceRepository {
 	public int policeWriteOff(BpoliceVO vo) {
 		return template.update(NAME_SPACE + ".policeWriteOff", vo);
 	}
+	public Page<BpoliceVO> myPoliceWrite(Pageable pageable, String searchType, String keyword, String author) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("offset", pageable.getOffset());
+		map.put("limit", pageable.getPageSize());
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		map.put("author", author);
+		int total = myPoliceWriteCount(searchType, keyword, author);
+		List<BpoliceVO> boards = template.selectList(NAME_SPACE + ".myPoliceWrite", map);
+		return new PageImpl<BpoliceVO>(boards, pageable, total);
+	}
+	public int myPoliceWriteCount(String searchType, String keyword, String author) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		map.put("author", author);
+		return template.selectOne(NAME_SPACE + ".myPoliceWriteCount", map);
+	}
 }

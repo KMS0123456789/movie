@@ -13,4 +13,24 @@
         INSERT INTO cpolice (id, cno, police_date, police_reason, police_result)
         VALUES (#{id}, #{cno}, NOW(), #{policeReason}, 0)
     </insert>
+    <select id="myPoliceComment" resultMap="cPoliceMap">
+		select * from cpolice
+		<where>
+			and id = #{author}
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+		order by cno desc
+		limit #{offset}, #{limit}
+	</select>
+	<select id="myPoliceCommentCount" resultType="int">
+		select count(*) from cpolice
+		<where>
+			and id = #{author}
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+	</select>
 </mapper>
