@@ -72,6 +72,7 @@ h1 {
 	line-height: 1.6; 
 	font-size: 1rem; 
 	color: #333;
+	text-align: left;
 }
 
 .button-group{
@@ -172,6 +173,11 @@ h1 {
     height: 100%;
     overflow: auto;
     background-color: rgba(0,0,0,0.4);
+}
+
+#image{
+	width: 500px;
+	height: 500px;
 }
 
 .modal-content {
