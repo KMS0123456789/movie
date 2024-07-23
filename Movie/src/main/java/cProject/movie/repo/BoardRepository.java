@@ -138,7 +138,7 @@ public class BoardRepository {
 	public int writeOn(BoardVO vo) {
 		return template.update(NAME_SPACE + ".writeOn", vo);
 	}
-public Page<BoardVO> myLike(Pageable pageable, String searchType, String keyword, String likeUser) {
+	public Page<BoardVO> myLike(Pageable pageable, String searchType, String keyword, String likeUser) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("offset", pageable.getOffset());
@@ -157,4 +157,5 @@ public Page<BoardVO> myLike(Pageable pageable, String searchType, String keyword
 		map.put("likeUser", likeUser);
 		return template.selectOne(NAME_SPACE + ".myLikeCount", map);
 	}
+	
 }

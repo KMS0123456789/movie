@@ -17,4 +17,24 @@
         INSERT INTO bpolice (id, bno, police_date, police_reason, police_result)
         VALUES (#{id}, #{bno}, NOW(), #{policeReason}, 0)
     </insert>
+    
+    <select id="selectPolice" resultMap="bPoliceMap">
+    	select * from bpolice left join board on bpolice.bno = board.bno
+	    	<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+					and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		order by bpolice.bno desc
+		limit #{offset}, #{limit}
+    </select>
+    
+    <select id="bpoliceCount" resultType="int">
+		select count(*) from bpolice left join board on bpolice.bno = board.bno
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+	</select>
+	
+	<update id="policeWriteOff" parameterType="cProject.movie.vo.BpoliceVO">
+		update bpolice set police_result = 1 where bno = #{bno};
+	</update>
 </mapper>

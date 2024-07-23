@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cProject.movie.vo.FileVO;
 import cProject.movie.vo.LikeVO;
@@ -311,5 +312,16 @@ public class BoardController {
 		return "mypage";
 	}
 	
-	
+	@RequestMapping(value="/policeWriteOff.do", method=RequestMethod.POST)
+	public String managerWriteOff(BoardVO vo, RedirectAttributes rttr) {
+		int result = repository.off(vo);
+		rttr.addFlashAttribute("bno",vo.getBno());
+		
+		if(result > 0) {
+			return "redirect:/bpolice/policeWriteOff.do";
+		}else {
+			return "redirect:/board/manager.do";
+		}
+		
+	}
 }
