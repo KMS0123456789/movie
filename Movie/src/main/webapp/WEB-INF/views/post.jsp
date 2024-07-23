@@ -68,7 +68,7 @@
     	</c:if>
     <div class="post-content">
     	<c:forEach items="${vo.files}" var="file">
-    		<img alt="이미지" src="<c:url value="${file.filePath}" />" onerror="this.style.display='none'">
+    		<img alt="이미지" src="<c:url value="${file.filePath}"/>" onerror="this.style.display='none'">
     	</c:forEach>
     	${vo.body}
     </div>

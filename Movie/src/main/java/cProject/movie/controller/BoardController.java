@@ -145,7 +145,7 @@ public class BoardController {
 				String uniqueFileName = UUID.randomUUID().toString()+"."+getFileExtension(originFileName);
 				String filePath = "/uploads/" + uniqueFileName;
 				try {
-					file.transferTo(new File(filePath));
+					file.transferTo(new File(uploadDir + uniqueFileName));
 					FileVO filevo = new FileVO();
 					filevo.setBno(result);
 					filevo.setFileName(originFileName);
