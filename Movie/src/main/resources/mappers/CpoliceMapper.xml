@@ -3,8 +3,9 @@
 <mapper namespace="CpoliceMapper">
 	<resultMap type="cProject.movie.vo.CpoliceVO" id="cPoliceMap">
 		<id property="policeNo" column="police_no"/>
-		<result property="id" column="id"/>
+		<result property="policeMan" column="police_man"/>
 		<result property="cno" column="cno"/>
+		<result property="villain" column="villain"/>
 		<result property="policeDate" column="police_date"/>
 		<result property="policeReason" column="police_reason"/>
 		<result property="policeResult" column="police_result"/>
@@ -22,14 +23,14 @@
 		</collection>
 	</resultMap>
 	<insert id="insertcPolice" parameterType="cProject.movie.vo.CpoliceVO">
-        INSERT INTO cpolice (id, cno, police_date, police_reason, police_result)
-        VALUES (#{id}, #{cno}, NOW(), #{policeReason}, 0)
+        INSERT INTO cpolice (police_man, cno, villain, police_date, police_reason, police_result)
+        VALUES (#{policeMan}, #{cno}, #{villain}, NOW(), #{policeReason}, 0)
     </insert>
     <select id="myPoliceComment" resultMap="cPoliceMap">
-		select cpolice.cno, cpolice.police_reason, cpolice.police_result, comment.cbody, comment.bno 
+		select cpolice.cno, cpolice.police_reason, cpolice.police_result, comment.cbody, comment.bno, comment.author 
 		from cpolice left join comment on cpolice.cno = comment.cno
 		<where>
-			and id = #{author}
+			and police_man = #{author}
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
@@ -40,14 +41,14 @@
 	<select id="myPoliceCommentCount" resultType="int">
 		select count(*) from cpolice
 		<where>
-			and id = #{author}
+			and police_man = #{author}
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
 		</where>
 	</select>
 	<select id="selectPolice" resultMap="cPoliceMap">
-    	select cpolice.cno, cpolice.police_reason, comment.bno, comment.cbody, comment.delete_flag from 
+    	select cpolice.cno, cpolice.police_reason, comment.bno, comment.cbody, comment.delete_flag, comment.author from 
     		cpolice left join comment on cpolice.cno = comment.cno
 	    	<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 					and ${searchType} like concat('%',#{keyword},'%')

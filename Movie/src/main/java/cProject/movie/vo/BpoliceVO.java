@@ -4,8 +4,9 @@ import java.util.List;
 
 public class BpoliceVO {
 	private int policeNo;
-	private String id;
+	private String policeMan;
 	private int bno;
+	private String villain;
 	private String policeDate;
 	private String policeReason;
 	private int policeResult;
@@ -22,12 +23,7 @@ public class BpoliceVO {
 	public void setPoliceNo(int policeNo) {
 		this.policeNo = policeNo;
 	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+	
 	public int getBno() {
 		return bno;
 	}
@@ -42,6 +38,18 @@ public class BpoliceVO {
 	}
 	public String getPoliceReason() {
 		return policeReason;
+	}
+	public String getPoliceMan() {
+		return policeMan;
+	}
+	public void setPoliceMan(String policeMan) {
+		this.policeMan = policeMan;
+	}
+	public String getVillain() {
+		return villain;
+	}
+	public void setVillain(String villain) {
+		this.villain = villain;
 	}
 	public void setPoliceReason(String policeReason) {
 		this.policeReason = policeReason;

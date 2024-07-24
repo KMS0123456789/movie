@@ -26,11 +26,13 @@ public class BpoliceController {
 
     @PostMapping("/police.do")
     public String bPolice(BpoliceVO police, HttpServletRequest request, Model model,
-                          @RequestParam(name="id") String id,
+                          @RequestParam(name="policeMan") String policeMan,
                           @RequestParam(name="bno") int bno,
+                          @RequestParam(name="villain") String villain,
                           @RequestParam(name="policeReason") String policeReason) {
 
-        model.addAttribute("id", id);
+        model.addAttribute("policeMan", policeMan);
+        model.addAttribute("villain", villain);
         model.addAttribute("bno", bno);
         model.addAttribute("policeReason", policeReason);
         

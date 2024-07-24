@@ -13,16 +13,18 @@
 		<result property="countTotal" column="count_total"/>
 		<collection property="Bpolices" ofType="cProject.movie.vo.BpoliceVO">
 			<id property="policeNo" column="police_no"/>
-			<result property="id" column="id"/>
+			<result property="policeMan" column="police_man"/>
 			<result property="bno" column="bno"/>
+			<result property="villain" column="villain"/>
 			<result property="policeDate" column="police_date"/>
 			<result property="policeReason" column="police_reason"/>
 			<result property="policeResult" column="police_result"/>
 		</collection>
 		<collection property="Cpolices" ofType="cProject.movie.vo.CpoliceVO">
 			<id property="policeNo" column="police_no"/>
-			<result property="id" column="id"/>
+			<result property="policeMan" column="police_man"/>
 			<result property="cno" column="cno"/>
+			<result property="villain" column="villain"/>
 			<result property="policeDate" column="police_date"/>
 			<result property="policeReason" column="police_reason"/>
 			<result property="policeResult" column="police_result"/>
@@ -75,10 +77,10 @@
     </update>
     <select id="selectPolice" resultMap="userMap">
     	select user.id, nick from user
-	    	left join bpolice on user.id = bpolice.id
-	    	left join cpolice on user.id = cpolice.id
+	    	left join bpolice on user.id = bpolice.villain
+	    	left join cpolice on user.id = cpolice.villain
 	  	<where>
-	  		and user.id = bpolice.id or user.id = cpolice.id 
+	  		and user.id = bpolice.villain or user.id = cpolice.villain 
 	  		<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 					and ${searchType} like concat('%',#{keyword},'%')
 			</if>
@@ -89,10 +91,10 @@
     
     <select id="upoliceCount" resultType="int">
 		select count(*) from user 
-	    	left join bpolice on user.id = bpolice.id
-	    	left join cpolice on user.id = cpolice.id
+	    	left join bpolice on user.id = bpolice.villain
+	    	left join cpolice on user.id = cpolice.villain
 		<where>
-	  		and user.id = bpolice.id or user.id = cpolice.id 
+	  		and user.id = bpolice.villain or user.id = cpolice.villain 
 		  	<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 						and ${searchType} like concat('%',#{keyword},'%')
 			</if>
@@ -119,7 +121,7 @@
 	</select>
 	<select id="policeUserTotal" resultMap="userMap">
 			select user.id, nick,
-			((select count(user.id)  from user inner join bpolice on user.id = bpolice.id where user.id = #{id})+(select count(user.id)  from user inner join cpolice on user.id = cpolice.id where user.id = #{id})) as count_total 
+			((select count(user.id)  from user inner join bpolice on user.id = bpolice.villain where user.id = #{id})+(select count(user.id)  from user inner join cpolice on user.id = cpolice.villain where user.id = #{id})) as count_total 
 	    	from user where user.id = #{id};
 	</select>
 </mapper>

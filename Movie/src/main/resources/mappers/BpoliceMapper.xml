@@ -6,8 +6,9 @@
 <mapper namespace="BpoliceMapper">
     <resultMap type="cProject.movie.vo.BpoliceVO" id="bPoliceMap">
         <id property="policeNo" column="police_no"/>
-        <result property="id" column="id"/>
+        <result property="policeMan" column="police_man"/>
         <result property="bno" column="bno"/>
+        <result property="villain" column="villain"/>
         <result property="policeDate" column="police_date"/>
         <result property="policeReason" column="police_reason"/>
         <result property="policeResult" column="police_result"/>
@@ -29,12 +30,12 @@
     </resultMap>
 
     <insert id="insertbPolice" parameterType="cProject.movie.vo.BpoliceVO">
-        INSERT INTO bpolice (id, bno, police_date, police_reason, police_result)
-        VALUES (#{id}, #{bno}, NOW(), #{policeReason}, 0)
+        INSERT INTO bpolice (police_man, bno, villain ,police_date, police_reason, police_result)
+        VALUES (#{policeMan}, #{bno}, #{villain}, NOW(), #{policeReason}, 0)
     </insert>
     
     <select id="selectPolice" resultMap="bPoliceMap">
-    	select bpolice.bno, bpolice.police_reason, board.title, board.delete_flag from bpolice 
+    	select bpolice.bno, bpolice.police_reason, board.title, board.delete_flag, board.author from bpolice 
     		left join board on bpolice.bno = board.bno
 	    	<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 					and ${searchType} like concat('%',#{keyword},'%')
@@ -50,10 +51,10 @@
 			</if>
 	</select>
 	<select id="myPoliceWrite" resultMap="bPoliceMap">
-		select bpolice.bno, bpolice.police_reason, board.title ,bpolice.police_result from bpolice 
+		select bpolice.bno, bpolice.police_reason, board.title ,bpolice.police_result, board.author from bpolice 
     		left join board on bpolice.bno = board.bno 
 		<where>
-			and id = #{author}
+			and police_man = #{author}
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
@@ -64,7 +65,7 @@
 	<select id="myPoliceWriteCount" resultType="int">
 		select count(*) from bpolice
 		<where>
-			and id = #{author}
+			and police_man = #{author}
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>

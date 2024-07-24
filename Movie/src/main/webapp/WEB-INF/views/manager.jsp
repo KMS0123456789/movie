@@ -35,8 +35,8 @@
 		    </header>
 		    <div id="my">관리자 페이지</div>
 			    <div>
-			        <a href="<c:url value="/bpolice/policeWrite.do"/>"><input type="button" value="신고한 글" class="btn"></a>
-			        <a href="<c:url value="/cpolice/policeComment.do"/>"><input type="button" value="신고 댓글"  class="btn"></a>
+			        <a href="<c:url value="/bpolice/policeWrite.do"/>"><input type="button" value="신고된 글" class="btn"></a>
+			        <a href="<c:url value="/cpolice/policeComment.do"/>"><input type="button" value="신고된 댓글"  class="btn"></a>
 			        <a href="<c:url value="/user/policeUser.do"/>"><input type="button" value="신고된 유저"  class="btn"></a>
 			        <a href="<c:url value="/board/offWrite.do"/>"><input type="button" value="비활성화 글"  class="btn"></a>
 			        <a href="<c:url value="/comment/offComment.do"/>"><input type="button" value="비활성화 댓글"  class="btn"></a>
@@ -49,6 +49,7 @@
 		                <tr>
 		                    <th>번호</th>
 		                    <th>제목</th>
+		                    <th>작성자</th>
 		                    <th>신고사유</th>
 		                    <th>비활성화</th>
 		                </tr>
@@ -59,6 +60,7 @@
 		                <tr>
 		                    <th>번호</th>
 		                    <th>제목</th>
+		                    <th>작성자</th>
 		                    <th>신고사유</th>
 		                    <th>비활성화</th>
 		                </tr>
@@ -121,6 +123,7 @@
 	            	 		<tr>
 		                        <td>${manager.bno}</td>
 		                        <td><a href='<c:url value="/board/post.do?bno=${manager.bno}"/>'>${bo.title}</a></td>
+		                        <td>${bo.author}</td>
 		                        <td>${manager.policeReason}</td>
 		                        <td>
 			              			<form action='<c:url value="/board/policeWriteOff.do"/>' method="post">
@@ -138,6 +141,7 @@
 		                    <tr>
 		                        <td>${manager.cno}</td>	                        
 		                        <td><a href='<c:url value="/board/post.do?bno=${co.bno}"/>'>${co.cbody}</a></td>
+		                        <td>${co.author}</td>
 		                        <td>${manager.policeReason}</td>
 		                        <td>
 			              			<form action='<c:url value="/comment/cpoliceWriteOff.do"/>' method="post">
@@ -170,7 +174,9 @@
                       <td>
 						 <form action='<c:url value="/user/policeUserTotal.do"/>' method="post">
 						 <input type="hidden" name="id" value="${manager.id}">
-						 <button type="submit">비활성화</button>
+						 <c:if test="${manager.countTotal > 5}">
+						 	<button type="submit">비활성화</button>
+						 </c:if>
 						 </form>
                    	  </td>
                     </tr>

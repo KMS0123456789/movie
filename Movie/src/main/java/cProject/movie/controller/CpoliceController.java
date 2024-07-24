@@ -23,15 +23,7 @@ public class CpoliceController {
     private CpoliceRepository repository;
 
     @PostMapping("/police.do")
-    public String cPolice(CpoliceVO police, HttpServletRequest request, Model model,
-                          @RequestParam(name="id") String id,
-                          @RequestParam(name="cno") int cno,
-                          @RequestParam(name="policeReason") String policeReason) {
-
-        model.addAttribute("id", id);
-        model.addAttribute("cno", cno);
-        model.addAttribute("policeReason", policeReason);
-        
+    public String cPolice(CpoliceVO police, HttpServletRequest request, Model model) {  
         repository.cPolice(police);
 
         if (request.getHeader("Referer") != null) {

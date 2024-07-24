@@ -47,8 +47,9 @@
 		</collection>
 		<collection property="Bpolices" ofType="cProject.movie.vo.BpoliceVO">
 			<id property="policeNo" column="police_no"/>
-			<result property="id" column="id"/>
+			<result property="policeMan" column="police_man"/>
 			<result property="bno" column="bno"/>
+			<result property="villain" column="villain"/>
 			<result property="policeDate" column="police_date"/>
 			<result property="policeReason" column="police_reason"/>
 			<result property="policeResult" column="police_result"/>

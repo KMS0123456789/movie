@@ -4,8 +4,9 @@ import java.util.List;
 
 public class CpoliceVO {
 	private int policeNo;
-    private String id;
+    private String policeMan;
     private int cno;
+    private String villain;
 	private String policeDate;
     private String policeReason;
     private String policeResult;
@@ -20,9 +21,7 @@ public class CpoliceVO {
 	public int getPoliceNo() {
 		return policeNo;
 	}
-	public String getId() {
-		return id;
-	}
+	
 	public int getCno() {
 		return cno;
 	}
@@ -38,8 +37,18 @@ public class CpoliceVO {
 	public void setPoliceNo(int policeNo) {
 		this.policeNo = policeNo;
 	}
-	public void setId(String id) {
-		this.id = id;
+	
+	public String getPoliceMan() {
+		return policeMan;
+	}
+	public void setPoliceMan(String policeMan) {
+		this.policeMan = policeMan;
+	}
+	public String getVillain() {
+		return villain;
+	}
+	public void setVillain(String villain) {
+		this.villain = villain;
 	}
 	public void setCno(int cno) {
 		this.cno = cno;

@@ -92,6 +92,7 @@
 	                <tr>
 	                    <th>번호</th>
 	                    <th>제목</th>
+	                    <th>작성자</th>
 	                    <th>신고 사유</th>
 	                    <th>신고 결과</th>
 	                </tr>
@@ -102,6 +103,7 @@
 	                <tr>
 	                    <th>번호</th>
 	                    <th>제목</th>
+	                    <th>작성자</th>
 	                    <th>신고 사유</th>
 	                    <th>신고 결과</th>
 	                </tr>
@@ -150,6 +152,7 @@
 		                    		<tr>
 				                        <td>${my.bno}</td>
 				                        <td><a href='<c:url value="/board/post.do?bno=${bo.bno}"></c:url>'>${bo.title}</a></td>
+										<td>${bo.author}</td>
 										<td>${my.policeReason}</td>
 										<td>처리 대기 중</td>
 				                    </tr>
@@ -158,6 +161,7 @@
 		                    		<tr>
 				                        <td>${my.bno}</td>
 				                        <td>${bo.title}</td>
+				                        <td>${bo.author}</td>
 										<td>${my.policeReason}</td>
 										<td>처리 완료</td>
 				                    </tr>
@@ -172,6 +176,7 @@
 		                    		<tr>
 				                        <td>${my.cno}</td>
 				                        <td><a href='<c:url value="/board/post.do?bno=${co.bno}"></c:url>'>${co.cbody}</a></td>
+										<td>${co.author}</td>
 										<td>${my.policeReason}</td>
 										<td>처리 대기 중</td>
 				                    </tr>
@@ -180,6 +185,7 @@
 		                    		<tr>
 				                        <td>${my.cno}</td>
 				                        <td>${co.cbody}</td>
+										<td>${co.author}</td>
 										<td>${my.policeReason}</td>
 										<td>처리 완료</td>
 				                    </tr>
