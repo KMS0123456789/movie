@@ -329,12 +329,11 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/policeWriteOff.do", method=RequestMethod.POST)
-	public String managerWriteOff(BoardVO vo, RedirectAttributes rttr) {
+	public String managerWriteOff(BoardVO vo) {
 		int result = repository.policeWriteOff(vo);
-		rttr.addFlashAttribute("bno",vo.getBno());
 		
 		if(result > 0) {
-			return "redirect:/bpolice/policeWriteOff.do";
+			return "redirect:/bpolice/policeWrite.do";
 		}else {
 			return "redirect:/board/manager.do";
 		}
