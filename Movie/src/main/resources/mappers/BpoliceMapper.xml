@@ -49,10 +49,6 @@
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
 	</select>
-	
-	<update id="policeWriteOff" parameterType="cProject.movie.vo.BpoliceVO">
-		update bpolice set police_result = 1 where bno = #{bno};
-	</update>
 	<select id="myPoliceWrite" resultMap="bPoliceMap">
 		select bpolice.bno, bpolice.police_reason, board.title ,bpolice.police_result from bpolice 
     		left join board on bpolice.bno = board.bno 

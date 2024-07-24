@@ -59,15 +59,6 @@ public class BpoliceController {
 		return "manager";
 	}
     
-    @RequestMapping(value="/policeWriteOff.do", method=RequestMethod.GET)
-	public String managerWriteOff(BpoliceVO vo) {
-		int result = repository.policeWriteOff(vo);
-		if(result > 0) {
-			return "redirect:/board/manager.do";
-		}else {
-			return "redirect:/board/manager.do";
-		}
-    }
     @RequestMapping(value="/myPoliceWrite.do", method=RequestMethod.GET)
 	public String myPoliceWrite(Model model, String author, 
 			@RequestParam(name="page", required=false, defaultValue = "1") int page,

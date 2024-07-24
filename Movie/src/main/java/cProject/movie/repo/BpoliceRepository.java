@@ -46,9 +46,7 @@ public class BpoliceRepository {
 		map.put("author", author);
 		return template.selectOne(NAME_SPACE + ".bpoliceCount", map);
 	}
-	public int policeWriteOff(BpoliceVO vo) {
-		return template.update(NAME_SPACE + ".policeWriteOff", vo);
-	}
+	
 	public Page<BpoliceVO> myPoliceWrite(Pageable pageable, String searchType, String keyword, String author) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
