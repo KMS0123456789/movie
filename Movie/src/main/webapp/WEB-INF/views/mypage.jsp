@@ -160,7 +160,7 @@
 		                    	<c:when test="${my.policeResult == 1}">
 		                    		<tr>
 				                        <td>${my.bno}</td>
-				                        <td>${bo.title}</td>
+				                        <td>비활성화된 게시글 입니다.</td>
 				                        <td>${bo.author}</td>
 										<td>${my.policeReason}</td>
 										<td>처리 완료</td>
@@ -184,7 +184,7 @@
 		                    	<c:when test="${my.policeResult == 1}">
 		                    		<tr>
 				                        <td>${my.cno}</td>
-				                        <td>${co.cbody}</td>
+				                        <td>비활성화된 댓글 입니다.</td>
 										<td>${co.author}</td>
 										<td>${my.policeReason}</td>
 										<td>처리 완료</td>

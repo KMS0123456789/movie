@@ -50,6 +50,7 @@
 		                    <th>번호</th>
 		                    <th>제목</th>
 		                    <th>작성자</th>
+				            <th>신고자</th>
 		                    <th>신고사유</th>
 		                    <th>비활성화</th>
 		                </tr>
@@ -61,6 +62,7 @@
 		                    <th>번호</th>
 		                    <th>제목</th>
 		                    <th>작성자</th>
+		                    <th>신고자</th>
 		                    <th>신고사유</th>
 		                    <th>비활성화</th>
 		                </tr>
@@ -124,6 +126,7 @@
 		                        <td>${manager.bno}</td>
 		                        <td><a href='<c:url value="/board/post.do?bno=${manager.bno}"/>'>${bo.title}</a></td>
 		                        <td>${bo.author}</td>
+		                        <td>${manager.policeMan}</td>
 		                        <td>${manager.policeReason}</td>
 		                        <td>
 			              			<form action='<c:url value="/board/policeWriteOff.do"/>' method="post">
@@ -142,6 +145,7 @@
 		                        <td>${manager.cno}</td>	                        
 		                        <td><a href='<c:url value="/board/post.do?bno=${co.bno}"/>'>${co.cbody}</a></td>
 		                        <td>${co.author}</td>
+		                        <td>${manager.policeMan}</td>
 		                        <td>${manager.policeReason}</td>
 		                        <td>
 			              			<form action='<c:url value="/comment/cpoliceWriteOff.do"/>' method="post">

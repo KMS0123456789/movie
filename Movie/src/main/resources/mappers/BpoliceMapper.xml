@@ -35,7 +35,7 @@
     </insert>
     
     <select id="selectPolice" resultMap="bPoliceMap">
-    	select bpolice.bno, bpolice.police_reason, board.title, board.delete_flag, board.author from bpolice 
+    	select bpolice.bno, bpolice.police_reason, board.title, board.delete_flag, board.author, bpolice.police_man from bpolice 
     		left join board on bpolice.bno = board.bno
 	    	<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 					and ${searchType} like concat('%',#{keyword},'%')
