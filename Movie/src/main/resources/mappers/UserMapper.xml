@@ -77,9 +77,13 @@
     	select user.id, nick from user
 	    	left join bpolice on user.id = bpolice.id
 	    	left join cpolice on user.id = cpolice.id
-	    	<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+	  	<where>
+	  		and user.id = bpolice.id or user.id = cpolice.id 
+	  		<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 					and ${searchType} like concat('%',#{keyword},'%')
 			</if>
+	  	</where>
+	    	
 		limit #{offset}, #{limit}
     </select>
     
@@ -87,9 +91,12 @@
 		select count(*) from user 
 	    	left join bpolice on user.id = bpolice.id
 	    	left join cpolice on user.id = cpolice.id
-			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
-				and ${searchType} like concat('%',#{keyword},'%')
+		<where>
+	  		and user.id = bpolice.id or user.id = cpolice.id 
+		  	<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+						and ${searchType} like concat('%',#{keyword},'%')
 			</if>
+	  	</where>
 	</select>
 	<select id="offUser" resultMap="userMap">
 		select * from user 
