@@ -94,6 +94,7 @@
 		                    <th>제목</th>
 		                    <th>작성자</th>
 		                    <th>작성일</th>
+		                    <th>신고 유무</th>
 		                    <th>활성화</th>
 		                </tr>
 		            </thead>
@@ -105,6 +106,7 @@
 		                    <th>제목</th>
 		                    <th>작성자</th>
 		                    <th>작성일</th>
+		                    <th>신고 유무</th>
 		                    <th>활성화</th>
 		                </tr>
 		            </thead>
@@ -187,32 +189,56 @@
                 </c:forEach>
                
                 <c:forEach items="${offWrite}" var="manager">
+                	<c:forEach items="${manager.bpolices}" var="bp">
                     <tr>
                         <td>${manager.bno}</td>
                         <td><a href='<c:url value="/board/post.do?bno=${manager.bno}"></c:url>'>${manager.title}</a></td>
                         <td>${manager.author}</td>
                         <td>${manager.createDate}</td>
+						<c:choose>
+							<c:when test="${(bp.policeResult == null) or (bp.policeResult == 0)}">
+								<td>X</td>
+							</c:when>
+							<c:when test="${bp.policeResult == 1}">
+								<td>O</td>
+							</c:when>
+						</c:choose>
                         <td>
-	              			<form action='<c:url value="/board/writeOn.do"/>' method="post">
-					        	<input type="hidden" name="bno" value="${manager.bno}">
-					        	<button type="submit">활성화</button>
-					        </form>
+							<c:if test="${(bp.policeResult == null) or (bp.policeResult == 0)}">
+								<form action='<c:url value="/board/writeOn.do"/>' method="post">
+						        	<input type="hidden" name="bno" value="${manager.bno}">
+						        	<button type="submit">활성화</button>
+					        	</form>
+							</c:if>
 				        </td>
                     </tr>
+                    </c:forEach>
                 </c:forEach>
                 <c:forEach items="${offComment}" var="manager">
-                    <tr>
-                        <td>${manager.cno}</td>
-                        <td><a href='<c:url value="/board/post.do?bno=${manager.bno}"></c:url>'>${manager.cbody}</a></td>
-                        <td>${manager.author}</td>
-                        <td>${manager.createDate}</td>
-                        <td>
-                        	<form action='<c:url value="/comment/commentOn.do"/>' method="post">
-					        	<input type="hidden" name="cno" value="${manager.cno}">
-					        	<button type="submit">활성화</button>
-					        </form>
-                        </td>
-                    </tr>
+                	<c:forEach items="${manager.cpolices}" var="cp">
+	                    <tr>
+	                        <td>${manager.cno}</td>
+	                        <td><a href='<c:url value="/board/post.do?bno=${manager.bno}"></c:url>'>${manager.cbody}</a></td>
+	                        <td>${manager.author}</td>
+	                        <td>${manager.createDate}</td>
+	                        <c:choose>
+								<c:when test="${(cp.policeResult == null) or (cp.policeResult == 0)}">
+									<td>X</td>
+								</c:when>
+								<c:when test="${cp.policeResult == 1}">
+									<td>O</td>
+								</c:when>
+							</c:choose>
+	                        <td>
+								<c:if test="${(cp.policeResult == null) or (cp.policeResult == 0)}">
+									<form action='<c:url value="/board/writeOn.do"/>' method="post">
+							        	<input type="hidden" name="cno" value="${manager.cno}">
+							        	<button type="submit">활성화</button>
+						        	</form>
+								</c:if>
+					        </td>
+	                    </tr>
+                    </c:forEach>
                 </c:forEach>
                 <c:forEach items="${offUser}" var="manager">
             		<tr>

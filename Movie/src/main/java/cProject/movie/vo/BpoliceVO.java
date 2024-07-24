@@ -60,4 +60,12 @@ public class BpoliceVO {
 	public void setPoliceResult(int policeResult) {
 		this.policeResult = policeResult;
 	}
+	@Override
+	public String toString() {
+		return "BpoliceVO [policeNo=" + policeNo + ", policeMan=" + policeMan + ", bno=" + bno + ", villain=" + villain
+				+ ", policeDate=" + policeDate + ", policeReason=" + policeReason + ", policeResult=" + policeResult
+				+ ", boards=" + boards + "]";
+	}
+	
+	
 }

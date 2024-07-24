@@ -124,4 +124,12 @@ public class BoardVO {
 	public void setDeleteDate(String deleteDate) {
 		this.deleteDate = deleteDate;
 	}
+	@Override
+	public String toString() {
+		return "BoardVO [bno=" + bno + ", author=" + author + ", categoryNo=" + categoryNo + ", notice=" + notice
+				+ ", hit=" + hit + ", title=" + title + ", body=" + body + ", deleteFlag=" + deleteFlag
+				+ ", policeFlag=" + policeFlag + ", createDate=" + createDate + ", updateDate=" + updateDate
+				+ ", deleteDate=" + deleteDate + ", files=" + files + ", comments=" + comments + ", likes=" + likes
+				+ ", stars=" + stars + ", Bpolices=" + Bpolices + "]";
+	}
 }

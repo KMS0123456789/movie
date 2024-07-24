@@ -295,6 +295,7 @@ public class BoardController {
 			) {
 		Pageable pageable = PageRequest.of(page-1, 10);
 		Page<BoardVO> data = repository.offWrite(pageable, searchType, keyword, author);
+		System.out.println(data.getContent().get(0).getBpolices().get(0).getPoliceResult());
 		model.addAttribute("offWrite", data.getContent());
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPage", data.getTotalPages());

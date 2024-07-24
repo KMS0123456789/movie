@@ -200,21 +200,22 @@
 	</update>
 	
 	<select id="offWrite" resultMap="boardMap">
-		select * from board 
+		select board.bno, board.title, board.author, board.create_date, bpolice.police_result
+		from board left join bpolice on board.bno = bpolice.bno
 		<where>
-			and delete_flag=1
+			and board.delete_flag=1
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
 		</where>
-		order by bno desc
+		order by board.bno desc
 		limit #{offset}, #{limit}
 	</select>
 	
 	<select id="offWriteCount" resultType="int">
-		select count(*) from board
+		select count(*) from board left join bpolice on board.bno = bpolice.bno
 		<where>
-			and delete_flag=1
+			and board.delete_flag=1
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>

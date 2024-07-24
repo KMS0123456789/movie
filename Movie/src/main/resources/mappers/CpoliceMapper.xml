@@ -23,8 +23,8 @@
 		</collection>
 	</resultMap>
 	<insert id="insertcPolice" parameterType="cProject.movie.vo.CpoliceVO">
-        INSERT INTO cpolice (police_man, cno, villain, police_date, police_reason, police_result)
-        VALUES (#{policeMan}, #{cno}, #{villain}, NOW(), #{policeReason}, 0)
+        INSERT INTO cpolice (police_man, cno, villain, police_date, police_reason)
+        VALUES (#{policeMan}, #{cno}, #{villain}, NOW(), #{policeReason})
     </insert>
     <select id="myPoliceComment" resultMap="cPoliceMap">
 		select cpolice.cno, cpolice.police_reason, cpolice.police_result, comment.cbody, comment.bno, comment.author 

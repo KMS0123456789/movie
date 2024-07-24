@@ -30,8 +30,8 @@
     </resultMap>
 
     <insert id="insertbPolice" parameterType="cProject.movie.vo.BpoliceVO">
-        INSERT INTO bpolice (police_man, bno, villain ,police_date, police_reason, police_result)
-        VALUES (#{policeMan}, #{bno}, #{villain}, NOW(), #{policeReason}, 0)
+        INSERT INTO bpolice (police_man, bno, villain ,police_date, police_reason)
+        VALUES (#{policeMan}, #{bno}, #{villain}, NOW(), #{policeReason})
     </insert>
     
     <select id="selectPolice" resultMap="bPoliceMap">
