@@ -1,6 +1,7 @@
 package cProject.movie.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -200,5 +201,14 @@ public class UserController {
 		model.addAttribute("totalPage", data.getTotalPages());
 		model.addAttribute("pageSize", 10);
 		return "manager";
+	}
+	@RequestMapping(value="/policeUserTotal.do", method =RequestMethod.POST)
+	public String policeUserTotal(UserVO vo, Model model){
+		
+		List<UserVO> policeUserTotal = (List<UserVO>)repository.policeUserTotal(vo);
+		
+		model.addAttribute("policeUserTotal", policeUserTotal);
+		
+		return "manager"; 
 	}
 }

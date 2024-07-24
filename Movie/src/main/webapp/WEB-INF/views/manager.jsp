@@ -73,6 +73,16 @@
 		                </tr>
 		            </thead>
 	            </c:if>
+	            <c:if test="${policeUserTotal != null}">
+		            <thead>
+		                <tr>
+		                    <th>아이디</th>
+		                    <th>닉네임</th>
+		                    <th>신고 횟수</th>
+		                    <th>비활성화</th>
+		                </tr>
+		            </thead>
+	            </c:if>
 	        	<c:if test="${offWrite != null}">
 		            <thead>
 		                <tr>
@@ -141,6 +151,26 @@
             		<tr>
                       <td>${manager.id}</td>
                       <td>${manager.nick}</td>
+                      <td>
+                   		 <form action='<c:url value="/user/policeUserTotal.do"/>' method="post">
+	                    	<input type="hidden" name="id" value="${manager.id}">
+	                    	<button type="submit">조회</button>
+	                     </form>
+                   	  </td>
+                    </tr>
+                </c:forEach>
+                
+                <c:forEach items="${policeUserTotal}" var="manager">
+            		<tr>
+                      <td>${manager.id}</td>
+                      <td>${manager.nick}</td>
+                      <td>${manager.countTotal}</td>
+                      <td>
+						 <form action='<c:url value="/user/policeUserTotal.do"/>' method="post">
+						 <input type="hidden" name="id" value="${manager.id}">
+						 <button type="submit">비활성화</button>
+						 </form>
+                   	  </td>
                     </tr>
                 </c:forEach>
                
@@ -174,9 +204,9 @@
                 </c:forEach>
                 <c:forEach items="${offUser}" var="manager">
             		<tr>
-                      <td>${manager.id}</td>
-                      <td>${manager.nick}</td>
-                    </tr>
+	                    <td>${manager.id}</td>
+	                    <td>${manager.nick}</td>
+                   	</tr>
                 </c:forEach>
 	            </tbody>
 	        </table>

@@ -10,6 +10,7 @@
 		<result property="createDate" column="create_date"/>
 		<result property="updateDate" column="update_date"/>
 		<result property="deleteDate" column="delete_date"/>
+		<result property="countTotal" column="count_total"/>
 		<collection property="Bpolices" ofType="cProject.movie.vo.BpoliceVO">
 			<id property="policeNo" column="police_no"/>
 			<result property="id" column="id"/>
@@ -108,5 +109,10 @@
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
 		</where>
+	</select>
+	<select id="policeUserTotal" resultMap="userMap">
+			select user.id, nick,
+			((select count(user.id)  from user inner join bpolice on user.id = bpolice.id where user.id = #{id})+(select count(user.id)  from user inner join cpolice on user.id = cpolice.id where user.id = #{id})) as count_total 
+	    	from user where user.id = #{id};
 	</select>
 </mapper>

@@ -101,4 +101,7 @@ public class UserRepository {
 		map.put("keyword", keyword);
 		return template.selectOne(NAME_SPACE + ".offUserCount", map);
 	}
+	public List<UserVO> policeUserTotal(UserVO vo) {
+		return	template.selectList(NAME_SPACE + ".policeUserTotal" , vo);
+	}
 }

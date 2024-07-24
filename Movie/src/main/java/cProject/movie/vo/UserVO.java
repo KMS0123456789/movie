@@ -13,7 +13,14 @@ public class UserVO {
 	private String deleteDate;
 	private List<BpoliceVO> Bpolices;
 	private List<CpoliceVO> Cpolices;
+	private int countTotal;
 	
+	public int getCountTotal() {
+		return countTotal;
+	}
+	public void setCountTotal(int countTotal) {
+		this.countTotal = countTotal;
+	}
 	public List<BpoliceVO> getBpolices() {
 		return Bpolices;
 	}
