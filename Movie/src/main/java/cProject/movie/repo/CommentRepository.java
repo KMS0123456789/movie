@@ -76,4 +76,7 @@ public Page<CommentVO> offComment(Pageable pageable, String searchType, String k
 	public int commentOn(CommentVO vo) {
 		return template.update(NAME_SPACE + ".commentOn", vo);
 	}
+	public int cpoliceWriteOff(CommentVO vo) {
+		return template.update(NAME_SPACE + ".cpoliceWriteOff", vo);
+	}
 }

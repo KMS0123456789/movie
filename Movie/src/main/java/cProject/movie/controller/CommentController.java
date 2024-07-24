@@ -11,8 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cProject.movie.repo.CommentRepository;
+import cProject.movie.vo.BoardVO;
 import cProject.movie.vo.CommentVO;
 
 @Controller
@@ -109,6 +111,17 @@ public class CommentController {
 		int result = repository.commentOn(vo);
 		if(result > 0) {
 			return "redirect:/board/manager.do";
+		}else {
+			return "redirect:/board/manager.do";
+		}
+		
+	}
+	@RequestMapping(value="/cpoliceWriteOff.do", method=RequestMethod.POST)
+	public String managercWriteOff(CommentVO vo) {
+		int result = repository.cpoliceWriteOff(vo);
+		
+		if(result > 0) {
+			return "redirect:/cpolice/policeComment.do";
 		}else {
 			return "redirect:/board/manager.do";
 		}

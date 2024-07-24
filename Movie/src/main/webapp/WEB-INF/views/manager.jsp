@@ -133,19 +133,21 @@
                     </c:forEach>
                 </c:forEach>
                 <c:forEach items="${policeComment}" var="manager">
-                    <tr>
-                        <td>${manager.cno}</td>
-                        <c:forEach items="${manager.comments}" var="co">
-                        	<td><a href='<c:url value="/board/post.do?bno=${co.bno}"/>'>${co.cbody}</a></td>
-                        </c:forEach>
-                        <td>${manager.policeReason}</td>
-                        <td>
-	              			<form action='<c:url value="/board/policeWriteOff.do"/>' method="post">
-					        	<input type="hidden" name="cno" value="${manager.cno}">
-					        	<button type="submit" >비활성화</button>
-					        </form>
-				        </td>
-                    </tr>
+                    <c:forEach items="${manager.comments}" var="co">
+                    	<c:if test="${co.deleteFlag == 0}">
+		                    <tr>
+		                        <td>${manager.cno}</td>	                        
+		                        <td><a href='<c:url value="/board/post.do?bno=${co.bno}"/>'>${co.cbody}</a></td>
+		                        <td>${manager.policeReason}</td>
+		                        <td>
+			              			<form action='<c:url value="/comment/cpoliceWriteOff.do"/>' method="post">
+							        	<input type="hidden" name="cno" value="${manager.cno}">
+							        	<button type="submit" >비활성화</button>
+							        </form>
+						        </td>
+		                    </tr>
+                    	</c:if>
+                    </c:forEach>
                 </c:forEach>
                 <c:forEach items="${policeUser}" var="manager">
             		<tr>

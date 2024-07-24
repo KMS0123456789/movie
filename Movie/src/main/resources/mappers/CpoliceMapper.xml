@@ -47,7 +47,7 @@
 		</where>
 	</select>
 	<select id="selectPolice" resultMap="cPoliceMap">
-    	select cpolice.cno, cpolice.police_reason, comment.bno, comment.cbody from 
+    	select cpolice.cno, cpolice.police_reason, comment.bno, comment.cbody, comment.delete_flag from 
     		cpolice left join comment on cpolice.cno = comment.cno
 	    	<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 					and ${searchType} like concat('%',#{keyword},'%')

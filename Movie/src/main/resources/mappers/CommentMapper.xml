@@ -79,4 +79,10 @@
 	<update id="commentOn" parameterType="int">
 		update comment set delete_flag = 0 ,delete_date = null where cno = #{cno}; 
 	</update>
+	<update id="cpoliceWriteOff" parameterType="cProject.movie.vo.CommentVO">
+		update comment left join cpolice on comment.cno = cpolice.cno set 
+			comment.delete_flag = 1,
+			comment.delete_date = now(), 
+			cpolice.police_result = 1 where comment.cno = #{cno}; 
+	</update>
 </mapper>
