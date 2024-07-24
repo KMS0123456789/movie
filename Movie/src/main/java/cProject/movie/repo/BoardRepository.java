@@ -169,4 +169,7 @@ public class BoardRepository {
 		return template.selectOne(NAME_SPACE + ".myLikeCount", map);
 	}
 	
+	public int policeWriteOff(BoardVO vo) {
+		return template.update(NAME_SPACE + ".policeWriteOff", vo);
+	}
 }

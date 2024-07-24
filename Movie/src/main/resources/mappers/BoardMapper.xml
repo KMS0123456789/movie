@@ -161,9 +161,11 @@
 	<update id="update" parameterType="cProject.movie.vo.BoardVO">
 		update board set title = #{title}, body = #{body}, update_date = now() where bno = #{bno}; 
 	</update>
+	
 	<update id="off" parameterType="cProject.movie.vo.BoardVO">
 		update board set delete_flag = 1, delete_date = now() where bno = #{bno}; 
 	</update>
+	
 	<select id="myWrite" resultMap="boardMap">
 		select * from board
 		<where>
@@ -176,6 +178,7 @@
 		order by bno desc
 		limit #{offset}, #{limit}
 	</select>
+	
 	<select id="myWriteCount" resultType="int">
 		select count(*) from board
 		<where>
@@ -186,6 +189,7 @@
 			</if>
 		</where>
 	</select>
+	
 	<update id="myWriteOff" parameterType="cProject.movie.vo.BoardVO">
 		update board set delete_flag = 1, delete_date = now() where bno = #{bno};
 	</update>
@@ -193,6 +197,7 @@
 	<update id="update_readhit" parameterType="int">
 		update board set hit = hit  + 1 where bno = #{bno};
 	</update>
+	
 	<select id="offWrite" resultMap="boardMap">
 		select * from board 
 		<where>
@@ -204,6 +209,7 @@
 		order by bno desc
 		limit #{offset}, #{limit}
 	</select>
+	
 	<select id="offWriteCount" resultType="int">
 		select count(*) from board
 		<where>
@@ -213,9 +219,11 @@
 			</if>
 		</where>
 	</select>
+	
 	<update id="writeOn" parameterType="cProject.movie.vo.BoardVO">
 		update board set delete_flag = 0, delete_date = null where bno = #{bno};
 	</update>
+	
 	<select id="myLike" resultMap="boardMap">
 		select * from like_no left join board on like_no.bno = board.bno
 		<where>
@@ -227,6 +235,7 @@
 		order by like_no.bno desc
 		limit #{offset}, #{limit}
 	</select>
+	
 	<select id="myLikeCount" resultType="int">
 		select count(*) from like_no left join board on like_no.bno = board.bno
 		<where>
@@ -236,4 +245,11 @@
 			</if>
 		</where>
 	</select>
+	
+	<update id="policeWriteOff" parameterType="cProject.movie.vo.BoardVO">
+		update board left join bpolice on board.bno = bpolice.bno set 
+			board.delete_flag = 1,
+			board.delete_date = now(), 
+			bpolice.police_result = 1 where board.bno = #{bno}; 
+	</update>
 </mapper>
