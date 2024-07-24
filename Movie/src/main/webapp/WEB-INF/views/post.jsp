@@ -12,7 +12,6 @@
      @import url('https://fonts.googleapis.com/css2?family=Orbit&display=swap');
     </style>
     <link href="<c:url value='/resources/css/post.css'/>" rel="stylesheet">
-    <link href="<c:url value='/resources/css/star.css'/>" rel="stylesheet"> 
     <link href="<c:url value='/resources/css/header_footer.css'/>" rel="stylesheet"> 
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 </head>
@@ -54,7 +53,7 @@
     	</dl>
     	
     	<c:if test="${vo.categoryNo == 1}">
-		    <div class="star_rating" name="star_rating" id="star_rating" style="text-align: left;">
+		    <div class="star_rating" name="star_rating" id="star_rating">
 		        <dt>별점:</dt>
 		        <dd>
 		        	<c:forEach items="${vo.stars}" var="star">
@@ -63,10 +62,10 @@
 			                    <c:forEach begin="1" end="5" var="i">
 			                        <c:choose>
 			                            <c:when test="${i <= vo.stars[0].star}">
-			                                <span class="star filled">★</span>
+			                                <span class="star_filled" style=" font-size: 30px; color : red;">★</span>
 			                            </c:when>
 			                            <c:otherwise>
-			                                <span class="star">☆</span>
+			                                <span class="star" style=" font-size: 28px; color : red;">☆</span>
 			                            </c:otherwise>
 			                        </c:choose>
 			                    </c:forEach>

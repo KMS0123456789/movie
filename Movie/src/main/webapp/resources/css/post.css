@@ -35,21 +35,29 @@ h1 {
 }
         
 .post-details dt {
-	font-weight: bold; 
-	text-align: left; 
+	font-weight: bold;
 	display: inline-block;
+	
 }
 
 .post-details dd {
 	margin: 0; 
 	padding: 0; 
 	display: inline-block;
+	margin-right: 5rem;
 }
 
 .star_rating {
+	text-align:left;
+	margin-left:3rem;
 	font-size: 1rem; 
 	color: #666; 
 	row-gap: 1rem;
+}
+
+.star_filled .star{
+	font-size: 30px; 
+	color : red;
 }
 
 .star_rating dt {
