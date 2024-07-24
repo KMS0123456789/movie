@@ -24,10 +24,12 @@
 }
 .btn{
     margin-left: 5rem;
+    display :inline-block;
 }
 #btn-list{
     border-bottom: 6px solid #e6e6fa;
-    max-width: 90%;
+    width: 90%;
+    display :inline-flex;
 }
 checkbox{
     size: 10px;
