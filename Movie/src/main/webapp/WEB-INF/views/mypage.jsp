@@ -93,6 +93,7 @@
 	                    <th>번호</th>
 	                    <th>제목</th>
 	                    <th>신고 사유</th>
+	                    <th>신고 결과</th>
 	                </tr>
 	            </thead>
 	            </c:if>
@@ -102,6 +103,7 @@
 	                    <th>번호</th>
 	                    <th>제목</th>
 	                    <th>신고 사유</th>
+	                    <th>신고 결과</th>
 	                </tr>
 	            </thead>
 	            </c:if>
@@ -142,18 +144,48 @@
 	                    </tr>
 	                </c:forEach>
 	                <c:forEach items="${myPoliceWrite}" var="my">
-	                    <tr>
-	                        <td>${my.bno}</td>
-	                        <td><a href='<c:url value="/board/post.do?bno=${my.bno}"></c:url>'>신고한 게시글 입니다</a></td>
-							<td>${my.policeReason}</td>
-	                    </tr>
+	                    <c:forEach items="${my.boards}" var="bo">
+	                    	<c:choose>
+		                    	<c:when test="${my.policeResult == 0}">
+		                    		<tr>
+				                        <td>${my.bno}</td>
+				                        <td><a href='<c:url value="/board/post.do?bno=${bo.bno}"></c:url>'>${bo.title}</a></td>
+										<td>${my.policeReason}</td>
+										<td>처리 대기 중</td>
+				                    </tr>
+		                    	</c:when>
+		                    	<c:when test="${my.policeResult == 1}">
+		                    		<tr>
+				                        <td>${my.bno}</td>
+				                        <td>${bo.title}</td>
+										<td>${my.policeReason}</td>
+										<td>처리 완료</td>
+				                    </tr>
+		                    	</c:when>
+		                    </c:choose>
+	                    </c:forEach>
 	                </c:forEach>
 	                <c:forEach items="${myPoliceComment}" var="my">
-	                    <tr>
-	                        <td>${my.cno}</td>
-	                        <td><a>신고한 댓글 입니다</a></td>
-							<td>${my.policeReason}</td>
-	                    </tr>
+	                    <c:forEach items="${my.comments}" var="co">
+	                    	<c:choose>
+		                    	<c:when test="${my.policeResult == 0}">
+		                    		<tr>
+				                        <td>${my.cno}</td>
+				                        <td><a href='<c:url value="/board/post.do?bno=${co.bno}"></c:url>'>${co.cbody}</a></td>
+										<td>${my.policeReason}</td>
+										<td>처리 대기 중</td>
+				                    </tr>
+		                    	</c:when>
+		                    	<c:when test="${my.policeResult == 1}">
+		                    		<tr>
+				                        <td>${my.cno}</td>
+				                        <td>${co.cbody}</td>
+										<td>${my.policeReason}</td>
+										<td>처리 완료</td>
+				                    </tr>
+		                    	</c:when>
+		                    </c:choose>
+	                    </c:forEach>
 	                </c:forEach>
 	            </tbody>
 	        </table>

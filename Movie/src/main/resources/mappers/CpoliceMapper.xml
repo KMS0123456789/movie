@@ -26,7 +26,8 @@
         VALUES (#{id}, #{cno}, NOW(), #{policeReason}, 0)
     </insert>
     <select id="myPoliceComment" resultMap="cPoliceMap">
-		select * from cpolice
+		select cpolice.cno, cpolice.police_reason, cpolice.police_result, comment.cbody, comment.bno 
+		from cpolice left join comment on cpolice.cno = comment.cno
 		<where>
 			and id = #{author}
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
