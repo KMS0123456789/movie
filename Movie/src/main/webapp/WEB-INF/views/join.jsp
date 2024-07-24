@@ -66,7 +66,6 @@
 	    }
 	});
 
-
     let idCheck = false;
     let nickCheck = false;
     let emailCheck = false;

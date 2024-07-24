@@ -54,7 +54,7 @@ public class UserController {
 	    int result = repository.join(vo);
 	    if(result > 0) {
 	        redirectAttributes.addFlashAttribute("message", "회원가입이 완료되었습니다.");
-	        return "redirect:/board/board.do";  // 이 부분 확인
+	        return "redirect:/board/board.do";
 	    } else {
 	        redirectAttributes.addFlashAttribute("error", "회원가입에 실패했습니다. 다시 시도해주세요.");
 	        return "redirect:/user/join.do";
