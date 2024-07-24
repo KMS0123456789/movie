@@ -54,7 +54,8 @@
 		update bpolice set police_result = 1 where bno = #{bno};
 	</update>
 	<select id="myPoliceWrite" resultMap="bPoliceMap">
-		select * from bpolice
+		select bpolice.bno, bpolice.police_reason, board.title ,bpolice.police_result from bpolice 
+    		left join board on bpolice.bno = board.bno 
 		<where>
 			and id = #{author}
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
