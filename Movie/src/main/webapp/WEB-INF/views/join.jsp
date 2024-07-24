@@ -28,9 +28,11 @@
                 <input type="password" id="pw" name="pw">
             </div>
             <div class="form-group">
-                <label for="passwordValid">비밀번호 확인</label>
-                <input type="password" id="pwValid" name="pwValid">
-            </div>
+			    <label for="passwordValid">비밀번호 확인</label>
+			    <input type="password" id="pwValid" name="pwValid">
+			    <span id="passwordMatch" class="password-match">비밀번호가 일치합니다.</span>
+			    <span id="passwordMismatch" class="password-mismatch">비밀번호가 일치하지 않습니다.</span>
+			</div>
             <div class="form-group">
                 <label for="nickname">닉네임</label>
                 <input type="text" id="nick" name="nick">
@@ -150,6 +152,19 @@
         });
     });
 
+    $("#pw, #pwValid").on("input", function(){
+        let pw = $("#pw").val();
+        let pwValid = $("#pwValid").val();
+
+        if (pw === pwValid) {
+            $("#passwordMatch").show();
+            $("#passwordMismatch").hide();
+        } else {
+            $("#passwordMatch").hide();
+            $("#passwordMismatch").show();
+        }
+    });
+    
     $("form").submit(function(){
         let id = $("#id");
         let pw = $("#pw");
