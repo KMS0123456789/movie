@@ -52,20 +52,31 @@
 	    		</c:forEach>
         	</dd>   
     	</dl>
+    	
     	<c:if test="${vo.categoryNo == 1}">
-    		<div class="star_rating" name="star_rating" id="star_rating" style="text-align: left;">
-	        <dt>별점:</dt>
-	        <dd>
-	        <fieldset>
-	            <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
-	            <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
-	            <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
-	            <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
-	            <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
-	        </fieldset>
-	        </dd>
-    	</div>
-    	</c:if>
+		    <div class="star_rating" name="star_rating" id="star_rating" style="text-align: left;">
+		        <dt>별점:</dt>
+		        <dd>
+		        	<c:forEach items="${vo.stars}" var="star">
+		        		<c:choose>
+			                <c:when test="${not empty star.star}">
+			                    <c:forEach begin="1" end="5" var="i">
+			                        <c:choose>
+			                            <c:when test="${i <= vo.stars[0].star}">
+			                                <span class="star filled">★</span>
+			                            </c:when>
+			                            <c:otherwise>
+			                                <span class="star">☆</span>
+			                            </c:otherwise>
+			                        </c:choose>
+			                    </c:forEach>
+			                </c:when>
+			            </c:choose>
+		        	</c:forEach>
+		        </dd>
+		    </div>
+		</c:if>
+    	
     <div class="post-content">
     	<c:forEach items="${vo.files}" var="file">
     		<img alt="이미지" src="<c:url value="${file.filePath}"/>" onerror="this.style.display='none'" id="image">

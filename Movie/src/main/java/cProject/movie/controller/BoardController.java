@@ -26,9 +26,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cProject.movie.vo.FileVO;
 import cProject.movie.vo.LikeVO;
+import cProject.movie.vo.StarVO;
 import jdk.nashorn.internal.ir.RuntimeNode.Request;
 import cProject.movie.repo.BoardRepository;
 import cProject.movie.repo.FileRepository;
+import cProject.movie.repo.StarRepository;
 import cProject.movie.vo.BoardVO;
 
 @Controller
@@ -40,6 +42,8 @@ public class BoardController {
 	ServletContext servletContext;
 	@Autowired
 	FileRepository fileRepository;
+	@Autowired
+    private StarRepository starRepository;
 	
 	@RequestMapping(value="/board.do", method=RequestMethod.GET)
 	public String board(BoardVO vo, Model model) {
@@ -128,9 +132,11 @@ public class BoardController {
 		return "write";
 	}
 	@RequestMapping(value="/write.do", method=RequestMethod.POST)
-	public String writeOK(BoardVO vo, @RequestParam("file") MultipartFile[] files) {
-		repository.insertOne(vo);
-		int result = vo.getBno();
+	public String writeOK(BoardVO boardVO, 
+			@RequestParam("file") MultipartFile[] files, 
+            @RequestParam(name="star", required=false, defaultValue="0") int star) {
+
+		int result = repository.insertOne(boardVO);
 		
 		String uploadDir = servletContext.getRealPath("/uploads/");
 		File dir = new File(uploadDir);
@@ -161,7 +167,16 @@ public class BoardController {
 			if(fileList.size() != 0) {
 				fileRepository.insert(fileList);
 			}
-			return "redirect:/board/post.do?bno="+vo.getBno();
+			
+			if (star > 0) {
+			    StarVO starVO = new StarVO();
+			    starVO.setAuthor(boardVO.getAuthor());
+			    starVO.setBno(boardVO.getBno());
+			    starVO.setStar(star);
+			    int starResult = starRepository.insertStar(starVO);
+			}
+			
+			return "redirect:/board/post.do?bno="+boardVO.getBno();
 		}else {
 			return "redirect:/board/board.do";
 		}

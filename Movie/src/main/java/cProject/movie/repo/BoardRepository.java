@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import cProject.movie.vo.BoardVO;
 import cProject.movie.vo.LikeVO;
+import cProject.movie.vo.StarVO;
 
 @Repository
 public class BoardRepository {
@@ -84,6 +85,16 @@ public class BoardRepository {
 	public BoardVO selectOne(int bno) {
 		return	template.selectOne(NAME_SPACE + ".findById" , bno);
 	}
+	
+	public int insertStar(BoardVO boardVO, StarVO starVO) {
+        int result = template.insert(NAME_SPACE + ".insertOne", boardVO);
+        if (result > 0 && starVO != null && starVO.getStar() > 0) {
+            starVO.setBno(boardVO.getBno());
+            template.insert("StarMapper.insertStar", starVO);
+        }
+        return result;
+    }
+	
 	public int update(BoardVO vo) {
 		return template.update(NAME_SPACE + ".update", vo);
 	}

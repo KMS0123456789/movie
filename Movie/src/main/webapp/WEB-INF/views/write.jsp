@@ -36,6 +36,15 @@
 		            <label for="body">본문</label>
 		            <textarea id="body" name="body"></textarea>
 		        </div>
+		        <div id="star_rating">
+			        <fieldset>
+			            <input type="radio" name="star" value="5" id="star1"><label for="star1">⭐</label>
+			            <input type="radio" name="star" value="4" id="star2"><label for="star2">⭐</label>
+			            <input type="radio" name="star" value="3" id="star3"><label for="star3">⭐</label>
+			            <input type="radio" name="star" value="2" id="star4"><label for="star4">⭐</label>
+			            <input type="radio" name="star" value="1" id="star5"><label for="star5">⭐</label>
+			        </fieldset>
+			    </div>
 		        <div class="form-group" id="fileDiv">
 		            <label for="file">첨부파일</label>
 		            <input type="file" accept="image/*" multiple id="file" name="file">
@@ -50,25 +59,36 @@
 		    </form>
 		</div>
 		<script>
-			function starview(){
-				let categoryNo = $('#categoryNo option:selected').val();
-				if(categoryNo == 1){
-					let star='';
-					star += '<div name="star_rating" id="star_rating">'
-					star +=	'<fieldset>'
-					star +=	'<input type="radio" name="star" value="5" id="star1"><label for="star1">⭐</label>'
-					star += '<input type="radio" name="star" value="4" id="star2"><label for="star2">⭐</label>'
-					star += '<input type="radio" name="star" value="3" id="star3"><label for="star3">⭐</label>'
-					star += '<input type="radio" name="star" value="2" id="star4"><label for="star4">⭐</label>'
-					star += '<input type="radio" name="star" value="1" id="star5"><label for="star5">⭐</label>'
-					star += '</fieldset>'
-					star += '</div>'
-					$("#fileDiv").before(star);
-					$('#categoryNo').one('change', function(){
-						$("#star_rating").remove();
-					});
-				}
-			}
-		</script>
+            $('form').submit(function(e) {
+                if ($('#categoryNo').val() == '1' && $('input[name="star"]:checked').length == 0) {
+                    alert('별점을 선택해주세요.');
+                    e.preventDefault();
+                }
+            });
+	 
+            function starview() {
+                let categoryNo = $('#categoryNo').val();
+                if (categoryNo == 1) {
+                    if (!$('#star_rating').length) {
+                        let star = '<div id="star_rating"><fieldset>';
+                        star += '<input type="radio" name="star" value="5" id="star1"><label for="star1">⭐</label>';
+                        star += '<input type="radio" name="star" value="4" id="star2"><label for="star2">⭐</label>';
+                        star += '<input type="radio" name="star" value="3" id="star3"><label for="star3">⭐</label>';
+                        star += '<input type="radio" name="star" value="2" id="star4"><label for="star4">⭐</label>';
+                        star += '<input type="radio" name="star" value="1" id="star5"><label for="star5">⭐</label>';
+                        star += '</fieldset></div>';
+                        $("#fileDiv").before(star);
+                    }
+                } else {
+                    $("#star_rating").remove();
+                }
+            }
+            
+            $(document).ready(function() {
+                starview(); // 페이지 로드 시 실행
+                $('#categoryNo').change(starview); 
+            });
+            
+        </script>
     </body>
 </html>
