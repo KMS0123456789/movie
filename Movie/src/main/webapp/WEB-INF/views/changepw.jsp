@@ -45,4 +45,36 @@
         </form>
     </div>
 </body>
+<script>
+        $(document).ready(function() {
+            $('form').submit(function(e) {
+                e.preventDefault();
+                
+                var pw = $('#pw').val();
+                var pw2 = $('#pw2').val();
+                
+                if (pw !== pw2) {
+                    alert('비밀번호가 일치하지 않습니다.');
+                    return;
+                }
+                
+                $.ajax({
+                    url: 'changePw.do',
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        if (response === 'success') {
+                            alert('비밀번호 변경에 성공했습니다.');
+                            window.location.href = '<c:url value="/board/board.do"/>';
+                        } else {
+                            alert('비밀번호 변경에 실패했습니다.');
+                        }
+                    },
+                    error: function() {
+                        alert('비밀번호 변경에 실패했습니다.');
+                    }
+                });
+            });
+        });
+</script>
 </html>

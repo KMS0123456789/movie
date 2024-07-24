@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cProject.movie.repo.UserRepository;
 import cProject.movie.vo.BoardVO;
@@ -48,13 +49,16 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/join.do", method=RequestMethod.POST)
-	public String joinOk(UserVO vo) {
-		int result = repository.join(vo);
-		if(result>0) {
-			return "redirect:/board/board.do";
-		}else {
-			return "redirect:/board/join.do";
-		}
+	public String joinOk(UserVO vo, @RequestParam("email") String email, RedirectAttributes redirectAttributes) {
+	    vo.setEmail(email);
+	    int result = repository.join(vo);
+	    if(result > 0) {
+	        redirectAttributes.addFlashAttribute("message", "회원가입이 완료되었습니다.");
+	        return "redirect:/board/board.do";
+	    } else {
+	        redirectAttributes.addFlashAttribute("error", "회원가입에 실패했습니다. 다시 시도해주세요.");
+	        return "redirect:/user/join.do";
+	    }
 	}
 	
 	@ResponseBody
@@ -144,10 +148,15 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/changePw.do", method=RequestMethod.POST)
+    @ResponseBody
     public String changePwOk(UserVO vo) {
-        repository.changePw(vo);
-        return "redirect:/board/board.do";
-	}
+        try {
+            repository.changePw(vo);
+            return "success";
+        } catch (Exception e) {
+            return "failure";
+        }
+    }
 	
 	@RequestMapping(value="/myChangePw.do", method=RequestMethod.GET)
     public String myChangePw() {

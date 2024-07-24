@@ -43,9 +43,7 @@
 		        <input type="password" name="pw2" id="pw2" placeholder="새 비밀번호 확인" required>
 		    </div><br>
 		    <button type="submit" class="submit-btn">비밀번호 변경</button>
-		</form>
-        
-        
+		</form> 
     </div>
 </body>
 </html>

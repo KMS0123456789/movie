@@ -53,6 +53,19 @@
     </div>
 </body>
 <script>
+	$(document).ready(function() {
+	    var message = "${message}";
+	    var error = "${error}";
+	    
+	    if(message) {
+	        alert(message);
+	    }
+	    
+	    if(error) {
+	        alert(error);
+	    }
+	});
+
     let idCheck = false;
     let nickCheck = false;
     let emailCheck = false;
@@ -165,7 +178,9 @@
         }
     });
     
-    $("form").submit(function(){
+    $("form").submit(function(e){
+        e.preventDefault();
+        
         let id = $("#id");
         let pw = $("#pw");
         let pwValid = $("#pwValid");
@@ -230,6 +245,14 @@
             alert("이메일 중복체크를 해주세요");
             return false;
         }
+
+        $("<input>").attr({
+            type: "hidden",
+            name: "email",
+            value: email
+        }).appendTo($(this));
+
+        this.submit();
     });
 </script>
 </html>
