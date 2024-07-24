@@ -63,6 +63,13 @@
         </div>
     </section>
     <script>
+	    $(document).ready(function() {
+	        var message = "${message}";
+	        if(message && message.trim() !== "") {
+	            alert(message);
+	        }
+	    });
+    
         let nickCheck = false;
         let emailCheck = false;
 

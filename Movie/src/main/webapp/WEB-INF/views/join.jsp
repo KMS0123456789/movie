@@ -57,14 +57,15 @@
 	    var message = "${message}";
 	    var error = "${error}";
 	    
-	    if(message) {
+	    if(message && message.trim() !== "") {
 	        alert(message);
 	    }
 	    
-	    if(error) {
+	    if(error && error.trim() !== "") {
 	        alert(error);
 	    }
 	});
+
 
     let idCheck = false;
     let nickCheck = false;
@@ -254,5 +255,6 @@
 
         this.submit();
     });
+    
 </script>
 </html>

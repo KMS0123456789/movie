@@ -54,7 +54,7 @@ public class UserController {
 	    int result = repository.join(vo);
 	    if(result > 0) {
 	        redirectAttributes.addFlashAttribute("message", "회원가입이 완료되었습니다.");
-	        return "redirect:/board/board.do";
+	        return "redirect:/board/board.do";  // 이 부분 확인
 	    } else {
 	        redirectAttributes.addFlashAttribute("error", "회원가입에 실패했습니다. 다시 시도해주세요.");
 	        return "redirect:/user/join.do";
@@ -164,10 +164,16 @@ public class UserController {
     }
 
 	@RequestMapping(value="/myChangePw.do", method=RequestMethod.POST)
-    public String myChangePwOk(UserVO vo) {
-        repository.myChangePw(vo);
-        return "redirect:/board/board.do";
-    }
+	public String myChangePwOk(UserVO vo, RedirectAttributes redirectAttributes) {
+	    int result = repository.myChangePw(vo);
+	    if (result > 0) {
+	        redirectAttributes.addFlashAttribute("message", "비밀번호가 성공적으로 변경되었습니다.");
+	        return "redirect:/user/userchange.do";
+	    } else {
+	        redirectAttributes.addFlashAttribute("error", "비밀번호 변경에 실패했습니다. 다시 시도해주세요.");
+	        return "redirect:/user/myChangePw.do";
+	    }
+	}
 	
 	@RequestMapping(value="/userchange.do", method=RequestMethod.GET)
 	public String userchange() {

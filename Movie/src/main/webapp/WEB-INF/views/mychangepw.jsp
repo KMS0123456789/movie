@@ -31,7 +31,6 @@
     </header>
     <div class="container">
         <h1>비밀번호 변경</h1>
-        
         <form action="myChangePw.do" method="post">
 		    <input type="hidden" name="id" value="${sessionScope.user.id}">
 		    <div class="form-group">
@@ -46,4 +45,30 @@
 		</form> 
     </div>
 </body>
+<script>
+        $(document).ready(function() {
+            var message = "${message}";
+            var error = "${error}";
+            
+            if(message && message.trim() !== "") {
+                alert(message);
+            }
+            
+            if(error && error.trim() !== "") {
+                alert(error);
+            }
+        });
+
+        $("form").submit(function(e) {
+            var pw = $("#pw").val();
+            var pw2 = $("#pw2").val();
+            
+            if (pw !== pw2) {
+                alert("비밀번호가 일치하지 않습니다.");
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
 </html>
