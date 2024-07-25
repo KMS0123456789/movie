@@ -36,15 +36,15 @@
 		            <label for="body">본문</label>
 		            <textarea id="body" name="body"></textarea>
 		        </div>
-		        <div id="star_rating">
-			        <fieldset>
-			            <input type="radio" name="star" value="5" id="star1"><label for="star1">⭐</label>
-			            <input type="radio" name="star" value="4" id="star2"><label for="star2">⭐</label>
-			            <input type="radio" name="star" value="3" id="star3"><label for="star3">⭐</label>
-			            <input type="radio" name="star" value="2" id="star4"><label for="star4">⭐</label>
-			            <input type="radio" name="star" value="1" id="star5"><label for="star5">⭐</label>
-			        </fieldset>
-			    </div>
+		        <div id="star_rating" style="display: none;">
+				    <fieldset>
+				        <input type="radio" name="star" value="5" id="star1"><label for="star1">⭐</label>
+				        <input type="radio" name="star" value="4" id="star2"><label for="star2">⭐</label>
+				        <input type="radio" name="star" value="3" id="star3"><label for="star3">⭐</label>
+				        <input type="radio" name="star" value="2" id="star4"><label for="star4">⭐</label>
+				        <input type="radio" name="star" value="1" id="star5"><label for="star5">⭐</label>
+				    </fieldset>
+				</div>
 		        <div class="form-group" id="fileDiv">
 		            <label for="file">첨부파일</label>
 		            <input type="file" accept="image/*" multiple id="file" name="file">
@@ -59,12 +59,12 @@
 		    </form>
 		</div>
 		<script>
-            $('form').submit(function(e) {
-                if ($('#categoryNo').val() == '1' && $('input[name="star"]:checked').length == 0) {
-                    alert('별점을 선택해주세요.');
-                    e.preventDefault();
-                }
-            });
+			$('form').submit(function(e) {
+		        if ($('#categoryNo').val() == '1' && ${sessionScope.user.userType != 0} && $('input[name="star"]:checked').length == 0) {
+		            alert('별점을 선택해주세요.');
+		            e.preventDefault();
+		        }
+		    });
 	 
             function starview() {
                 let categoryNo = $('#categoryNo').val();
@@ -84,6 +84,16 @@
                 }
             }
             
+            function starview() {
+                let categoryNo = $('#categoryNo').val();
+                let userType = ${sessionScope.user.userType};
+                if (categoryNo == 1 && userType != 0) {
+                    $('#star_rating').show();
+                } else {
+                    $('#star_rating').hide();
+                }
+            }
+
             $(document).ready(function() {
                 starview(); // 페이지 로드 시 실행
                 $('#categoryNo').change(starview); 
