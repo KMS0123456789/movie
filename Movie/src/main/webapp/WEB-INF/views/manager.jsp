@@ -200,10 +200,10 @@
 	            	 	<c:if test="${bo.deleteFlag == 0 }">
 	            	 		<tr>
 		                        <td>${manager.bno}</td>
-		                        <form action='<c:url value="/board/post.do?bno=${bvo.bno}"></c:url>'>
-									<input type="hidden" name="bno" value="${bvo.bno}">
+		                        <form action='<c:url value="/board/post.do?bno=${manager.bno}"></c:url>'>
+									<input type="hidden" name="bno" value="${manager.bno}">
 									<input type="hidden" name="id" value="${sessionScope.user.id}">
-									<td><button type="submit">${bvo.title}</button></td>
+									<td><button type="submit">${bo.title}</button></td>
 								</form>
 		                        <td>${bo.author}</td>
 		                        <td>${manager.policeMan}</td>
@@ -223,10 +223,10 @@
                     	<c:if test="${co.deleteFlag == 0}">
 		                    <tr>
 		                        <td>${manager.cno}</td>	                        
-		                        <form action='<c:url value="/board/post.do?bno=${bvo.bno}"></c:url>'>
-									<input type="hidden" name="bno" value="${bvo.bno}">
+		                        <form action='<c:url value="/board/post.do?bno=${co.bno}"></c:url>'>
+									<input type="hidden" name="bno" value="${co.bno}">
 									<input type="hidden" name="id" value="${sessionScope.user.id}">
-									<td><button type="submit">${bvo.title}</button></td>
+									<td><button type="submit">${co.cbody}</button></td>
 								</form>
 		                        <td>${co.author}</td>
 		                        <td>${manager.policeMan}</td>
@@ -276,10 +276,10 @@
                 	<c:forEach items="${manager.bpolices}" var="bp">
                     <tr>
                         <td>${manager.bno}</td>
-                        <form action='<c:url value="/board/post.do?bno=${bvo.bno}"></c:url>'>
-							<input type="hidden" name="bno" value="${bvo.bno}">
+                        <form action='<c:url value="/board/post.do?bno=${manager.bno}"></c:url>'>
+							<input type="hidden" name="bno" value="${manager.bno}">
 							<input type="hidden" name="id" value="${sessionScope.user.id}">
-							<td><button type="submit">${bvo.title}</button></td>
+							<td><button type="submit">${manager.title}</button></td>
 						</form>
                         <td>${manager.author}</td>
                         <td>${manager.createDate}</td>
@@ -306,10 +306,10 @@
                 	<c:forEach items="${manager.cpolices}" var="cp">
 	                    <tr>
 	                        <td>${manager.cno}</td>
-	                        <form action='<c:url value="/board/post.do?bno=${bvo.bno}"></c:url>'>
-								<input type="hidden" name="bno" value="${bvo.bno}">
+	                        <form action='<c:url value="/board/post.do?bno=${manager.bno}"></c:url>'>
+								<input type="hidden" name="bno" value="${manager.bno}">
 								<input type="hidden" name="id" value="${sessionScope.user.id}">
-								<td><button type="submit">${bvo.title}</button></td>
+								<td><button type="submit">${manager.cbody}</button></td>
 							</form>
 	                        <td>${manager.author}</td>
 	                        <td>${manager.createDate}</td>
