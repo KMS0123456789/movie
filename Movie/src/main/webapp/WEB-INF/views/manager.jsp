@@ -34,13 +34,13 @@
 		        </nav>
 		    </header>
 		    <div id="my">관리자 페이지</div>
-			    <div>
-			        <a href="<c:url value="/bpolice/policeWrite.do"/>"><input type="button" value="신고된 글" class="btn"></a>
-			        <a href="<c:url value="/cpolice/policeComment.do"/>"><input type="button" value="신고된 댓글"  class="btn"></a>
-			        <a href="<c:url value="/user/policeUser.do"/>"><input type="button" value="신고된 유저"  class="btn"></a>
-			        <a href="<c:url value="/board/offWrite.do"/>"><input type="button" value="비활성화 글"  class="btn"></a>
-			        <a href="<c:url value="/comment/offComment.do"/>"><input type="button" value="비활성화 댓글"  class="btn"></a>
-			        <a href="<c:url value="/user/offUser.do"/>"><input type="button" value="비활성화 유저"  class="btn"></a>
+			    <div id="btn-list">
+			        <button class="btn"><a href="<c:url value="/bpolice/policeWrite.do"/>">신고된 글</a></button>
+			        <button class="btn"><a href="<c:url value="/cpolice/policeComment.do"/>">신고된 댓글</a></button>
+			        <button class="btn"><a href="<c:url value="/user/policeUser.do"/>">신고된 유저</a></button>
+			        <button class="btn"><a href="<c:url value="/board/offWrite.do"/>">비활성화 글</a></button>
+			        <button class="btn"><a href="<c:url value="/comment/offComment.do"/>">비활성화 댓글</a></button>
+			        <button class="btn"><a href="<c:url value="/user/offUser.do"/>">비활성화 유저</a></button>
 			    </div>
 		    <div>
 		    <table id="table">

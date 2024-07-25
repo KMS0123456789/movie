@@ -9,7 +9,7 @@
 #main{
     margin-left: 40px;
 }
-#btn{
+#btn,.btn{
     width: 120px;
     height: 50px;
     border-radius: 10px;
@@ -75,13 +75,7 @@ tr:hover{
     max-width: 84.3%;
     text-align: right;
 }
-.btn{
-    width: 120px;
-    height: 50px;
-    border-radius: 10px;
-    background-color: #a2a4dd;
-    font-size: 15px;
-    font-family: "Gowun Dodum", sans-serif;
-    font-style: normal;
-    border: none;
+#btn,.btn a{
+	text-decoration: none;
+	color:black;
 }

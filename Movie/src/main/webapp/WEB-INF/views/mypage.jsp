@@ -118,7 +118,7 @@
 	                        <td><a href='<c:url value="/board/post.do?bno=${my.bno}"></c:url>'>${my.title}</a></td>
 	                        <td>${my.author}</td>
 	                        <td>${my.createDate}</td>
-	                        <td><button><a href="<c:url value="/board/modify.do?bno=${my.bno}"></c:url>">수정</a></button></td>
+	                        <td><button><a href="<c:url value='/board/modify.do?bno=${my.bno}' />">수정</a></button></td>
 	                        <td>
 		              			<form action='<c:url value="/board/myWriteOff.do"/>' method="post">
 						        	<input type="hidden" name="bno" value="${my.bno}">
