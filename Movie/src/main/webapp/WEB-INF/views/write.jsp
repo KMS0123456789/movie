@@ -23,12 +23,17 @@
 		        	<option value="2">영화 정보 게시판</option>
 		            <option value="3">영화 굿즈 게시판</option>
 		        </select>
-		        <select name="notice" class="notice" style="margin: 1rem;">
-		        	<c:if test="${sessionScope.user.userType == 0}">
-		        	<option value="0">공지사항</option>
-		        	</c:if>
-		            <option value="1">일반 글</option>
-		        </select>
+		        <c:choose>
+                    <c:when test="${sessionScope.user.userType == 0}">
+                        <select name="notice" class="notice" style="margin: 1rem;">
+                            <option value="0">공지사항</option>
+                            <option value="1">일반 글</option>
+                        </select>
+                    </c:when>
+                    <c:otherwise>
+                        <input type="hidden" name="notice" value="1">
+                    </c:otherwise>
+                </c:choose>
 		        <br><br>
 		        <input type="hidden" id="author" name="author" value="${sessionScope.user.id}">
 		        <div class="form-group">
