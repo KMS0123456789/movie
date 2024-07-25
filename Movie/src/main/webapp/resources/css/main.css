@@ -43,3 +43,8 @@ ul{
 #li a{
 	color:black;
 }
+button{
+	border: none;
+	background-color:transparent;
+	cursor:pointer;
+}

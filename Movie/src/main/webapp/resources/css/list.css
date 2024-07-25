@@ -104,6 +104,11 @@
 	    padding: 0px;
 	    cursor: pointer;
 	}
+	button{
+		border: none;
+  		background-color:transparent;
+  		cursor:pointer;
+	}
 	#page li{
 	    display: inline-block;
 	    background-color: #dda0dd;

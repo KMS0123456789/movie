@@ -79,3 +79,8 @@ tr:hover{
 	text-decoration: none;
 	color:black;
 }
+button{
+		border: none;
+  		background-color:transparent;
+  		cursor:pointer;
+	}
