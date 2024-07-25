@@ -56,13 +56,13 @@
 		</collection>
 	</resultMap>
 	<select id="board" resultMap="boardMap">
-		(select * from  board where category_no = 0 and delete_flag = 0 order by bno desc limit 10) 
+		(select * from  board where category_no = 0 and delete_flag = 0 and notice = 1 order by bno desc limit 10) 
 		union 
-		(select * from  board where category_no = 1 and delete_flag = 0 order by bno desc limit 10)
+		(select * from  board where category_no = 1 and delete_flag = 0 and notice = 1 order by bno desc limit 10)
 		union 
-		(select * from  board where category_no = 2 and delete_flag = 0 order by bno desc limit 10) 
+		(select * from  board where category_no = 2 and delete_flag = 0 and notice = 1 order by bno desc limit 10) 
 		union 
-		(select * from  board where category_no = 3 and delete_flag = 0 order by bno desc limit 10)
+		(select * from  board where category_no = 3 and delete_flag = 0 and notice = 1 order by bno desc limit 10)
 	</select>
 	<select id="freelist" resultMap="boardMap">
 		select * from board 
@@ -77,7 +77,7 @@
 		limit #{offset}, #{limit}
 	</select>
 	<select id="reviewlist" resultMap="boardMap">
-		SELECT b.*, s.star
+		SELECT b.* ,s.star
 	    FROM board b
 	    LEFT JOIN star s ON b.bno = s.bno
 	    <where>
