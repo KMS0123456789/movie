@@ -55,150 +55,187 @@
                 <button id="btn" class="btn" type="submit">신고 댓글</button>
             </form>
         </div>
+        <c:if test="${myWrite != null}">
+	        <form action="<c:url value="/board/myWrite.do" />" method="get" id="form">
+		        <div class="searchDiv">
+		            <select name="searchType">
+		                <option value="title" ${param.searchType == 'title'  ? 'selected' : ''}>제목</option>
+		                <option value="body" ${param.searchType == 'body'  ? 'selected' : ''}>내용</option>
+		            </select>
+		            <input type="text" name="keyword" value="${param.keyword}">
+		            <input type="hidden" name="author" value="${sessionScope.user.id}">
+		            <input type="submit" value="검색">
+		        </div>
+	        </form>
+        </c:if>
 	        <table id="table">
 	        	<c:if test="${myWrite != null}">
 	            <thead>
 	                <tr>
 	                    <th>번호</th>
-	                    <th>제목</th>
+	                    <th>내용</th>
 	                    <th>작성자</th>
 	                    <th>작성일</th>
 	                    <th>수정</th>
 	                    <th>삭제</th>
 	                </tr>
 	            </thead>
-	            </c:if>
-	            <c:if test="${myComment != null}">
-	            <thead>
-	                <tr>
-	                    <th>번호</th>
-	                    <th>제목</th>
-	                    <th>작성자</th>
-	                    <th>작성일</th>
-	                    <th>삭제</th>
-	                </tr>
-	            </thead>
-	            </c:if>
-	            <c:if test="${myLike != null}">
-	            <thead>
-	                <tr>
-	                    <th>글 번호</th>
-	                    <th>글 제목</th>
-	                    <th>작성일</th>
-	                    <th>조회수</th>
-	                </tr>
-	            </thead>
-	            </c:if>
-	            <c:if test="${myPoliceWrite != null}">
-	            <thead>
-	                <tr>
-	                    <th>번호</th>
-	                    <th>제목</th>
-	                    <th>작성자</th>
-	                    <th>신고 사유</th>
-	                    <th>신고 결과</th>
-	                </tr>
-	            </thead>
-	            </c:if>
-	             <c:if test="${myPoliceComment != null}">
-	            <thead>
-	                <tr>
-	                    <th>번호</th>
-	                    <th>제목</th>
-	                    <th>작성자</th>
-	                    <th>신고 사유</th>
-	                    <th>신고 결과</th>
-	                </tr>
-	            </thead>
-	            </c:if>
-	            <tbody>
-	                <c:forEach items="${myWrite}" var="my">
-	                    <tr>
-	                        <td>${my.bno}</td>
-	                        <td><a href='<c:url value="/board/post.do?bno=${my.bno}"></c:url>'>${my.title}</a></td>
-	                        <td>${my.author}</td>
-	                        <td>${my.createDate}</td>
-	                        <td><button><a href="<c:url value='/board/modify.do?bno=${my.bno}' />">수정</a></button></td>
-	                        <td>
-		              			<form action='<c:url value="/board/myWriteOff.do"/>' method="post">
-						        	<input type="hidden" name="bno" value="${my.bno}">
-						        	<button type="submit">삭제</button>
-						        </form>
-					        </td>
-	                    </tr>
-	                </c:forEach>
-	                <c:forEach items="${myComment}" var="my">
-	                    <tr>
-	                        <td>${my.cno}</td>
-	                        <td><a href='<c:url value="/board/post.do?bno=${my.bno}"></c:url>'>${my.cbody}</a></td>
-	                        <td>${my.author}</td>
-	                        <td>${my.createDate}</td>
-	                        <td>
-	                        	<form action='<c:url value="/comment/myCommentOff.do"/>' method="post">
-						        	<input type="hidden" name="cno" value="${my.cno}">
-						        	<button type="submit">삭제</button>
-						        </form>
-	                        </td>
-	                    </tr>
-	                </c:forEach>
-	                <c:forEach items="${myLike}" var="my">
-	                    <tr>
-	                        <td>${my.bno}</td>
-	                        <td><a href='<c:url value="/board/post.do?bno=${my.bno}"></c:url>'>${my.title}</a></td>
-	                        <td>${my.createDate}</td>
-	                        <td>${my.hit}</td>
-	                    </tr>
-	                </c:forEach>
-	                <c:forEach items="${myPoliceWrite}" var="my">
-	                    <c:forEach items="${my.boards}" var="bo">
-	                    	<c:choose>
-		                    	<c:when test="${my.policeResult == 0}">
-		                    		<tr>
-				                        <td>${my.bno}</td>
-				                        <td><a href='<c:url value="/board/post.do?bno=${bo.bno}"></c:url>'>${bo.title}</a></td>
-										<td>${bo.author}</td>
-										<td>${my.policeReason}</td>
-										<td>처리 대기 중</td>
-				                    </tr>
-		                    	</c:when>
-		                    	<c:when test="${my.policeResult == 1}">
-		                    		<tr>
-				                        <td>${my.bno}</td>
-				                        <td>비활성화된 게시글 입니다.</td>
-				                        <td>${bo.author}</td>
-										<td>${my.policeReason}</td>
-										<td>처리 완료</td>
-				                    </tr>
-		                    	</c:when>
-		                    </c:choose>
-	                    </c:forEach>
-	                </c:forEach>
-	                <c:forEach items="${myPoliceComment}" var="my">
-	                    <c:forEach items="${my.comments}" var="co">
-	                    	<c:choose>
-		                    	<c:when test="${my.policeResult == 0}">
-		                    		<tr>
-				                        <td>${my.cno}</td>
-				                        <td><a href='<c:url value="/board/post.do?bno=${co.bno}"></c:url>'>${co.cbody}</a></td>
-										<td>${co.author}</td>
-										<td>${my.policeReason}</td>
-										<td>처리 대기 중</td>
-				                    </tr>
-		                    	</c:when>
-		                    	<c:when test="${my.policeResult == 1}">
-		                    		<tr>
-				                        <td>${my.cno}</td>
-				                        <td>비활성화된 댓글 입니다.</td>
-										<td>${co.author}</td>
-										<td>${my.policeReason}</td>
-										<td>처리 완료</td>
-				                    </tr>
-		                    	</c:when>
-		                    </c:choose>
-	                    </c:forEach>
-	                </c:forEach>
-	            </tbody>
-	        </table>
+	    </c:if>
+	    <c:if test="${myComment != null}">
+	        <form action="<c:url value="/comment/myComment.do" />" method="get" id="form">
+		        <div class="searchDiv">
+		            <select name="searchType">
+		                <option value="cbody" ${param.searchType == 'cobdy'  ? 'selected' : ''}>내용</option>
+		            </select>
+		            <input type="text" name="keyword" value="${param.keyword}">
+		            <input type="hidden" name="author" value="${sessionScope.user.id}">
+		            <input type="submit" value="검색">
+		        </div>
+	        </form>
+        </c:if>
+	    <c:if test="${myComment != null}">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>작성일</th>
+                    <th>삭제</th>
+                </tr>
+            </thead>
+	    </c:if>
+	    <c:if test="${myLike != null}">
+	        <form action="<c:url value="/board/myLike.do" />" method="get" id="form">
+		        <div class="searchDiv">
+		            <select name="searchType">
+		                <option value="title" ${param.searchType == 'title'  ? 'selected' : ''}>제목</option>
+		            </select>
+		            <input type="text" name="keyword" value="${param.keyword}">
+		            <input type="hidden" name="likeUser" value="${sessionScope.user.id}">
+		            <input type="submit" value="검색">
+		        </div>
+	        </form>
+        </c:if>
+	    <c:if test="${myLike != null}">
+            <thead>
+                <tr>
+                    <th>글 번호</th>
+                    <th>글 제목</th>
+                    <th>작성일</th>
+                    <th>조회수</th>
+                </tr>
+            </thead>
+	    </c:if>
+	    <c:if test="${myPoliceWrite != null}">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>신고 사유</th>
+                    <th>신고 결과</th>
+                </tr>
+            </thead>
+	    </c:if>
+	    <c:if test="${myPoliceComment != null}">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>신고 사유</th>
+                    <th>신고 결과</th>
+                </tr>
+            </thead>
+	    </c:if>
+            <tbody>
+                <c:forEach items="${myWrite}" var="my">
+                    <tr>
+                        <td>${my.bno}</td>
+                        <td><a href='<c:url value="/board/post.do?bno=${my.bno}"></c:url>'>${my.title}</a></td>
+                        <td>${my.author}</td>
+                        <td>${my.createDate}</td>
+                        <td><button><a href="<c:url value='/board/modify.do?bno=${my.bno}' />">수정</a></button></td>
+                        <td>
+	              			<form action='<c:url value="/board/myWriteOff.do"/>' method="post">
+					        	<input type="hidden" name="bno" value="${my.bno}">
+					        	<button type="submit">삭제</button>
+					        </form>
+				        </td>
+                    </tr>
+                </c:forEach>
+                <c:forEach items="${myComment}" var="my">
+                    <tr>
+                        <td>${my.cno}</td>
+                        <td><a href='<c:url value="/board/post.do?bno=${my.bno}"></c:url>'>${my.cbody}</a></td>
+                        <td>${my.author}</td>
+                        <td>${my.createDate}</td>
+                        <td>
+                        	<form action='<c:url value="/comment/myCommentOff.do"/>' method="post">
+					        	<input type="hidden" name="cno" value="${my.cno}">
+					        	<button type="submit">삭제</button>
+					        </form>
+                        </td>
+                    </tr>
+                </c:forEach>
+                <c:forEach items="${myLike}" var="my">
+                    <tr>
+                        <td>${my.bno}</td>
+                        <td><a href='<c:url value="/board/post.do?bno=${my.bno}"></c:url>'>${my.title}</a></td>
+                        <td>${my.createDate}</td>
+                        <td>${my.hit}</td>
+                    </tr>
+                </c:forEach>
+                <c:forEach items="${myPoliceWrite}" var="my">
+                    <c:forEach items="${my.boards}" var="bo">
+                    	<c:choose>
+	                    	<c:when test="${my.policeResult == 0}">
+	                    		<tr>
+			                        <td>${my.bno}</td>
+			                        <td><a href='<c:url value="/board/post.do?bno=${bo.bno}"></c:url>'>${bo.title}</a></td>
+									<td>${bo.author}</td>
+									<td>${my.policeReason}</td>
+									<td>처리 대기 중</td>
+			                    </tr>
+	                    	</c:when>
+	                    	<c:when test="${my.policeResult == 1}">
+	                    		<tr>
+			                        <td>${my.bno}</td>
+			                        <td>비활성화된 게시글 입니다.</td>
+			                        <td>${bo.author}</td>
+									<td>${my.policeReason}</td>
+									<td>처리 완료</td>
+			                    </tr>
+	                    	</c:when>
+	                    </c:choose>
+                    </c:forEach>
+                </c:forEach>
+                <c:forEach items="${myPoliceComment}" var="my">
+                    <c:forEach items="${my.comments}" var="co">
+                    	<c:choose>
+	                    	<c:when test="${my.policeResult == 0}">
+	                    		<tr>
+			                        <td>${my.cno}</td>
+			                        <td><a href='<c:url value="/board/post.do?bno=${co.bno}"></c:url>'>${co.cbody}</a></td>
+									<td>${co.author}</td>
+									<td>${my.policeReason}</td>
+									<td>처리 대기 중</td>
+			                    </tr>
+	                    	</c:when>
+	                    	<c:when test="${my.policeResult == 1}">
+	                    		<tr>
+			                        <td>${my.cno}</td>
+			                        <td>비활성화된 댓글 입니다.</td>
+									<td>${co.author}</td>
+									<td>${my.policeReason}</td>
+									<td>처리 완료</td>
+			                    </tr>
+	                    	</c:when>
+	                    </c:choose>
+                    </c:forEach>
+                </c:forEach>
+            </tbody>
+        </table>
         <div id="btn2">
         </div>
         <c:if test="${myWrite != null}">

@@ -6,6 +6,21 @@
 		<result property="likeUser" column="like_user"/>
 		<result property="bno" column="bno"/>
 		<result property="likeDate" column="like_date"/>
+		<collection property="boards" ofType="cProject.movie.vo.BoardVO">
+			<id property="bno" column="bno"/>
+			<result property="author" column="author"/>
+			<result property="bno" column="bno"/>
+			<result property="categoryN0" column="category_no"/>
+			<result property="notice" column="notice"/>
+			<result property="hit" column="hit"/>
+			<result property="title" column="title"/>
+			<result property="body" column="body"/>
+			<result property="deleteFlag" column="delete_flag"/>
+			<result property="policeFlag" column="police_flag"/>
+			<result property="createDate" column="create_date"/>
+			<result property="updateDate" column="update_date"/>
+			<result property="deleteDate" column="delete_date"/>
+		</collection>
 	</resultMap>
 	
 	<insert id="likeUp">

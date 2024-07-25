@@ -143,7 +143,13 @@
 		values(#{author}, ${categoryNo}, ${notice}, 0, #{title}, #{body});
 	</insert>
 	<select id="findById" parameterType="int"  resultMap="boardMap">
-			select * from board 
+			select board.bno, board.author, board.category_no, board.notice, board.hit, board.body, board.delete_flag, board.create_date, 
+				   comment.cno, comment.author,  comment.cbody, comment.delete_flag, comment.create_date,
+				   bpolice.police_man,  bpolice.villain, bpolice.police_reason, bpolice.police_result,
+				   file.file_no,  file.file_name, file.file_path, file.file_size,
+				   star.star, 
+				   like_no.like_user
+			from board 
 			left join comment on
 				board.bno=comment.bno
 				and comment.delete_flag != 1
@@ -226,7 +232,7 @@
 	</update>
 	
 	<select id="myLike" resultMap="boardMap">
-		select * from like_no left join board on like_no.bno = board.bno
+		select like_no.*, board.title, board.create_date, board.hit from like_no left join board on like_no.bno = board.bno
 		<where>
 			and like_user = #{likeUser}
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
