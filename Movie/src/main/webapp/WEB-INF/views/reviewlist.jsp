@@ -37,6 +37,7 @@
                     <select name="searchType">
                         <option value="title" ${param.searchType == 'title'  ? 'selected' : ''}>제목</option>
                         <option value="body" ${param.searchType == 'body'  ? 'selected' : ''}>내용</option>
+                        <option value="author" ${param.searchType == 'author'  ? 'selected' : ''}>작성자</option>
                     </select>
                     <input type="text" name="keyword" value="${param.keyword}">
                     <input type="submit" value="검색">
