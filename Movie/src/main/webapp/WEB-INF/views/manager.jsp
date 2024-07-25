@@ -231,7 +231,7 @@
 							</c:choose>
 	                        <td>
 								<c:if test="${(cp.policeResult == null) or (cp.policeResult == 0)}">
-									<form action='<c:url value="/board/writeOn.do"/>' method="post">
+									<form action='<c:url value="/comment/CommentOn.do"/>' method="post">
 							        	<input type="hidden" name="cno" value="${manager.cno}">
 							        	<button type="submit">활성화</button>
 						        	</form>
