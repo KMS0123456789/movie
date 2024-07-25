@@ -205,7 +205,7 @@
 	</update>
 	
 	<select id="offWrite" resultMap="boardMap">
-		select board.bno, board.title, board.author, board.create_date, bpolice.police_result
+		select board.bno, board.title, board.create_date, board.body, board.author, bpolice.police_result
 		from board left join bpolice on board.bno = bpolice.bno
 		<where>
 			and board.delete_flag=1

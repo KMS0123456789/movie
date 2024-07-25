@@ -50,17 +50,22 @@
 	<select id="selectPolice" resultMap="cPoliceMap">
     	select cpolice.cno, cpolice.police_reason, comment.bno, comment.cbody, comment.delete_flag, comment.author, cpolice.police_man from 
     		cpolice left join comment on cpolice.cno = comment.cno
-	    	<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+	    	<where>
+	    		and comment.delete_flag = 0
+	    		<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 					and ${searchType} like concat('%',#{keyword},'%')
-			</if>
+				</if>
+	    	</where>
 		order by cpolice.cno desc
 		limit #{offset}, #{limit}
     </select>
     
     <select id="cpoliceCount" resultType="int">
 		select count(*) from cpolice left join comment on cpolice.cno = comment.cno
-			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
-				and ${searchType} like concat('%',#{keyword},'%')
-			</if>
+			<where>
+				<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+					and ${searchType} like concat('%',#{keyword},'%')
+				</if>
+			</where>
 	</select>
 </mapper>

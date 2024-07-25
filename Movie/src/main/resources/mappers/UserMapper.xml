@@ -76,11 +76,12 @@
         UPDATE user SET email = #{email} WHERE id = #{id}
     </update>
     <select id="selectPolice" resultMap="userMap">
-    	select user.id, nick from user
+    	select user.id, nick, user.user_type from user
 	    	left join bpolice on user.id = bpolice.villain
 	    	left join cpolice on user.id = cpolice.villain
 	  	<where>
-	  		and user.id = bpolice.villain or user.id = cpolice.villain 
+	  		and (user.user_type <![CDATA[<]]> 2)
+	  		and (user.id = bpolice.villain or user.id = cpolice.villain) 
 	  		<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 					and ${searchType} like concat('%',#{keyword},'%')
 			</if>
@@ -128,6 +129,6 @@
 		update user set user_type = 2 where id = #{id};
 	</update>
 	<update id="userOn" parameterType="cProject.movie.vo.UserVO">
-		update user set user_type = 2 where id = #{id};
+		update user set user_type = 1 where id = #{id};
 	</update>
 </mapper>

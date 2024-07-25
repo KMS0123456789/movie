@@ -127,23 +127,21 @@ public class BoardRepository {
 		int res = template.update(NAME_SPACE + ".update_readhit" , bno);
 		return res;
 	}
-	public Page<BoardVO> offWrite(Pageable pageable, String searchType, String keyword, String author) {
+	public Page<BoardVO> offWrite(Pageable pageable, String searchType, String keyword) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("offset", pageable.getOffset());
 		map.put("limit", pageable.getPageSize());
 		map.put("searchType", searchType);
 		map.put("keyword", keyword);
-		map.put("author", author);
-		int total = offWriteCount(searchType, keyword, author);
+		int total = offWriteCount(searchType, keyword);
 		List<BoardVO> boards = template.selectList(NAME_SPACE + ".offWrite", map);
 		return new PageImpl<BoardVO>(boards, pageable, total);
 	}
-	public int offWriteCount(String searchType, String keyword, String author) {
+	public int offWriteCount(String searchType, String keyword) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchType", searchType);
 		map.put("keyword", keyword);
-		map.put("author", author);
 		return template.selectOne(NAME_SPACE + ".offWriteCount", map);
 	}
 	public int writeOn(BoardVO vo) {

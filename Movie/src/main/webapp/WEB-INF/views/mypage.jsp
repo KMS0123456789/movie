@@ -68,6 +68,30 @@
 		        </div>
 	        </form>
         </c:if>
+        <c:if test="${myComment != null}">
+	        <form action="<c:url value="/comment/myComment.do" />" method="get" id="form">
+		        <div class="searchDiv">
+		            <select name="searchType">
+		                <option value="cbody" ${param.searchType == 'cobdy'  ? 'selected' : ''}>내용</option>
+		            </select>
+		            <input type="text" name="keyword" value="${param.keyword}">
+		            <input type="hidden" name="author" value="${sessionScope.user.id}">
+		            <input type="submit" value="검색">
+		        </div>
+	        </form>
+        </c:if>
+         <c:if test="${myLike != null}">
+	        <form action="<c:url value="/board/myLike.do" />" method="get" id="form">
+		        <div class="searchDiv">
+		            <select name="searchType">
+		                <option value="title" ${param.searchType == 'title'  ? 'selected' : ''}>제목</option>
+		            </select>
+		            <input type="text" name="keyword" value="${param.keyword}">
+		            <input type="hidden" name="likeUser" value="${sessionScope.user.id}">
+		            <input type="submit" value="검색">
+		        </div>
+	        </form>
+        </c:if>
 	        <table id="table">
 	        	<c:if test="${myWrite != null}">
 	            <thead>
@@ -82,18 +106,6 @@
 	            </thead>
 	    </c:if>
 	    <c:if test="${myComment != null}">
-	        <form action="<c:url value="/comment/myComment.do" />" method="get" id="form">
-		        <div class="searchDiv">
-		            <select name="searchType">
-		                <option value="cbody" ${param.searchType == 'cobdy'  ? 'selected' : ''}>내용</option>
-		            </select>
-		            <input type="text" name="keyword" value="${param.keyword}">
-		            <input type="hidden" name="author" value="${sessionScope.user.id}">
-		            <input type="submit" value="검색">
-		        </div>
-	        </form>
-        </c:if>
-	    <c:if test="${myComment != null}">
             <thead>
                 <tr>
                     <th>번호</th>
@@ -104,18 +116,6 @@
                 </tr>
             </thead>
 	    </c:if>
-	    <c:if test="${myLike != null}">
-	        <form action="<c:url value="/board/myLike.do" />" method="get" id="form">
-		        <div class="searchDiv">
-		            <select name="searchType">
-		                <option value="title" ${param.searchType == 'title'  ? 'selected' : ''}>제목</option>
-		            </select>
-		            <input type="text" name="keyword" value="${param.keyword}">
-		            <input type="hidden" name="likeUser" value="${sessionScope.user.id}">
-		            <input type="submit" value="검색">
-		        </div>
-	        </form>
-        </c:if>
 	    <c:if test="${myLike != null}">
             <thead>
                 <tr>

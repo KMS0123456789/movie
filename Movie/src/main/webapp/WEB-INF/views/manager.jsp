@@ -43,6 +43,80 @@
 			        <button class="btn"><a href="<c:url value="/user/offUser.do"/>">비활성화 유저</a></button>
 			    </div>
 		    <div>
+		    <c:if test="${policeWrite != null}">
+		        <form action="<c:url value="/bpolice/policeWrite.do" />" method="get" id="form">
+			        <div class="searchDiv">
+			            <select name="searchType">
+			                <option value="title" ${param.searchType == 'title'  ? 'selected' : ''}>제목</option>
+	                        <option value="body" ${param.searchType == 'body'  ? 'selected' : ''}>내용</option>
+	                        <option value="author" ${param.searchType == 'author'  ? 'selected' : ''}>작성자</option>
+			            </select>
+			            <input type="text" name="keyword" value="${param.keyword}">
+			            <input type="submit" value="검색">
+			        </div>
+		        </form>
+        	</c:if>
+        	<c:if test="${policeComment != null}">
+		        <form action="<c:url value="/cpolice/policeComment.do" />" method="get" id="form">
+			        <div class="searchDiv">
+			            <select name="searchType">
+	                        <option value="cbody" ${param.searchType == 'cbody'  ? 'selected' : ''}>내용</option>
+	                        <option value="author" ${param.searchType == 'author'  ? 'selected' : ''}>작성자</option>
+			            </select>
+			            <input type="text" name="keyword" value="${param.keyword}">
+			            <input type="submit" value="검색">
+			        </div>
+		        </form>
+        	</c:if>
+        	<c:if test="${policeUser != null}">
+		        <form action="<c:url value="/user/policeUser.do" />" method="get" id="form">
+			        <div class="searchDiv">
+			            <select name="searchType">
+	                        <option value="id" ${param.searchType == 'id'  ? 'selected' : ''}>아이디</option>
+	                        <option value="nick" ${param.searchType == 'nick'  ? 'selected' : ''}>닉네임</option>
+			            </select>
+			            <input type="text" name="keyword" value="${param.keyword}">
+			            <input type="submit" value="검색">
+			        </div>
+		        </form>
+        	</c:if>
+        	<c:if test="${offWrite != null}">
+		        <form action="<c:url value="/board/offWrite.do" />" method="get" id="form">
+			        <div class="searchDiv">
+			            <select name="searchType">
+			                <option value="title" ${param.searchType == 'title'  ? 'selected' : ''}>제목</option>
+	                        <option value="body" ${param.searchType == 'body'  ? 'selected' : ''}>내용</option>
+	                        <option value="author" ${param.searchType == 'author'  ? 'selected' : ''}>작성자</option>
+			            </select>
+			            <input type="text" name="keyword" value="${param.keyword}">
+			            <input type="submit" value="검색">
+			        </div>
+		        </form>
+        	</c:if>
+        	<c:if test="${offComment != null}">
+		        <form action="<c:url value="/comment/offComment.do" />" method="get" id="form">
+			        <div class="searchDiv">
+			            <select name="searchType">
+	                        <option value="cbody" ${param.searchType == 'cbody'  ? 'selected' : ''}>내용</option>
+	                        <option value="author" ${param.searchType == 'author'  ? 'selected' : ''}>작성자</option>
+			            </select>
+			            <input type="text" name="keyword" value="${param.keyword}">
+			            <input type="submit" value="검색">
+			        </div>
+		        </form>
+        	</c:if>
+        	<c:if test="${offUser != null}">
+		        <form action="<c:url value="/user/offUser.do" />" method="get" id="form">
+			        <div class="searchDiv">
+			            <select name="searchType">
+	                        <option value="id" ${param.searchType == 'id'  ? 'selected' : ''}>아이디</option>
+	                        <option value="nick" ${param.searchType == 'nick'  ? 'selected' : ''}>닉네임</option>
+			            </select>
+			            <input type="text" name="keyword" value="${param.keyword}">
+			            <input type="submit" value="검색">
+			        </div>
+		        </form>
+        	</c:if>
 		    <table id="table">
 	        	<c:if test="${policeWrite != null}">
 		            <thead>
@@ -60,7 +134,7 @@
 		            <thead>
 		                <tr>
 		                    <th>번호</th>
-		                    <th>제목</th>
+		                    <th>내용</th>
 		                    <th>작성자</th>
 		                    <th>신고자</th>
 		                    <th>신고사유</th>
@@ -160,16 +234,18 @@
                     </c:forEach>
                 </c:forEach>
                 <c:forEach items="${policeUser}" var="manager">
-            		<tr>
-                      <td>${manager.id}</td>
-                      <td>${manager.nick}</td>
-                      <td>
-                   		 <form action='<c:url value="/user/policeUserTotal.do"/>' method="post">
-	                    	<input type="hidden" name="id" value="${manager.id}">
-	                    	<button type="submit">조회</button>
-	                     </form>
-                   	  </td>
-                    </tr>
+            		<c:if test="${manager.userType < 2}">
+            			<tr>
+	                      <td>${manager.id}</td>
+	                      <td>${manager.nick}</td>
+	                      <td>
+	                   		 <form action='<c:url value="/user/policeUserTotal.do"/>' method="post">
+		                    	<input type="hidden" name="id" value="${manager.id}">
+		                    	<button type="submit">조회</button>
+		                     </form>
+	                   	  </td>
+	                    </tr>
+            		</c:if>
                 </c:forEach>
                 
                 <c:forEach items="${policeUserTotal}" var="manager">
@@ -397,15 +473,5 @@
         	</div>
         </c:if>
 		</div>
-	    <br>
-	    <form action="#" method="get" id="page">
-	        <select name="searchType" >
-	            <option value="title">제목</option>
-	            <option value="body">내용</option>
-	            <option value="author">작성자</option>
-	        </select>
-	        <input type="text" name="search" placeholder="검색어 입력창">
-	        <input type="submit" value="검색" id="#btn1">
-	    </form>
 	</body>
 </html>
