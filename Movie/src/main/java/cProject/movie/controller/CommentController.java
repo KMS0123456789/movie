@@ -106,7 +106,7 @@ public class CommentController {
 		model.addAttribute("author",author);
 		return "manager";
 	}
-	@RequestMapping(value="/commentOn.do", method=RequestMethod.POST)
+	@RequestMapping(value="/CommentOn.do", method=RequestMethod.POST)
 	public String writeOn(CommentVO vo) {
 		int result = repository.commentOn(vo);
 		if(result > 0) {
