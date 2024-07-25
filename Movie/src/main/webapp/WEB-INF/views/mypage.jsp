@@ -84,6 +84,8 @@
 	                <tr>
 	                    <th>글 번호</th>
 	                    <th>글 제목</th>
+	                    <th>작성일</th>
+	                    <th>조회수</th>
 	                </tr>
 	            </thead>
 	            </c:if>
@@ -143,6 +145,8 @@
 	                    <tr>
 	                        <td>${my.bno}</td>
 	                        <td><a href='<c:url value="/board/post.do?bno=${my.bno}"></c:url>'>${my.title}</a></td>
+	                        <td>${my.createDate}</td>
+	                        <td>${my.hit}</td>
 	                    </tr>
 	                </c:forEach>
 	                <c:forEach items="${myPoliceWrite}" var="my">

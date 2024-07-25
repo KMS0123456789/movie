@@ -234,7 +234,7 @@
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
 		</where>
-		order by like_no.bno desc
+		order by like_no.like_no desc
 		limit #{offset}, #{limit}
 	</select>
 	
