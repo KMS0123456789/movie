@@ -22,6 +22,41 @@ public class BoardVO {
 	private List<LikeVO> likes;
 	private List<StarVO> stars;
 	private List<BpoliceVO> Bpolices;
+	private String filePath;
+	private String fileName;
+	private int star;
+	private int likeCount;
+	private int likeFlag;
+	public String getFilePath() {
+		return filePath;
+	}
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	public int getStar() {
+		return star;
+	}
+	public void setStar(int star) {
+		this.star = star;
+	}
+	public int getLikeCount() {
+		return likeCount;
+	}
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+	public int getLikeFlag() {
+		return likeFlag;
+	}
+	public void setLikeFlag(int likeFlag) {
+		this.likeFlag = likeFlag;
+	}
 	public List<CommentVO> getComments() {
 		return comments;
 	}

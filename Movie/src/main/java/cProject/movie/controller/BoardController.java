@@ -185,9 +185,11 @@ public class BoardController {
 	    }
 	}
 	@RequestMapping(value="/post.do",method =RequestMethod.GET)
-	public String view(@RequestParam(name="bno" , defaultValue="0") int bno,Model model, HttpSession session){
+	public String view(@RequestParam(name="bno" , defaultValue="0") int bno,
+					   @RequestParam(name="id", defaultValue="null") String id,
+					   Model model, HttpSession session){
 		
-		BoardVO vo =repository.selectOne(bno);
+		BoardVO vo =repository.selectOne(bno, id);
 			
 		session.getAttribute("user");
 		
@@ -203,7 +205,7 @@ public class BoardController {
 	}
 	@RequestMapping(value="/modify.do", method=RequestMethod.GET)
 	public String modify(@RequestParam(name="bno", required=false, defaultValue="0") int bno, Model model) {
-		BoardVO vo = repository.selectOne(bno);
+		BoardVO vo = repository.modify(bno);
 		model.addAttribute("vo", vo);
 		return "modify";
 	}

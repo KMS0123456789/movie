@@ -14,6 +14,11 @@
 		<result property="createDate" column="create_date"/>
 		<result property="updateDate" column="update_date"/>
 		<result property="deleteDate" column="delete_date"/>
+		<result property="fileName" column="file_name"/>
+		<result property="filePath" column="file_path"/>
+		<result property="star" column="star"/>
+		<result property="likeCount" column="like_count"/>
+		<result property="likeFlag" column="like_flag"/>
 		<collection property="files" ofType="cProject.movie.vo.FileVO">
 			<id property="fileNo" column="file_no"/>
 			<result property="bno" column="bno"/>
@@ -32,8 +37,7 @@
 			<result property="createDate" column="create_date"/>
 			<result property="updateDate" column="update_date"/>
 			<result property="deleteDate" column="delete_date"/>
-		</collection>
-		<collection property="likes" ofType="cProject.movie.vo.LikeVO">
+		</collection><collection property="likes" ofType="cProject.movie.vo.LikeVO">
 			<id property="likeNo" column="like_no"/>
 			<result property="likeUser" column="like_user"/>
 			<result property="bno" column="bno"/>
@@ -143,25 +147,21 @@
 		values(#{author}, ${categoryNo}, ${notice}, 0, #{title}, #{body});
 	</insert>
 	<select id="findById" parameterType="int"  resultMap="boardMap">
-			select board.bno, board.author, board.category_no, board.notice, board.hit, board.body, board.delete_flag, board.create_date, 
+			select board.title ,board.bno, board.author, board.category_no, board.notice, board.hit, board.body, board.delete_flag, board.create_date, 
 				   comment.cno, comment.author,  comment.cbody, comment.delete_flag, comment.create_date,
-				   bpolice.police_man,  bpolice.villain, bpolice.police_reason, bpolice.police_result,
-				   file.file_no,  file.file_name, file.file_path, file.file_size,
-				   star.star, 
-				   like_no.like_user
+				   (select file_path from file where bno = #{bno}) as file_path,
+                                                   (select file_name from file where bno = #{bno}) as file_name,
+				   (select star from star where bno = #{bno}) as star,
+				   (select count(*) as like_count from like_no where bno = #{bno} group by bno) as like_count,
+				   (select count(*) as like_flag from like_no where like_user=${id} and bno=#{bno}) as like_flag
 			from board 
 			left join comment on
 				board.bno=comment.bno
 				and comment.delete_flag != 1
-			left join bpolice on
-				board.bno=bpolice.bno
-			left join file on
-				board.bno=file.bno
-			left join star on
-				board.bno=star.bno	
-			left join like_no on
-				board.bno=like_no.bno
 			where board.bno = #{bno}
+	</select>
+	<select id="modify" parameterType="int"  resultMap="boardMap">
+			select * from board where bno = #{bno}
 	</select>
 	
 	<update id="update" parameterType="cProject.movie.vo.BoardVO">

@@ -37,49 +37,34 @@
         <dt>조회수:${vo.hit}</dt>
         	<dd></dd>
         <dt>좋아요:</dt>
-        	<dd>
-        		<c:forEach items="${vo.likes}" var="like" varStatus="likes">
-					<c:if test="${likes.last}">
-						${likes.count}
-					</c:if>
-        		</c:forEach>
-        	</dd>
+        	<dd>${vo.likeCount}</dd>
         <dt>첨부파일:</dt>
-        	<dd>
-	        	<c:forEach items="${vo.files}" var="file">
-	    			${file.fileName}
-	    		</c:forEach>
-        	</dd>   
+        	<dd>${vo.fileName}</dd>   
     	</dl>
     	
     	<c:if test="${vo.categoryNo == 1 && vo.notice != 0}">
 		    <div class="star_rating" name="star_rating" id="star_rating">
 		        <dt>별점:</dt>
-		        <dd>
-		            <c:forEach items="${vo.stars}" var="star">
-		                <c:choose>
-		                    <c:when test="${not empty star.star}">
-		                        <c:forEach begin="1" end="5" var="i">
-		                            <c:choose>
-		                                <c:when test="${i <= vo.stars[0].star}">
-		                                    <span class="star_filled" style="font-size: 30px; color: red;">★</span>
-		                                </c:when>
-		                                <c:otherwise>
-		                                    <span class="star" style="font-size: 28px; color: red;">☆</span>
-		                                </c:otherwise>
-		                            </c:choose>
-		                        </c:forEach>
-		                    </c:when>
-		                </c:choose>
-		            </c:forEach>
-		        </dd>
+		        <c:if test="${vo.star == 1}">
+		        	 <dd><span class="star_filled" style="font-size: 30px; color: red;">★☆☆☆☆</span></dd>
+		        </c:if>
+		        <c:if test="${vo.star == 2}">
+		        	 <dd><span class="star_filled" style="font-size: 30px; color: red;">★★☆☆☆</span></dd>
+		        </c:if>
+		        <c:if test="${vo.star == 3}">
+		        	 <dd><span class="star_filled" style="font-size: 30px; color: red;">★★★☆☆</span></dd>
+		        </c:if>
+		        <c:if test="${vo.star == 4}">
+		        	 <dd><span class="star_filled" style="font-size: 30px; color: red;">★★★★☆</span></dd>
+		        </c:if>
+		        <c:if test="${vo.star == 5}">
+		        	 <dd><span class="star_filled" style="font-size: 30px; color: red;">★★★★★</span></dd>
+		        </c:if>
 		    </div>
 		</c:if>
     	
     <div class="post-content">
-    	<c:forEach items="${vo.files}" var="file">
-    		<img alt="이미지" src="<c:url value="${file.filePath}"/>" onerror="this.style.display='none'" id="image">
-    	</c:forEach>
+    	<img alt="이미지" src="<c:url value="${vo.filePath}"/>" onerror="this.style.display='none'" id="image">
     	${vo.body}
     </div>
     <div>
@@ -115,16 +100,15 @@
 			</c:if>
         <c:if test="${sessionScope.user.id != null}">
 	        <div id="p_l_btn2">
-	        <c:forEach items="${vo.likes}" var="like" varStatus="likes" begin="0" end="0">
 	        	<c:choose>
-	        		<c:when test="${(sessionScope.user.id) ne like.likeUser}">
+	        		<c:when test="${vo.likeFlag == 0}">
 						<form action="<c:url value='/like/like.do'/>"  method="post">
 							<input type="hidden" name="bno" value="${vo.bno}">
 							<input type="hidden" name="likeUser" value="${sessionScope.user.id}">
 							<input type="submit" class="buttons" value="🤍 좋아요">
 						</form>
 					</c:when>
-					<c:when test="${(sessionScope.user.id) eq like.likeUser}">
+					<c:when test="${vo.likeFlag == 1}">
 						<form action="<c:url value='/like/likeOff.do'/>"  method="post">
 							<input type="hidden" name="bno" value="${vo.bno}">
 							<input type="hidden" name="likeUser" value="${sessionScope.user.id}">
@@ -132,7 +116,6 @@
 						</form>
 					</c:when>
 	        	</c:choose>
-	        </c:forEach>
 	        </div>
 	    </c:if>
     </div>
@@ -184,7 +167,7 @@
 			        <form id="policeForm" action='<c:url value="/cpolice/police.do"/>' method="post">
 			            <input type="hidden" name="cno" value="${item.cno}">
 			            <input type="hidden" name="policeMan" value="${sessionScope.user.id}">
-						<input type="hidden" name="villain" value="${vo.author}">
+						<input type="hidden" name="villain" value="${item.author}">
 			            <input type="radio" id="spam" name="policeReason" value="스팸">
 			            <label for="spam">스팸</label><br>
 			            <input type="radio" id="abusive" name="policeReason" value="욕설">

@@ -82,8 +82,14 @@ public class BoardRepository {
 	public int insertOne(BoardVO vo) {
 		return template.insert(NAME_SPACE + ".insert", vo);
 	}
-	public BoardVO selectOne(int bno) {
-		return	template.selectOne(NAME_SPACE + ".findById" , bno);
+	public BoardVO modify(int bno) {
+		return	template.selectOne(NAME_SPACE + ".modify" , bno);
+	}
+	public BoardVO selectOne(int bno, String id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("bno", bno);
+		map.put("id", id);
+		return	template.selectOne(NAME_SPACE + ".findById" , map);
 	}
 	
 	public int insertStar(BoardVO boardVO, StarVO starVO) {

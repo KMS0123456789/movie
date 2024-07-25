@@ -57,6 +57,7 @@
 			<exclude-mapping path="/user/idCheck.do"/>
 			<exclude-mapping path="/user/nickCheck.do"/>
 			<exclude-mapping path="/user/emailCheck.do"/>
+			<exclude-mapping path="/board/return.do"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 	</interceptors>

@@ -65,7 +65,11 @@
                     <c:if test="${bvo.notice == 0}">
 						<tr>
 							<td>공지</td>
-							<td><a href='<c:url value="/board/post.do?bno=${bvo.bno}"></c:url>'>${bvo.title}</a></td>
+							<form action='<c:url value="/board/post.do?bno=${bvo.bno}"></c:url>'>
+								<input type="hidden" name="bno" value="${bvo.bno}">
+								<input type="hidden" name="id" value="${sessionScope.user.id}">
+								<td><button type="submit">${bvo.title}</button></td>
+							</form>
 							<td>${bvo.author}</td>
 							<td>${bvo.createDate}</td>
 							<td>${bvo.hit}</td>
@@ -78,7 +82,11 @@
                     <c:if test="${bvo.notice == 1}">
 						<tr>
 							<td>${bvo.bno}</td>
-							<td><a href='<c:url value="/board/post.do?bno=${bvo.bno}"></c:url>'>${bvo.title}</a></td>
+							<form action='<c:url value="/board/post.do?bno=${bvo.bno}"></c:url>'>
+								<input type="hidden" name="bno" value="${bvo.bno}">
+								<input type="hidden" name="id" value="${sessionScope.user.id}">
+								<td><button type="submit">${bvo.title}</button></td>
+							</form>
 							<td>${bvo.author}</td>
 							<td>${bvo.createDate}</td>
 							<td>${bvo.hit}</td>
