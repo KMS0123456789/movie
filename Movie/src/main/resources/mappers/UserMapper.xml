@@ -124,4 +124,10 @@
 			((select count(user.id)  from user inner join bpolice on user.id = bpolice.villain where user.id = #{id})+(select count(user.id)  from user inner join cpolice on user.id = cpolice.villain where user.id = #{id})) as count_total 
 	    	from user where user.id = #{id};
 	</select>
+	<update id="userOff" parameterType="cProject.movie.vo.UserVO">
+		update user set user_type = 2 where id = #{id};
+	</update>
+	<update id="userOn" parameterType="cProject.movie.vo.UserVO">
+		update user set user_type = 2 where id = #{id};
+	</update>
 </mapper>

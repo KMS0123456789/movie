@@ -104,4 +104,10 @@ public class UserRepository {
 	public List<UserVO> policeUserTotal(UserVO vo) {
 		return	template.selectList(NAME_SPACE + ".policeUserTotal" , vo);
 	}
+	public int userOff(UserVO vo) {
+		return template.update(NAME_SPACE + ".userOff", vo);
+	}
+	public int userOn(UserVO vo) {
+		return template.update(NAME_SPACE + ".userOn", vo);
+	}
 }

@@ -226,4 +226,24 @@ public class UserController {
 		
 		return "manager"; 
 	}
+	@RequestMapping(value="/userOff.do", method=RequestMethod.POST)
+	public String userOff(UserVO vo) {
+		int result = repository.userOff(vo);
+		if(result > 0) {
+			return "redirect:/board/manager.do";
+		}else {
+			return "redirect:/board/manager.do";
+		}
+		
+	}
+	@RequestMapping(value="/userOn.do", method=RequestMethod.POST)
+	public String userOn(UserVO vo) {
+		int result = repository.userOn(vo);
+		if(result > 0) {
+			return "redirect:/board/manager.do";
+		}else {
+			return "redirect:/board/manager.do";
+		}
+		
+	}
 }

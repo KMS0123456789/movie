@@ -178,9 +178,9 @@
                       <td>${manager.nick}</td>
                       <td>${manager.countTotal}</td>
                       <td>
-						 <form action='<c:url value="/user/policeUserTotal.do"/>' method="post">
+						 <form action='<c:url value="/user/userOff.do"/>' method="post">
 						 <input type="hidden" name="id" value="${manager.id}">
-						 <c:if test="${manager.countTotal > 5}">
+						 <c:if test="${manager.countTotal >= 5}">
 						 	<button type="submit">비활성화</button>
 						 </c:if>
 						 </form>
@@ -244,6 +244,12 @@
             		<tr>
 	                    <td>${manager.id}</td>
 	                    <td>${manager.nick}</td>
+	                    <td>
+	              			<form action='<c:url value="/user/userOn.do"/>' method="post">
+					        	<input type="hidden" name="id" value="${manager.id}">
+					        	<button type="submit" >활성화</button>
+					        </form>
+				        </td>
                    	</tr>
                 </c:forEach>
 	            </tbody>
