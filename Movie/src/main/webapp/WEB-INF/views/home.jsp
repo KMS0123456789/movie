@@ -15,6 +15,7 @@
     </style>
     <link rel="stylesheet" href="<c:url value='/resources/css/main.css'/>">
     <link rel="stylesheet" href="<c:url value='/resources/css/header_footer.css'/>">
+     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
     <header>
