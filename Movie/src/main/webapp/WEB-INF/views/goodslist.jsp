@@ -107,7 +107,7 @@
 				</c:otherwise>
 			</c:choose>
 			<c:if test="${!empty sessionScope.user.id}">
-				<button type="button" id="write"><a href="write.do">글 쓰기</a></button>
+			    <button type="button" id="write" onclick="redirectToWritePage()">글 쓰기</button>
 			</c:if>
             <div>
                 <ul id="page">
@@ -136,4 +136,11 @@
                 </ul>
             </div>
     </body>
+    <script>
+	    function redirectToWritePage() {
+	        var categoryNo = 3;
+	        var url = "write.do?categoryNo=" + categoryNo;
+	        window.location.href = url;
+	    }
+	</script>
 </html>

@@ -14,6 +14,9 @@
         <div class="container">
 		    <h1>게시글 작성</h1>
 		    <form action="write.do" method="post" enctype="multipart/form-data">
+                <!-- 숨겨진 필드로 categoryNo를 포함 -->
+                <input type="hidden" id="hiddenCategoryNo" name="categoryNo" value="${param.categoryNo}">
+
 				<select id="categoryNo" name="categoryNo" class="category" onchange="starview()">
 			        <option value="0">영화 자유 게시판</option>
 					<option value="1">영화 리뷰 게시판</option>
@@ -59,35 +62,10 @@
 		    </form>
 		</div>
 		<script>
-			$('form').submit(function(e) {
-		        if ($('#categoryNo').val() == '1' && ${sessionScope.user.userType != 0} && $('input[name="star"]:checked').length == 0) {
-		            alert('별점을 선택해주세요.');
-		            e.preventDefault();
-		        }
-		    });
-	 
-            function starview() {
-                let categoryNo = $('#categoryNo').val();
-                if (categoryNo == 1) {
-                    if (!$('#star_rating').length) {
-                        let star = '<div id="star_rating"><fieldset>';
-                        star += '<input type="radio" name="star" value="5" id="star1"><label for="star1">⭐</label>';
-                        star += '<input type="radio" name="star" value="4" id="star2"><label for="star2">⭐</label>';
-                        star += '<input type="radio" name="star" value="3" id="star3"><label for="star3">⭐</label>';
-                        star += '<input type="radio" name="star" value="2" id="star4"><label for="star4">⭐</label>';
-                        star += '<input type="radio" name="star" value="1" id="star5"><label for="star5">⭐</label>';
-                        star += '</fieldset></div>';
-                        $("#fileDiv").before(star);
-                    }
-                } else {
-                    $("#star_rating").remove();
-                }
-            }
-            
             function starview() {
                 let categoryNo = $('#categoryNo').val();
                 let userType = ${sessionScope.user.userType};
-                if (categoryNo == 1 && userType != 0) {
+                if (categoryNo == '1' && userType != 0) {
                     $('#star_rating').show();
                 } else {
                     $('#star_rating').hide();
@@ -95,10 +73,40 @@
             }
 
             $(document).ready(function() {
-                starview(); // 페이지 로드 시 실행
-                $('#categoryNo').change(starview); 
+                // 페이지 로드 시 숨겨진 필드에서 categoryNo 값을 읽어와 선택 박스에 설정
+                let hiddenCategoryNo = $('#hiddenCategoryNo').val();
+                $('#categoryNo').val(hiddenCategoryNo);
+                starview(); // 페이지 로드 시 별점 입력 필드 표시 여부 업데이트
+
+                $('#categoryNo').change(starview);
+                
+                // 파일 첨부 시 이미지 미리보기
+                $('#file').on('change', function() {
+                    let files = $(this)[0].files;
+                    if (files.length > 0) {
+                        let reader = new FileReader();
+                        reader.onload = function(e) {
+                            $('#previewImg').attr('src', e.target.result).show();
+                        }
+                        reader.readAsDataURL(files[0]);
+                    } else {
+                        $('#previewImg').hide();
+                    }
+                });
+                
+                // 폼 제출 시 별점 필수 체크
+                $('form').submit(function(e) {
+                    if ($('#categoryNo').val() == '1' && ${sessionScope.user.userType != 0} && $('input[name="star"]:checked').length == 0) {
+                        alert('별점을 선택해주세요.');
+                        e.preventDefault();
+                    }
+                });
             });
-            
+
+            function popImage(src) {
+                let imgWindow = window.open("", "Image", "width=600,height=400");
+                imgWindow.document.write('<img src="' + src + '" style="width:100%; height:auto;">');
+            }
         </script>
     </body>
 </html>
