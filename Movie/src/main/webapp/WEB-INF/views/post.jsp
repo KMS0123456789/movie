@@ -105,12 +105,14 @@
 	     </div>	     
     </div>
 	<div id="p_l_btn">
-        <div>
-		    <div id="p_l_btn1">
-		        <p> <img src="../resources/image/siren.jpg"> </p>
-		        <button type="button" class="buttons" onclick="openModal()">신고</button>
-		    </div>
-		</div>
+			<c:if test="${!empty sessionScope.user.id}">
+		        <div>
+				    <div id="p_l_btn1">
+				        <p> <img src="../resources/image/siren.jpg"> </p>
+				        <button type="button" class="buttons" onclick="openModal()">신고</button>
+				    </div>
+				</div>
+			</c:if>
         <c:if test="${sessionScope.user.id != null}">
 	        <div id="p_l_btn2">
 	        <c:forEach items="${vo.likes}" var="like" varStatus="likes" begin="0" end="0">
@@ -146,31 +148,36 @@
 	       		</c:if>
 	        </div>
         </form>        
-      <c:forEach items="${vo.comments}" var="item">        
+      <c:forEach items="${vo.comments}" var="item">
+	      	<c:if test="${!empty sessionScope.user.id}">
+		     	<div>
+				   <div id="p_l_btn1">
+				       <button type="button" class="buttons" onclick="openCModal()">신고</button>
+				   </div>
+				</div>
+			</c:if>        
         	<div class="comment-list">
 		    	<div class="comment">
 			           <div style="text-align: left;">작성자 :${item.author}</div>
 			           	<div class="comment-actions">
 			            	<form action='<c:url value="/comment/cModify.do"/>' method="post">
-			            		<input type="text"  readonly="readonly" style="text-align: left " name="cbody"value="${item.cbody}">
+			            		<input type="text"  readonly="readonly" style="text-align: left " name="cbody"value="${item.cbody}" >
 			            		<input type="hidden" name="cno" value="${item.cno}">
 			               		<button class="btn_comment_diplay" type="submit"  style="visibility: hidden;">작성</button>
 			               		<button class="btn_comment_diplay" type="button" onclick="cancelReply(this)" style="visibility: hidden;" value="${item.cbody}">취소</button>	
-			               	</form>		                
+			               	</form>
+			               	<c:if test="${sessionScope.user.id == item.author}">		                
 			                <button type="button" class="modifyReply" onclick="modifyReply(this)">수정</button>
 			                <form  action='<c:url value="/comment/cOff.do"/>' method="post">
 			            		<input type="hidden" name="cno" value="${item.cno}">
 			                	<button type="submit" class="deleteReply" >삭제</button>
 			                </form>
+			                </c:if>
 			             </div>	                   
 				</div>    
     		</div>
-		<div id="p_l_btn">
-        <div>
-		    <div id="p_l_btn1">
-		        <button type="button" class="buttons" onclick="openCModal()">신고</button>
-		    </div>
-		</div>
+
+        
 			<div id="CpoliceModal" class="modal" style="display: none;">
 			    <div class="modal-content">
 			        	<h2>신고 사유 선택</h2>
