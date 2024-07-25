@@ -152,7 +152,11 @@
                 <c:forEach items="${myWrite}" var="my">
                     <tr>
                         <td>${my.bno}</td>
-                        <td><a href='<c:url value="/board/post.do?bno=${my.bno}"></c:url>'>${my.title}</a></td>
+  						<form action='<c:url value="/board/post.do?bno=${bvo.bno}"></c:url>'>
+							<input type="hidden" name="bno" value="${bvo.bno}">
+							<input type="hidden" name="id" value="${sessionScope.user.id}">
+							<td><button type="submit">${bvo.title}</button></td>
+						</form>
                         <td>${my.author}</td>
                         <td>${my.createDate}</td>
                         <td><button><a href="<c:url value='/board/modify.do?bno=${my.bno}' />">수정</a></button></td>
@@ -167,7 +171,11 @@
                 <c:forEach items="${myComment}" var="my">
                     <tr>
                         <td>${my.cno}</td>
-                        <td><a href='<c:url value="/board/post.do?bno=${my.bno}"></c:url>'>${my.cbody}</a></td>
+                        <form action='<c:url value="/board/post.do?bno=${bvo.bno}"></c:url>'>
+							<input type="hidden" name="bno" value="${bvo.bno}">
+							<input type="hidden" name="id" value="${sessionScope.user.id}">
+							<td><button type="submit">${bvo.title}</button></td>
+						</form>
                         <td>${my.author}</td>
                         <td>${my.createDate}</td>
                         <td>
@@ -181,7 +189,11 @@
                 <c:forEach items="${myLike}" var="my">
                     <tr>
                         <td>${my.bno}</td>
-                        <td><a href='<c:url value="/board/post.do?bno=${my.bno}"></c:url>'>${my.title}</a></td>
+                        <form action='<c:url value="/board/post.do?bno=${bvo.bno}"></c:url>'>
+							<input type="hidden" name="bno" value="${bvo.bno}">
+							<input type="hidden" name="id" value="${sessionScope.user.id}">
+							<td><button type="submit">${bvo.title}</button></td>
+						</form>
                         <td>${my.createDate}</td>
                         <td>${my.hit}</td>
                     </tr>
@@ -192,7 +204,11 @@
 	                    	<c:when test="${my.policeResult == 0}">
 	                    		<tr>
 			                        <td>${my.bno}</td>
-			                        <td><a href='<c:url value="/board/post.do?bno=${bo.bno}"></c:url>'>${bo.title}</a></td>
+						            <form action='<c:url value="/board/post.do?bno=${bvo.bno}"></c:url>'>
+										<input type="hidden" name="bno" value="${bvo.bno}">
+										<input type="hidden" name="id" value="${sessionScope.user.id}">
+										<td><button type="submit">${bvo.title}</button></td>
+									</form>
 									<td>${bo.author}</td>
 									<td>${my.policeReason}</td>
 									<td>처리 대기 중</td>
@@ -216,7 +232,11 @@
 	                    	<c:when test="${my.policeResult == 0}">
 	                    		<tr>
 			                        <td>${my.cno}</td>
-			                        <td><a href='<c:url value="/board/post.do?bno=${co.bno}"></c:url>'>${co.cbody}</a></td>
+			                        <form action='<c:url value="/board/post.do?bno=${bvo.bno}"></c:url>'>
+										<input type="hidden" name="bno" value="${bvo.bno}">
+										<input type="hidden" name="id" value="${sessionScope.user.id}">
+										<td><button type="submit">${bvo.title}</button></td>
+									</form>
 									<td>${co.author}</td>
 									<td>${my.policeReason}</td>
 									<td>처리 대기 중</td>
