@@ -40,8 +40,12 @@
                 	<c:if test="${list.categoryNo == 0 and list.deleteFlag == 0}">
                			<ul id="list">
                 			<li id="li">
-             					<span id="span">${i}</span>
-								<a href='<c:url value="/board/post.do?bno=${list.bno}"></c:url>'>${list.title}</a>
+             					<form action='<c:url value="/board/post.do?bno=${list.bno}"></c:url>'>
+									<input type="hidden" name="bno" value="${list.bno}">
+									<input type="hidden" name="id" value="${sessionScope.user.id}">
+									<span id="span">${i}</span>
+									<span><button type="submit">${list.title}</button></span>
+								</form>
 							</li>
                 		</ul>
                 	</c:if>
@@ -54,8 +58,12 @@
                 		<c:set var="j" value="${ j+1 }"/>
                 		<ul id="list">
                 			<li id="li">
-             					<span id="span2">${j}</span>
-								<a href='<c:url value="/board/post.do?bno=${list.bno}"></c:url>'>${list.title}</a>
+								<form action='<c:url value="/board/post.do?bno=${list.bno}"></c:url>'>
+									<input type="hidden" name="bno" value="${list.bno}">
+									<input type="hidden" name="id" value="${sessionScope.user.id}">
+									<span id="span2">${j}</span>
+									<span><button type="submit">${list.title}</button></span>
+								</form>
 							</li>
                 		</ul>
                 	</c:if>
@@ -81,8 +89,12 @@
                 		<c:set var="k" value="${ k+1 }"/>
                 		<ul id="list">
                 			<li id="li">
-             					<span id="span3">${k}</span>
-								<td><a href='<c:url value="/board/post.do?bno=${list.bno}"></c:url>'>${list.title}</a>
+             					<form action='<c:url value="/board/post.do?bno=${list.bno}"></c:url>'>
+									<input type="hidden" name="bno" value="${list.bno}">
+									<input type="hidden" name="id" value="${sessionScope.user.id}">
+									<span id="span3">${k}</span>
+									<span><button type="submit">${list.title}</button></span>
+								</form>
 							</li>
                 		</ul>
                 	</c:if>
@@ -95,8 +107,12 @@
                 		<c:set var="l" value="${ l+1 }"/>
                 		<ul id="list">
                 			<li id="li">
-             					<span id="span4">${l}</span>
-								<a href='<c:url value="/board/post.do?bno=${list.bno}"></c:url>'>${list.title}</a>
+             					<form action='<c:url value="/board/post.do?bno=${list.bno}"></c:url>'>
+									<input type="hidden" name="bno" value="${list.bno}">
+									<input type="hidden" name="id" value="${sessionScope.user.id}">
+									<span id="span4">${l}</span>
+									<span><button type="submit">${list.title}</button></span>
+								</form>
 							</li>
                 		</ul>
                 	</c:if>
