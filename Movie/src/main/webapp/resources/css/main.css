@@ -24,9 +24,22 @@ body{
 #container{
   float: left;
 }
-td{
+#span,#span2,#span3,#span4{
+	padding: 7px 10px;
+	background:white;
+}
+li{
 	text-overflow: ellipsis;
 	max-width: 400px;
 	white-space: nowrap;
 	overflow: hidden;
+	font-size:13px;
+	list-style: none;
+	border-radius: 7px;
+}
+ul{
+	padding:0px;
+}
+#li a{
+	color:black;
 }

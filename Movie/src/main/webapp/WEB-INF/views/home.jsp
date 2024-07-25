@@ -35,12 +35,14 @@
             <div id="case">
                 <div id="free">영화 자유게시판 최신 글</div>
                 <c:forEach items="${list}" var="list">
+                	<c:set var="i" value="${i+1 }"/>
                 	<c:if test="${list.categoryNo == 0 and list.deleteFlag == 0}">
-                		<table>
-	                		<tr>
-								<td><a href='<c:url value="/board/post.do?bno=${list.bno}"></c:url>'>${list.title}</a></td>
-							</tr>
-                		</table>
+               			<ul id="list">
+                			<li id="li">
+             					<span id="span">${i}</span>
+								<a href='<c:url value="/board/post.do?bno=${list.bno}"></c:url>'>${list.title}</a>
+							</li>
+                		</ul>
                 	</c:if>
                 </c:forEach>
             </div>
@@ -48,11 +50,13 @@
                 <div id="free">영화 리뷰게시판 최신 글</div>
                 <c:forEach items="${list}" var="list">
                 	<c:if test="${list.categoryNo == 1 and list.deleteFlag == 0}">
-                		<table>
-	                		<tr>
-								<td><a href='<c:url value="/board/post.do?bno=${list.bno}"></c:url>'>${list.title}</a></td>
-							</tr>
-                		</table>
+                		<c:set var="j" value="${ j+1 }"/>
+                		<ul id="list">
+                			<li id="li">
+             					<span id="span2">${j}</span>
+								<a href='<c:url value="/board/post.do?bno=${list.bno}"></c:url>'>${list.title}</a>
+							</li>
+                		</ul>
                 	</c:if>
                 </c:forEach>
             </div>
@@ -73,11 +77,13 @@
                 <div id="free">영화 정보게시판 최신 글</div>
                 <c:forEach items="${list}" var="list">
                 	<c:if test="${list.categoryNo == 2 and list.deleteFlag == 0}">
-                		<table>
-	                		<tr>
-								<td><a href='<c:url value="/board/post.do?bno=${list.bno}"></c:url>'>${list.title}</a></td>
-							</tr>
-                		</table>
+                		<c:set var="k" value="${ k+1 }"/>
+                		<ul id="list">
+                			<li id="li">
+             					<span id="span3">${k}</span>
+								<td><a href='<c:url value="/board/post.do?bno=${list.bno}"></c:url>'>${list.title}</a>
+							</li>
+                		</ul>
                 	</c:if>
                 </c:forEach>
             </div>
@@ -85,11 +91,13 @@
                 <div id="free">영화 굿즈게시판 최신 글</div>
                 <c:forEach items="${list}" var="list">
                 	<c:if test="${list.categoryNo == 3 and list.deleteFlag == 0}">
-                		<table>
-	                		<tr>
-								<td><a href='<c:url value="/board/post.do?bno=${list.bno}"></c:url>'>${list.title}</a></td>
-							</tr>
-                		</table>
+                		<c:set var="l" value="${ l+1 }"/>
+                		<ul id="list">
+                			<li id="li">
+             					<span id="span4">${l}</span>
+								<a href='<c:url value="/board/post.do?bno=${list.bno}"></c:url>'>${list.title}</a>
+							</li>
+                		</ul>
                 	</c:if>
                 </c:forEach>
             </div>
