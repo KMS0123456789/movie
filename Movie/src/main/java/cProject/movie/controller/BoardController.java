@@ -133,53 +133,56 @@ public class BoardController {
 	}
 	@RequestMapping(value="/write.do", method=RequestMethod.POST)
 	public String writeOK(BoardVO boardVO, 
-			@RequestParam("file") MultipartFile[] files, 
-            @RequestParam(name="star", required=false, defaultValue="0") int star) {
+	        @RequestParam("file") MultipartFile[] files, 
+	        @RequestParam(name="star", required=false, defaultValue="0") int star) {
 
-		int result = repository.insertOne(boardVO);
-		
-		String uploadDir = servletContext.getRealPath("/uploads/");
-		File dir = new File(uploadDir);
-		if(!dir.exists()) {
-			dir.mkdirs();
-		}
-		
-		List<FileVO> fileList = new ArrayList<>();
-		for(MultipartFile file : files) {
-			if(!file.isEmpty()) {
-				String originFileName = file.getOriginalFilename();
-				String uniqueFileName = UUID.randomUUID().toString()+"."+getFileExtension(originFileName);
-				String filePath = "/uploads/" + uniqueFileName;
-				try {
-					file.transferTo(new File(uploadDir + uniqueFileName));
-					FileVO filevo = new FileVO();
-					filevo.setBno(result);
-					filevo.setFileName(originFileName);
-					filevo.setFilePath(filePath);
-					filevo.setFileSize(file.getSize()+"");
-					fileList.add(filevo);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		if(result > 0) {
-			if(fileList.size() != 0) {
-				fileRepository.insert(fileList);
-			}
-			
-			if (star > 0) {
-			    StarVO starVO = new StarVO();
-			    starVO.setAuthor(boardVO.getAuthor());
-			    starVO.setBno(boardVO.getBno());
-			    starVO.setStar(star);
-			    int starResult = starRepository.insertStar(starVO);
-			}
-			
-			return "redirect:/board/post.do?bno="+boardVO.getBno();
-		}else {
-			return "redirect:/board/board.do";
-		}
+	    int result = repository.insertOne(boardVO);
+	    
+	    if(result > 0) {
+	        String uploadDir = servletContext.getRealPath("/uploads/");
+	        File dir = new File(uploadDir);
+	        if(!dir.exists()) {
+	            dir.mkdirs();
+	        }
+	        
+	        List<FileVO> fileList = new ArrayList<>();
+	        for(MultipartFile file : files) {
+	            if(!file.isEmpty()) {
+	                String originFileName = file.getOriginalFilename();
+	                String uniqueFileName = UUID.randomUUID().toString() + "_" + originFileName;
+	                String filePath = "/uploads/" + uniqueFileName;
+	                
+	                try {
+	                    file.transferTo(new File(uploadDir + uniqueFileName));
+	                    FileVO fileVO = new FileVO();
+	                    fileVO.setBno(boardVO.getBno());
+	                    fileVO.setFileName(originFileName);
+	                    fileVO.setFilePath(filePath);
+	                    fileVO.setFileSize(String.valueOf(file.getSize()));
+	                    fileList.add(fileVO);
+	                } catch (Exception e) {
+	                    e.printStackTrace();
+	                    // 파일 업로드 실패 시 처리 (예: 에러 메시지 설정)
+	                }
+	            }
+	        }
+	        
+	        if(!fileList.isEmpty()) {
+	            fileRepository.insert(fileList);
+	        }
+	        
+	        if (star > 0) {
+	            StarVO starVO = new StarVO();
+	            starVO.setAuthor(boardVO.getAuthor());
+	            starVO.setBno(boardVO.getBno());
+	            starVO.setStar(star);
+	            starRepository.insertStar(starVO);
+	        }
+	        
+	        return "redirect:/board/post.do?bno=" + boardVO.getBno();
+	    } else {
+	        return "redirect:/board/board.do";
+	    }
 	}
 	@RequestMapping(value="/post.do",method =RequestMethod.GET)
 	public String view(@RequestParam(name="bno" , defaultValue="0") int bno,Model model, HttpSession session){
