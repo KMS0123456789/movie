@@ -58,37 +58,37 @@
         <c:if test="${myWrite != null}">
 	        <form action="<c:url value="/board/myWrite.do" />" method="get" id="form">
 		        <div class="searchDiv">
-		            <select name="searchType">
+		            <select name="searchType" id="search">
 		                <option value="title" ${param.searchType == 'title'  ? 'selected' : ''}>제목</option>
 		                <option value="body" ${param.searchType == 'body'  ? 'selected' : ''}>내용</option>
 		            </select>
-		            <input type="text" name="keyword" value="${param.keyword}">
+		            <input type="text" name="keyword"  id="text" value="${param.keyword}">
 		            <input type="hidden" name="author" value="${sessionScope.user.id}">
-		            <input type="submit" value="검색">
+		            <input type="submit" class="search" value="검색">
 		        </div>
 	        </form>
         </c:if>
         <c:if test="${myComment != null}">
 	        <form action="<c:url value="/comment/myComment.do" />" method="get" id="form">
 		        <div class="searchDiv">
-		            <select name="searchType">
+		            <select name="searchType" id="search">
 		                <option value="cbody" ${param.searchType == 'cobdy'  ? 'selected' : ''}>내용</option>
-		            </select>
-		            <input type="text" name="keyword" value="${param.keyword}">
+	            	</select>
+		            <input type="text" name="keyword" id="text"  value="${param.keyword}">
 		            <input type="hidden" name="author" value="${sessionScope.user.id}">
-		            <input type="submit" value="검색">
-		        </div>
+		            <input type="submit" class="search" value="검색">
+	   			</div>
 	        </form>
         </c:if>
          <c:if test="${myLike != null}">
 	        <form action="<c:url value="/board/myLike.do" />" method="get" id="form">
 		        <div class="searchDiv">
-		            <select name="searchType">
+		            <select name="searchType" id="search">
 		                <option value="title" ${param.searchType == 'title'  ? 'selected' : ''}>제목</option>
 		            </select>
-		            <input type="text" name="keyword" value="${param.keyword}">
+		            <input type="text" name="keyword" id="text"  value="${param.keyword}">
 		            <input type="hidden" name="likeUser" value="${sessionScope.user.id}">
-		            <input type="submit" value="검색">
+		            <input type="submit" class="search" value="검색">
 		        </div>
 	        </form>
         </c:if>
@@ -159,7 +159,7 @@
 						</form>
                         <td>${my.author}</td>
                         <td>${my.createDate}</td>
-                        <td><button><a href="<c:url value='/board/modify.do?bno=${my.bno}' />">수정</a></button></td>
+                        <td><button id="btn3"><a href="<c:url value='/board/modify.do?bno=${my.bno}' />">수정</a></button></td>
                         <td>
 	              			<form action='<c:url value="/board/myWriteOff.do"/>' method="post">
 					        	<input type="hidden" name="bno" value="${my.bno}">

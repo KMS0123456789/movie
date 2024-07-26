@@ -83,4 +83,42 @@ button{
 		border: none;
   		background-color:transparent;
   		cursor:pointer;
-	}
+}
+#btn3 a{
+	text-decoration:none;
+	color: black;
+}
+.searchDiv{
+	text-align:center;
+	margin-top:2rem;
+	position: relative;
+}
+#search{
+	padding: 15px;
+	position: absolute;
+	border:none;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	cursor:pointer;
+}
+#text{
+	width:45%;
+	padding: 16px;
+	border:none;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	background-color: #e6e6fa;
+}
+.search{
+	padding:14px;
+	position: absolute;
+	border:none;
+	border-bottom-right-radius: 10px;
+	border-top-right-radius: 10px;
+	cursor:pointer;
+	width:70px;
+}
+#type{
+	border-radius: 10px;
+	border: 1px solid black;
+}
