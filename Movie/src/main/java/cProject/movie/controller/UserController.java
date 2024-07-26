@@ -164,10 +164,11 @@ public class UserController {
     }
 
 	@RequestMapping(value="/myChangePw.do", method=RequestMethod.POST)
-	public String myChangePwOk(UserVO vo, RedirectAttributes redirectAttributes) {
+	public String myChangePwOk(UserVO vo, RedirectAttributes redirectAttributes, HttpSession session) {
 	    int result = repository.myChangePw(vo);
 	    if (result > 0) {
 	        redirectAttributes.addFlashAttribute("message", "비밀번호가 성공적으로 변경되었습니다.");
+	        session.invalidate();
 	        return "redirect:/user/userchange.do";
 	    } else {
 	        redirectAttributes.addFlashAttribute("error", "비밀번호 변경에 실패했습니다. 다시 시도해주세요.");
