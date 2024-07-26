@@ -27,6 +27,20 @@ public class BoardVO {
 	private int star;
 	private int likeCount;
 	private int likeFlag;
+	private String nick;
+	private String cAuthor;
+	public String getcAuthor() {
+		return cAuthor;
+	}
+	public void setcAuthor(String cAuthor) {
+		this.cAuthor = cAuthor;
+	}
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
 	public String getFilePath() {
 		return filePath;
 	}

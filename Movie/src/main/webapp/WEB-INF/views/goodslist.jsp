@@ -70,7 +70,7 @@
 								<input type="hidden" name="id" value="${sessionScope.user.id}">
 								<td><button type="submit">${bvo.title}</button></td>
 							</form>
-							<td>${bvo.author}</td>
+							<td>${bvo.nick}</td>
 							<td>${bvo.createDate}</td>
 							<td>${bvo.hit}</td>
 						</tr>
@@ -87,7 +87,7 @@
 								<input type="hidden" name="id" value="${sessionScope.user.id}">
 								<td><button type="submit">${bvo.title}</button></td>
 							</form>
-							<td>${bvo.author}</td>
+							<td>${bvo.nick}</td>
 							<td>${bvo.createDate}</td>
 							<td>${bvo.hit}</td>
 						</tr>

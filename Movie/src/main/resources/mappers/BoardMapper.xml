@@ -19,6 +19,8 @@
 		<result property="star" column="star"/>
 		<result property="likeCount" column="like_count"/>
 		<result property="likeFlag" column="like_flag"/>
+		<result property="nick" column="nick"/>
+		<result property="cAuthor" column="c_author"/>
 		<collection property="files" ofType="cProject.movie.vo.FileVO">
 			<id property="fileNo" column="file_no"/>
 			<result property="bno" column="bno"/>
@@ -69,7 +71,7 @@
 		(select * from  board where category_no = 3 and delete_flag = 0 and notice = 1 order by bno desc limit 10)
 	</select>
 	<select id="freelist" resultMap="boardMap">
-		select * from board 
+		select *,(select nick from user where user.id = board.author) as nick from board 
 		<where>
 			and category_no=0
 			and delete_flag=0
@@ -81,7 +83,7 @@
 		limit #{offset}, #{limit}
 	</select>
 	<select id="reviewlist" resultMap="boardMap">
-		select * from board 
+		select *,(select nick from user where user.id = board.author) as nick from board 
 	    <where>
 	        AND category_no = 1
 	        AND delete_flag = 0
@@ -93,7 +95,7 @@
 	    LIMIT #{offset}, #{limit}
 	</select>
 	<select id="minfolist" resultMap="boardMap">
-		select * from board
+		select *,(select nick from user where user.id = board.author) as nick from board 
 		<where>
 			and category_no=2
 			and delete_flag=0
@@ -105,7 +107,7 @@
 		limit #{offset}, #{limit}
 	</select>
 	<select id="goodslist" resultMap="boardMap">
-		select * from board
+		select *,(select nick from user where user.id = board.author) as nick from board 
 		<where>
 			and category_no=3
 			and delete_flag=0
