@@ -101,14 +101,14 @@
         <c:if test="${sessionScope.user.id != null}">
 	        <div id="p_l_btn2">
 	        	<c:choose>
-	        		<c:when test="${vo.likeFlag == 0}">
+	        		<c:when test="${vo.likeFlag < 1}">
 						<form action="<c:url value='/like/like.do'/>"  method="post">
 							<input type="hidden" name="bno" value="${vo.bno}">
 							<input type="hidden" name="likeUser" value="${sessionScope.user.id}">
 							<input type="submit" class="buttons" value="🤍 좋아요${vo.likeCount}">
 						</form>
 					</c:when>
-					<c:when test="${vo.likeFlag == 1}">
+					<c:when test="${vo.likeFlag >= 1}">
 						<form action="<c:url value='/like/likeOff.do'/>"  method="post">
 							<input type="hidden" name="bno" value="${vo.bno}">
 							<input type="hidden" name="likeUser" value="${sessionScope.user.id}">

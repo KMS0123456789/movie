@@ -152,7 +152,7 @@
 			select board.title ,board.bno, board.author, board.category_no, board.notice, board.hit, board.body, board.delete_flag, board.create_date, 
 				   comment.cno, comment.author,  comment.cbody, comment.delete_flag, comment.create_date,
 				   (select file_path from file where bno = #{bno}) as file_path,
-                                                   (select file_name from file where bno = #{bno}) as file_name,
+                   (select file_name from file where bno = #{bno}) as file_name,
 				   (select star from star where bno = #{bno}) as star,
 				   (select count(*) as like_count from like_no where bno = #{bno} group by bno) as like_count,
 				   (select count(*) as like_flag from like_no where like_user=${id} and bno=#{bno}) as like_flag
