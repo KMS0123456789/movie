@@ -181,8 +181,9 @@ public class UserController {
 		return "userchange";
 	}
 	@RequestMapping(value="/changenick.do", method=RequestMethod.POST)
-    public String changenick(UserVO vo) {
+    public String changenick(UserVO vo, HttpSession session) {
         repository.changenick(vo);
+        session.invalidate();
         return "redirect:/user/userchange.do";
 	}
 	@RequestMapping(value="/changeemail.do", method=RequestMethod.POST)
