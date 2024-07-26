@@ -95,15 +95,13 @@ button{
 }
 #search{
 	padding: 15px;
-	position: absolute;
 	border:none;
-	border-top-left-radius: 10px;
-	border-bottom-left-radius: 10px;
+	border-radius:10px;
 	cursor:pointer;
 }
 #text{
 	width:45%;
-	padding: 16px;
+	padding: 16px 10px;
 	border:none;
 	border-top-left-radius: 10px;
 	border-bottom-left-radius: 10px;
