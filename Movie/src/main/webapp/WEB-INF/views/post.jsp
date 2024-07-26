@@ -32,7 +32,7 @@
     <div class="container">
     	<h1 class="underline">제목:${vo.title}</h1>
     	<dl class="post-details">
-        <dt>작성자:${vo.author}</dt>
+        <dt>작성자:${vo.nick}</dt>
         	<dd></dd>
         <dt>조회수:${vo.hit}</dt>
         	<dd></dd>
@@ -126,7 +126,7 @@
 	        	<input type="hidden" name="bno" value="${vo.bno}">
 	        	<input type="hidden" name="author" value="${sessionScope.user.id}">
 	            <textarea placeholder="댓글을 입력하세요" id="cbody" name="cbody"></textarea><br>
-	            <c:if test="${!empty sessionScope.user.id}">
+	            <c:if test="${!empty sessionScope.user.id and sessionScope.user.userType < 2}">
 	            	<button type="submit" id="btn_reply_submit" style="margin-right: 1rem;">댓글 작성</button>
 	       		</c:if>
 	        </div>
@@ -141,7 +141,7 @@
 			</c:if>        
         	<div class="comment-list">
 		    	<div class="comment">
-			           <div style="text-align: left;">작성자 :${item.author}</div>
+			           <div style="text-align: left;">작성자 :${vo.cAuthor}</div>
 			           	<div class="comment-actions">
 			            	<form action='<c:url value="/comment/cModify.do"/>' method="post">
 			            		<input type="text"  readonly="readonly" style="text-align: left " name="cbody"value="${item.cbody}" >
@@ -149,7 +149,7 @@
 			               		<button class="btn_comment_diplay" type="submit"  style="visibility: hidden;">작성</button>
 			               		<button class="btn_comment_diplay" type="button" onclick="cancelReply(this)" style="visibility: hidden;" value="${item.cbody}">취소</button>	
 			               	</form>
-			               	<c:if test="${sessionScope.user.id == item.author}">		                
+			               	<c:if test="${sessionScope.user.nick == vo.cAuthor}">		                
 			                <button type="button" class="modifyReply" onclick="modifyReply(this)">수정</button>
 			                <form  action='<c:url value="/comment/cOff.do"/>' method="post">
 			            		<input type="hidden" name="cno" value="${item.cno}">
@@ -165,9 +165,9 @@
 			    <div class="modal-content">
 			        	<h2>신고 사유 선택</h2>
 			        <form id="policeForm" action='<c:url value="/cpolice/police.do"/>' method="post">
-			            <input type="hidden" name="cno" value="${item.cno}">
+			            <input type="hidden" name="cno" value="${vo.cAuthor}">
 			            <input type="hidden" name="policeMan" value="${sessionScope.user.id}">
-						<input type="hidden" name="villain" value="${item.author}">
+						<input type="hidden" name="villain" value="${vo.cAuthor}">
 			            <input type="radio" id="spam" name="policeReason" value="스팸">
 			            <label for="spam">스팸</label><br>
 			            <input type="radio" id="abusive" name="policeReason" value="욕설">

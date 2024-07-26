@@ -106,7 +106,7 @@
 					<%@ include file="./includes/b_logincase.jsp" %>
 				</c:otherwise>
 			</c:choose>
-			<c:if test="${!empty sessionScope.user.id}">
+			<c:if test="${!empty sessionScope.user.id and sessionScope.user.userType < 2 }">
 			    <button type="button" id="write" onclick="redirectToWritePage()">글 쓰기</button>
 			</c:if>
             <div>
