@@ -165,9 +165,9 @@
 			    <div class="modal-content">
 			        	<h2>신고 사유 선택</h2>
 			        <form id="policeForm" action='<c:url value="/cpolice/police.do"/>' method="post">
-			            <input type="hidden" name="cno" value="${vo.cAuthor}">
+			            <input type="hidden" name="cno" value="${item.cno}">
 			            <input type="hidden" name="policeMan" value="${sessionScope.user.id}">
-						<input type="hidden" name="villain" value="${vo.cAuthor}">
+						<input type="hidden" name="villain" value="${item.author}">
 			            <input type="radio" id="spam" name="policeReason" value="스팸">
 			            <label for="spam">스팸</label><br>
 			            <input type="radio" id="abusive" name="policeReason" value="욕설">

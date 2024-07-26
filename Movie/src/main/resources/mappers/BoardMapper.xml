@@ -150,19 +150,19 @@
 	</insert>
 	<select id="findById" parameterType="int"  resultMap="boardMap">
 			select board.title ,board.bno, board.author, board.category_no, board.notice, board.hit, board.body, board.delete_flag, board.create_date, 
-				   comment.cno, comment.cbody, comment.delete_flag, comment.create_date,
+				   comment.cno, comment.cbody, comment.delete_flag, comment.create_date, comment.author,
 				   (select nick from user where user.id = board.author) as nick,
-				   ( select nick from user left join comment on user.id = comment.author where bno = #{bno}) as c_author,
-				   (select file_path from file where bno = #{bno}) as file_path,
-                   (select file_name from file where bno = #{bno}) as file_name,
-				   (select star from star where bno = #{bno}) as star,
-				   (select count(*) as like_count from like_no where bno = #{bno} group by bno) as like_count,
-				   (select count(*) as like_flag from like_no where like_user=${id} and bno=#{bno}) as like_flag
+				   (select nick from user left join comment on user.id = comment.author where bno = ${bno}) as c_author,
+				   (select file_path from file where bno = ${bno}) as file_path,
+                   (select file_name from file where bno = ${bno}) as file_name,
+				   (select star from star where bno = ${bno}) as star,
+				   (select count(*) as like_count from like_no where bno = ${bno} group by bno) as like_count,
+				   (select count(*) as like_flag from like_no where like_user = #{id} and bno = ${bno}) as like_flag
 			from board 
 			left join comment on
 				board.bno=comment.bno
 				and comment.delete_flag != 1
-			where board.bno = #{bno}
+			where board.bno = ${bno}
 	</select>
 	<select id="modify" parameterType="int"  resultMap="boardMap">
 			select * from board where bno = #{bno}

@@ -185,8 +185,8 @@ public class BoardController {
 	    }
 	}
 	@RequestMapping(value="/post.do",method =RequestMethod.GET)
-	public String view(@RequestParam(name="bno" , defaultValue="0") int bno,
-					   @RequestParam(name="id", defaultValue="null") String id,
+	public String view(@RequestParam(name="bno" , defaultValue="0", required=false) int bno,
+					   @RequestParam(name="id", defaultValue="" ,required=false) String id,
 					   Model model, HttpSession session){
 		
 		BoardVO vo =repository.selectOne(bno, id);
